@@ -17,6 +17,9 @@ import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 
 public class MainActivity extends ActionBarActivity
@@ -54,6 +57,19 @@ public class MainActivity extends ActionBarActivity
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
                 .commit();
+
+        switch (position)
+        {
+            case 0:
+                Toast.makeText(this, "odabran je: 1 ", Toast.LENGTH_SHORT).show();
+                break;
+            case 1:
+                Toast.makeText(this, "odabran je: 2 ", Toast.LENGTH_SHORT).show();
+                break;
+            case 2:
+                Toast.makeText(this, "odabran je: 3 ", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 
     public void onSectionAttached(int number) {
