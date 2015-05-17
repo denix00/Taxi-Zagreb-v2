@@ -200,7 +200,7 @@ public class MainActivity extends ActionBarActivity
 
     public void clickBtnCallCammeo(View v)
     {
-        Toast.makeText(this, "Zoves cammeo",Toast.LENGTH_LONG).show();
+        call(getResources().getInteger(R.integer.broj_cammeo));
     }
 
     public void clickBtnInfoCammeo(View v)
@@ -210,7 +210,7 @@ public class MainActivity extends ActionBarActivity
 
     public void clickBtnCallRadio(View v)
     {
-        Toast.makeText(this, "Zoves radio",Toast.LENGTH_LONG).show();
+        call(getResources().getInteger(R.integer.broj_radio));
     }
 
     public void clickBtnInfoRadio(View v)
@@ -220,7 +220,7 @@ public class MainActivity extends ActionBarActivity
 
     public void clickBtnCallEko(View v)
     {
-        Toast.makeText(this, "Zoves eko",Toast.LENGTH_LONG).show();
+        call(getResources().getInteger(R.integer.broj_eko));
     }
 
     public void clickBtnInfoEko(View v)
@@ -230,11 +230,27 @@ public class MainActivity extends ActionBarActivity
 
     public void clickBtnCallZebra(View v)
     {
-        Toast.makeText(this, "Zoves zebra",Toast.LENGTH_LONG).show();
+        call(getResources().getInteger(R.integer.broj_zebra));
     }
 
     public void clickBtnInfoZebra(View v)
     {
         Toast.makeText(this, "info zebra",Toast.LENGTH_LONG).show();
+    }
+
+
+    public void call(int phone)
+    {
+        /** Stvaranje objekta aktivnosti koja pokrece ugradenu mogusnost zvanja ( ACTION_CALL ) */
+        Intent intent = new Intent("android.intent.action.CALL");
+
+        /** Stvaranje uri objekta u koji se sprema telefonski broj */
+        Uri telBroj = Uri.parse("tel:" + phone );
+
+        /** Postavljanje stvorenog uri objekta u intent */
+        intent.setData(telBroj);
+
+        /**Pokretanje aktivnosti za zvanje */
+        startActivity(intent);
     }
 }
