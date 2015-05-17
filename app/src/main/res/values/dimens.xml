@@ -8,7 +8,7 @@
     <dimen name="navigation_drawer_width">240dp</dimen>
 
 
-    <dimen name="imenik_visina_polja">150dp</dimen>
+    <dimen name="imenik_visina_polja">180dp</dimen>
 
     <dimen name="imenik_logo_margin_top">10dp</dimen>
 

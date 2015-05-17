@@ -7,7 +7,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity$PlaceholderFragment">
+    tools:context=".MainActivity$PlaceholderFragment"
+    android:background="@color/pozadina_siva">
 
 
     <LinearLayout
@@ -19,10 +20,11 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="@dimen/imenik_visina_polja"
-            android:background="#e2dbdbd7"
+            android:background="@color/pozadina_zuta"
             android:layout_weight="1">
 
             <ImageView
+                android:contentDescription="@string/desc_cammeo_logo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/imenik_cammeo_logo"
@@ -31,7 +33,7 @@
                 android:layout_marginTop="@dimen/imenik_logo_margin_top"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@drawable/taxicammeo"/>
+                android:src="@drawable/taxicammeo"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -51,20 +53,47 @@
                 android:layout_below="@+id/imenik_cammeo_kn"
                 android:layout_centerHorizontal="true" />
 
+            <ImageButton
+                android:contentDescription="@string/desc_cammeo_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_imenik_cammeo_info"
+                android:layout_below="@+id/imenik_cammeo_fix_mob"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/ic_action_about"
+                android:onClick="clickBtnInfoCammeo"
+                android:clickable="true" />
+
+            <ImageButton
+                android:contentDescription="@string/desc_cammeo_call"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_imenik_cammeo_call"
+                android:layout_below="@id/imenik_cammeo_fix_mob"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_action_call"
+                android:onClick="clickBtnCallCammeo"
+                android:clickable="true"/>
+
         </RelativeLayout>
 
         <Space
-            android:layout_width="5dp"
+            android:layout_width="10dp"
             android:layout_height="5dp" />
 
         <RelativeLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="@dimen/imenik_visina_polja"
-            android:background="#fffffadd"
+            android:background="@color/pozadina_zuta"
             android:layout_weight="1">
 
             <ImageView
+                android:contentDescription="@string/desc_radio_logo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/imenik_radio_logo"
@@ -73,7 +102,7 @@
                 android:layout_marginTop="@dimen/imenik_logo_margin_top"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@drawable/radiotaxi"/>
+                android:src="@drawable/radiotaxi"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -93,6 +122,32 @@
                 android:layout_below="@+id/imenik_radio_kn"
                 android:layout_centerHorizontal="true" />
 
+            <ImageButton
+                android:contentDescription="@string/desc_radio_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_imenik_radio_info"
+                android:layout_below="@+id/imenik_radio_fix_mob"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/ic_action_about"
+                android:clickable="true"
+                android:onClick="clickBtnInfoRadio" />
+
+            <ImageButton
+                android:contentDescription="@string/desc_radio_call"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_imenik_radio_call"
+                android:layout_below="@id/imenik_radio_fix_mob"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_action_call"
+                android:clickable="true"
+                android:onClick="clickBtnCallRadio" />
+
         </RelativeLayout>
     </LinearLayout>
 
@@ -102,16 +157,17 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp">
+        android:layout_marginTop="10dp">
 
         <RelativeLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="@dimen/imenik_visina_polja"
-            android:background="#e2dbdbd7"
+            android:background="@color/pozadina_zuta"
             android:layout_weight="1">
 
             <ImageView
+                android:contentDescription="@string/desc_eko_logo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/imenik_eko_logo"
@@ -120,7 +176,7 @@
                 android:layout_marginTop="@dimen/imenik_logo_margin_top"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@drawable/ekotaxi"/>
+                android:src="@drawable/ekotaxi"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -140,20 +196,47 @@
                 android:layout_below="@+id/imenik_eko_kn"
                 android:layout_centerHorizontal="true" />
 
+            <ImageButton
+                android:contentDescription="@string/desc_eko_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_imenik_eko_info"
+                android:layout_below="@+id/imenik_eko_fix_mob"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/ic_action_about"
+                android:clickable="true"
+                android:onClick="clickBtnInfoEko" />
+
+            <ImageButton
+                android:contentDescription="@string/desc_eko_call"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_imenik_eko_call"
+                android:layout_below="@id/imenik_eko_fix_mob"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_action_call"
+                android:clickable="true"
+                android:onClick="clickBtnCallEko" />
+
         </RelativeLayout>
 
         <Space
-            android:layout_width="5dp"
+            android:layout_width="10dp"
             android:layout_height="5dp" />
 
         <RelativeLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="@dimen/imenik_visina_polja"
-            android:background="#fffffadd"
+            android:background="@color/pozadina_zuta"
             android:layout_weight="1">
 
             <ImageView
+                android:contentDescription="@string/desc_zebra_logo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/imenik_zebra_logo"
@@ -162,7 +245,7 @@
                 android:layout_marginTop="@dimen/imenik_logo_margin_top"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@drawable/zebrataxi"/>
+                android:src="@drawable/zebrataxi"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -181,6 +264,32 @@
                 android:id="@+id/imenik_zebra_fix_mob"
                 android:layout_below="@+id/imenik_zebra_kn"
                 android:layout_centerHorizontal="true" />
+
+            <ImageButton
+                android:contentDescription="@string/desc_zebra_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_imenik_zebra_info"
+                android:layout_below="@+id/imenik_zebra_fix_mob"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/ic_action_about"
+                android:clickable="true"
+                android:onClick="clickBtnInfoZebra" />
+
+            <ImageButton
+                android:contentDescription="@string/desc_zebra_call"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_imenik_zebra_call"
+                android:layout_below="@id/imenik_zebra_fix_mob"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_action_call"
+                android:clickable="true"
+                android:onClick="clickBtnCallZebra" />
 
         </RelativeLayout>
     </LinearLayout>

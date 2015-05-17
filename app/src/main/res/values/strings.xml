@@ -30,4 +30,24 @@
 
     <string name="imenik_fix_mob">fix/mob</string>
 
+    <string name="imenik_btn_info">i</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <string name="desc_cammeo_logo">cammeo logo</string>
+    <string name="desc_radio_logo">radio logo</string>
+    <string name="desc_eko_logo">eko logo</string>
+    <string name="desc_zebra_logo">zebra logo</string>
+
+    <string name="desc_cammeo_call">cammeo call</string>
+    <string name="desc_radio_call">radio call</string>
+    <string name="desc_eko_call">eko call</string>
+    <string name="desc_zebra_call">zebra call</string>
+
+    <string name="desc_cammeo_info">cammeo info</string>
+    <string name="desc_radio_info">radio info</string>
+    <string name="desc_eko_info">eko info</string>
+    <string name="desc_zebra_info">zebra info</string>
 </resources>

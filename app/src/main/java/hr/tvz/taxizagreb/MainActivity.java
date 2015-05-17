@@ -1,7 +1,9 @@
 package hr.tvz.taxizagreb;
 
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -24,8 +26,11 @@ import org.w3c.dom.Text;
 
 
 public class MainActivity extends ActionBarActivity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+        implements NavigationDrawerFragment.NavigationDrawerCallbacks,
+                    FragmentImenik.OnFragmentInteractionListener,
+                    FragmentCijenaINavigacija.OnFragmentInteractionListener, FragmentPovijest.OnFragmentInteractionListener{
 
+    android.support.v4.app.FragmentManager manager;
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -49,6 +54,8 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
+        manager = getSupportFragmentManager();
     }
 
     @Override
@@ -62,13 +69,27 @@ public class MainActivity extends ActionBarActivity
         switch (position)
         {
             case 0:
-                Toast.makeText(this, "odabran je: 1 ", Toast.LENGTH_SHORT).show();
+             //   FragmentImenik imenik = new FragmentImenik();
+              //  android.support.v4.app.FragmentTransaction transaction = manager.beginTransaction();
+              //  transaction.add(R.id.container, imenik, "imenik");
+              //  transaction.commit();
+
+                getFragmentManager().beginTransaction()
+                        .add(R.id.container, new FragmentImenik(), "imenik").commit();
+
+
+               // Toast.makeText(this, "odabran je: 1 ", Toast.LENGTH_SHORT).show();
                 break;
             case 1:
-                Toast.makeText(this, "odabran je: 2 ", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(this, "odabran je: 2 ", Toast.LENGTH_SHORT).show();
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.container, new FragmentCijenaINavigacija()).commit();
                 break;
             case 2:
-                Toast.makeText(this, "odabran je: 3 ", Toast.LENGTH_SHORT).show();
+            //    Toast.makeText(this, "odabran je: 3 ", Toast.LENGTH_SHORT).show();
+
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.container, new FragmentPovijest()).commit();
                 break;
         }
     }
@@ -123,6 +144,18 @@ public class MainActivity extends ActionBarActivity
         return super.onOptionsItemSelected(item);
     }
 
+    //FragmentImenik i FragmentCijenaINavigacija
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    //FragmentPovijest
+    @Override
+    public void onFragmentInteraction(String id) {
+
+    }
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -163,4 +196,45 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
+
+
+    public void clickBtnCallCammeo(View v)
+    {
+        Toast.makeText(this, "Zoves cammeo",Toast.LENGTH_LONG).show();
+    }
+
+    public void clickBtnInfoCammeo(View v)
+    {
+        Toast.makeText(this, "info cammeo",Toast.LENGTH_LONG).show();
+    }
+
+    public void clickBtnCallRadio(View v)
+    {
+        Toast.makeText(this, "Zoves radio",Toast.LENGTH_LONG).show();
+    }
+
+    public void clickBtnInfoRadio(View v)
+    {
+        Toast.makeText(this, "info radio",Toast.LENGTH_LONG).show();
+    }
+
+    public void clickBtnCallEko(View v)
+    {
+        Toast.makeText(this, "Zoves eko",Toast.LENGTH_LONG).show();
+    }
+
+    public void clickBtnInfoEko(View v)
+    {
+        Toast.makeText(this, "info eko",Toast.LENGTH_LONG).show();
+    }
+
+    public void clickBtnCallZebra(View v)
+    {
+        Toast.makeText(this, "Zoves zebra",Toast.LENGTH_LONG).show();
+    }
+
+    public void clickBtnInfoZebra(View v)
+    {
+        Toast.makeText(this, "info zebra",Toast.LENGTH_LONG).show();
+    }
 }
