@@ -50,4 +50,12 @@
     <string name="desc_radio_info">radio info</string>
     <string name="desc_eko_info">eko info</string>
     <string name="desc_zebra_info">zebra info</string>
+
+    <string name="dialogGumbZatvori">Zatvori</string>
+
+
+    <string name="naslov_cammeo">Cammeo Taxi</string>
+    <string name="naslov_radio">Radio Taxi</string>
+    <string name="naslov_eko">Eko Taxi</string>
+    <string name="naslov_zebra">Zebra Taxi</string>
 </resources>

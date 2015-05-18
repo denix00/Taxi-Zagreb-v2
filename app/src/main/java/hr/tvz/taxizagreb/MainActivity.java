@@ -1,6 +1,8 @@
 package hr.tvz.taxizagreb;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
@@ -19,8 +21,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import junit.framework.TestCase;
 
 import org.w3c.dom.Text;
 
@@ -28,9 +34,10 @@ import org.w3c.dom.Text;
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
                     FragmentImenik.OnFragmentInteractionListener,
-                    FragmentCijenaINavigacija.OnFragmentInteractionListener, FragmentPovijest.OnFragmentInteractionListener{
+                    FragmentCijenaINavigacija.OnFragmentInteractionListener, FragmentPovijest.OnFragmentInteractionListener {
 
-    android.support.v4.app.FragmentManager manager;
+    //android.support.v4.app.FragmentManager manager;
+
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -55,7 +62,7 @@ public class MainActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
-        manager = getSupportFragmentManager();
+       // manager = getSupportFragmentManager();
     }
 
     @Override
@@ -235,7 +242,10 @@ public class MainActivity extends ActionBarActivity
 
     public void clickBtnInfoZebra(View v)
     {
-        Toast.makeText(this, "info zebra",Toast.LENGTH_LONG).show();
+        DialogFragment infoDialogFragment = new InfoDialog();
+        infoDialogFragment.show(getFragmentManager(), "helpProzor");
+      //  ((TextView)infoDialogFragment.getView().findViewById(R.id.txtDialogNaslov)).setText(R.string.naslov_zebra);
+        //((TextView)findViewById(R.id.txtDialogNaslov)).setText(R.string.naslov_zebra);
     }
 
 
