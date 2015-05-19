@@ -21,11 +21,12 @@
 
     <dimen name="cijena_txtCijena_lijeva_margina">17dp</dimen>
     <dimen name="cijena_logo_top">5dp</dimen>
+    <dimen name="cijena_logo_left">5dp</dimen>
     <dimen name="cijena_btnCall_right">10dp</dimen>
 
     <dimen name="cijena_podaci_top">5dp</dimen>
 
     <dimen name="cijena_taksist_bottom">5dp</dimen>
 
-    <dimen name="btn_karta">-47dp</dimen>
+    <dimen name="btn_karta">-52dp</dimen>
 </resources>

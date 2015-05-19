@@ -175,6 +175,7 @@
 
                 <ImageView
                     android:layout_marginTop="@dimen/cijena_logo_top"
+                    android:layout_marginLeft="@dimen/cijena_logo_left"
                     android:layout_width="@dimen/cijena_max_width_logo"
                     android:layout_height="@dimen/cijena_max_height_logo"
                     android:id="@+id/imgCijenaRadio"
@@ -220,6 +221,7 @@
 
                 <ImageView
                     android:layout_marginTop="@dimen/cijena_logo_top"
+                    android:layout_marginLeft="@dimen/cijena_logo_left"
                     android:layout_width="@dimen/cijena_max_width_logo"
                     android:layout_height="@dimen/cijena_max_height_logo"
                     android:id="@+id/imgCijenaEko"
