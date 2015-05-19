@@ -15,6 +15,11 @@ import android.widget.TextView;
 //klasa za ispis informacija o aplikaciji i timu, u obliku Dialoga
 
 public class InfoDialog extends DialogFragment {
+
+         TextView naslov;
+
+         TextView info;
+
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -31,8 +36,20 @@ public class InfoDialog extends DialogFragment {
                     }
                 });
 
+        naslov = (TextView)getDialog().findViewById(R.id.txtDialogNaslov);
+       // info = (TextView)getActivity().findViewById(R.id.txtDialogInfo);
+
+
+        naslov.setText("Naslov dialoga");
+
         //prikazi dialog
         return builder.create();
+    }
+
+    public void setNaslovIOpis()
+    {
+        naslov.setText("Naslov dialoga");
+        info.setText("Neki info sadrzaj");
     }
 
 }

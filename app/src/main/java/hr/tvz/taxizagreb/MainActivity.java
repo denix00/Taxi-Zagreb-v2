@@ -244,6 +244,7 @@ public class MainActivity extends ActionBarActivity
     {
         DialogFragment infoDialogFragment = new InfoDialog();
         infoDialogFragment.show(getFragmentManager(), "helpProzor");
+
       //  ((TextView)infoDialogFragment.getView().findViewById(R.id.txtDialogNaslov)).setText(R.string.naslov_zebra);
         //((TextView)findViewById(R.id.txtDialogNaslov)).setText(R.string.naslov_zebra);
     }

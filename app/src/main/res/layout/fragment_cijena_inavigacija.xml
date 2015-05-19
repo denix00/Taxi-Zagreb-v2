@@ -1,10 +1,298 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="hr.tvz.taxizagreb.FragmentCijenaINavigacija">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView android:layout_width="match_parent" android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+<!--unos tocaka-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/cijena_margina_unosa"
+        android:layout_height="wrap_content"
+        android:background="@color/pozadina_zuta">
 
-</FrameLayout>
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPostalAddress"
+                android:ems="9"
+                android:id="@+id/txtAdresaPolazista"
+                android:hint="@string/adresa_polazista" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_GPS"
+                android:id="@+id/btnGPS"
+                android:layout_alignBottom="@+id/txtAdresaPolazista"
+                android:layout_toRightOf="@+id/txtAdresaPolazista"
+                android:layout_toEndOf="@+id/txtAdresaPolazista" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_povijest"
+                android:id="@+id/btnPovijest"
+                android:layout_alignBottom="@+id/btnGPS"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textPostalAddress"
+                android:ems="9"
+                android:id="@+id/txtAdresaOdredista"
+                android:hint="@string/adresa_polazista" />
+
+            <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_izracunaj"
+                android:id="@+id/btnIzracunaj"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+<!--Podaci o ruti-->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/cijena_margina_unosa"
+        android:background="@color/pozadina_zuta">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/txt_na"
+            android:id="@+id/txtUdaljenost" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/txt_na"
+            android:id="@+id/txtVrijemeVoznje"
+            android:layout_marginTop="@dimen/cijena_podaci_top"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/btn_karta"
+            android:text="@string/btn_karta"
+            android:id="@+id/button"
+            android:layout_gravity="end"
+            android:clickable="false"/>
+    </LinearLayout>
+
+<!--popis taksista -->
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/cijena_margina_unosa">
+<!-- prvi taksist-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/pozadina_zuta"
+            android:layout_marginBottom="@dimen/cijena_taksist_bottom">
+
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_marginTop="@dimen/cijena_logo_top"
+                    android:layout_width="@dimen/cijena_max_width_logo"
+                    android:layout_height="@dimen/cijena_max_height_logo"
+                    android:id="@+id/imgCijenaCammeo"
+                    android:background="@drawable/taxicammeo"/>
+
+                <TextView
+                    android:layout_marginLeft="@dimen/cijena_txtCijena_lijeva_margina"
+                    android:layout_marginStart="@dimen/cijena_txtCijena_lijeva_margina"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/txt_na"
+                    android:id="@+id/txtCammeoCijena"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/imgCijenaCammeo"
+                    android:layout_toEndOf="@+id/imgCijenaCammeo" />
+
+                <ImageButton
+                    android:contentDescription="@string/desc_cammeo_call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_imenik_cammeo_call"
+                    android:src="@drawable/ic_action_call"
+                    android:onClick="clickBtnCallCammeo"
+                    android:clickable="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+
+        </LinearLayout>
+<!--drugi taksist-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/pozadina_zuta"
+            android:layout_marginBottom="@dimen/cijena_taksist_bottom">
+
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_marginTop="@dimen/cijena_logo_top"
+                    android:layout_width="@dimen/cijena_max_width_logo"
+                    android:layout_height="@dimen/cijena_max_height_logo"
+                    android:id="@+id/imgCijenaRadio"
+                    android:background="@drawable/radiotaxi"/>
+
+                <TextView
+                    android:layout_marginLeft="@dimen/cijena_txtCijena_lijeva_margina"
+                    android:layout_marginStart="@dimen/cijena_txtCijena_lijeva_margina"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/txt_na"
+                    android:id="@+id/txtRadioCijena"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/imgCijenaRadio"
+                    android:layout_toEndOf="@+id/imgCijenaRadio" />
+
+                <ImageButton
+                    android:contentDescription="@string/desc_radio_call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_imenik_radio_call"
+                    android:src="@drawable/ic_action_call"
+                    android:onClick="clickBtnCallRadio"
+                    android:clickable="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+        </LinearLayout>
+<!--treci taksist-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/pozadina_zuta"
+            android:layout_marginBottom="@dimen/cijena_taksist_bottom">
+
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_marginTop="@dimen/cijena_logo_top"
+                    android:layout_width="@dimen/cijena_max_width_logo"
+                    android:layout_height="@dimen/cijena_max_height_logo"
+                    android:id="@+id/imgCijenaEko"
+                    android:background="@drawable/ekotaxi"/>
+
+                <TextView
+                    android:layout_marginLeft="@dimen/cijena_txtCijena_lijeva_margina"
+                    android:layout_marginStart="@dimen/cijena_txtCijena_lijeva_margina"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/txt_na"
+                    android:id="@+id/txtEkoCijena"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/imgCijenaEko"
+                    android:layout_toEndOf="@+id/imgCijenaEko" />
+
+                <ImageButton
+                    android:contentDescription="@string/desc_radio_call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_imenik_eko_call"
+                    android:src="@drawable/ic_action_call"
+                    android:onClick="clickBtnCallEko"
+                    android:clickable="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+        </LinearLayout>
+<!--cetvrti taksist-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/pozadina_zuta">
+
+            <RelativeLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_marginTop="@dimen/cijena_logo_top"
+                    android:layout_width="@dimen/cijena_max_width_logo"
+                    android:layout_height="@dimen/cijena_max_height_logo"
+                    android:id="@+id/imgCijenaZebra"
+                    android:background="@drawable/zebrataxi"/>
+
+                <TextView
+                    android:layout_marginStart="@dimen/cijena_txtCijena_lijeva_margina"
+                    android:layout_marginLeft="@dimen/cijena_txtCijena_lijeva_margina"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="@string/txt_na"
+                    android:id="@+id/txtZebraCijena"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/imgCijenaZebra"
+                    android:layout_toEndOf="@+id/imgCijenaZebra" />
+
+                <ImageButton
+                    android:contentDescription="@string/desc_radio_call"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btn_imenik_zebra_call"
+                    android:src="@drawable/ic_action_call"
+                    android:onClick="clickBtnCallZebra"
+                    android:clickable="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentEnd="true" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -58,4 +58,20 @@
     <string name="naslov_radio">Radio Taxi</string>
     <string name="naslov_eko">Eko Taxi</string>
     <string name="naslov_zebra">Zebra Taxi</string>
+
+    <string name="adresa_polazista">Adresa polazista</string>
+    <string name="adresa_odredista">Adresa dolazista</string>
+    <string name="btn_GPS">GPS</string>
+    <string name="btn_izracunaj">Izracunaj</string>
+    <string name="btn_povijest">Povijest</string>
+
+    <string name="txt_na"></string>
+    <string name="txt_cijena">Cijena</string>
+    <string name="txt_cijena_kn">kn</string>
+
+    <string name="txt_udaljenost">Udaljenost</string>
+    <string name="txt_udaljenost_km">km</string>
+
+    <string name="btn_karta">Karta</string>
+
 </resources>
