@@ -105,7 +105,8 @@
             android:text="@string/btn_karta"
             android:id="@+id/button"
             android:layout_gravity="end"
-            android:clickable="false"/>
+            android:clickable="true"
+            android:onClick="clickBtnMap"/>
     </LinearLayout>
 
 <!--popis taksista -->

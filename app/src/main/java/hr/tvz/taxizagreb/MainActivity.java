@@ -20,10 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+
 import android.widget.Toast;
 
 import junit.framework.TestCase;
@@ -249,6 +246,12 @@ public class MainActivity extends ActionBarActivity
         //((TextView)findViewById(R.id.txtDialogNaslov)).setText(R.string.naslov_zebra);
     }
 
+
+    public void clickBtnMap(View v)
+    {
+        Intent map = new Intent(this, GoogleMaps.class);
+        startActivity(map);
+    }
 
     public void call(int phone)
     {
