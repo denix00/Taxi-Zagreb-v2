@@ -73,5 +73,6 @@
     <string name="txt_udaljenost_km">km</string>
 
     <string name="btn_karta">Karta</string>
+    <string name="title_activity_google_maps">Map</string>
 
 </resources>
