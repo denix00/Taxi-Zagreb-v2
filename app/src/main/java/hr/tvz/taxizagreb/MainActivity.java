@@ -246,11 +246,25 @@ public class MainActivity extends ActionBarActivity
         //((TextView)findViewById(R.id.txtDialogNaslov)).setText(R.string.naslov_zebra);
     }
 
-
     public void clickBtnMap(View v)
     {
         Intent map = new Intent(this, GoogleMaps.class);
         startActivity(map);
+    }
+
+    public void clickBtnGPS(View view)
+    {
+        
+    }
+
+    public void clickBtnIzracunaj(View view)
+    {
+
+    }
+
+    public void clickBtnPovijest(View view)
+    {
+
     }
 
     public void call(int phone)

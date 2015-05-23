@@ -34,7 +34,8 @@
                 android:id="@+id/btnGPS"
                 android:layout_alignBottom="@+id/txtAdresaPolazista"
                 android:layout_toRightOf="@+id/txtAdresaPolazista"
-                android:layout_toEndOf="@+id/txtAdresaPolazista" />
+                android:layout_toEndOf="@+id/txtAdresaPolazista"
+                android:onClick="clickBtnGPS"/>
 
             <Button
                 style="?android:attr/buttonStyleSmall"
@@ -44,7 +45,8 @@
                 android:id="@+id/btnPovijest"
                 android:layout_alignBottom="@+id/btnGPS"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:onClick="clickBtnPovijest"/>
         </RelativeLayout>
 
         <RelativeLayout
@@ -68,7 +70,8 @@
                 android:id="@+id/btnIzracunaj"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:onClick="clickBtnIzracunaj"/>
 
 
         </RelativeLayout>
