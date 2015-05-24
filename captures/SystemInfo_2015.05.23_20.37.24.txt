@@ -1,0 +1,33 @@
+Applications Memory Usage (kB):
+Uptime: 40705764 Realtime: 90967040
+
+** MEMINFO in pid 5889 [hr.tvz.taxizagreb] **
+                         Shared  Private     Heap     Heap     Heap
+                   Pss    Dirty    Dirty     Size    Alloc     Free
+                ------   ------   ------   ------   ------   ------
+       Native       53       20       52     5356     4098     1257
+       Dalvik     5319     5212     5068     5948     4629     1319
+       Cursor        0        0        0                           
+       Ashmem        0        0        0                           
+    Other dev        4       44        0                           
+     .so mmap     2175      396     1236                           
+    .jar mmap        0        0        0                           
+    .apk mmap      205        0        0                           
+    .ttf mmap       29        0        0                           
+    .dex mmap     1796        0       12                           
+   Other mmap     1825       32      144                           
+      Unknown     3083      196     3060                           
+        TOTAL    14489     5900     9572    11304     8727     2576
+ 
+ Objects
+               Views:       57         ViewRootImpl:        2
+         AppContexts:        3           Activities:        1
+              Assets:        3        AssetManagers:        3
+       Local Binders:       12        Proxy Binders:       17
+    Death Recipients:        0
+     OpenSSL Sockets:        0
+ 
+ SQL
+         MEMORY_USED:       98
+  PAGECACHE_OVERFLOW:       24          MALLOC_SIZE:       62
+ 

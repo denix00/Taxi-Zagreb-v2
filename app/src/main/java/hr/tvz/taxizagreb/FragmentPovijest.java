@@ -1,6 +1,7 @@
 package hr.tvz.taxizagreb;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,8 +11,13 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import hr.tvz.taxizagreb.dummy.DummyContent;
 
@@ -69,14 +75,33 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        DbHelper db = new DbHelper(getActivity());
+        List<DbModel> td = db.ispisiSve();
+
+        ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
+        HashMap<String, String> item;
+        for (DbModel t : td) {
+            item = new HashMap<String, String>();
+            item.put("polaziste_i_odrediste", t.getPolaziste() + " -> " + t.getOdrediste());
+            item.put("prijevoznik_cijena_distanca", t.getPrijevoznik() + " - " + t.getCijena() + "kn - " + t.getDistanca() + "km");
+            list.add(item);
+        }
+
+        SimpleAdapter adapter = new SimpleAdapter(getActivity(), list, android.R.layout.simple_list_item_2, new String[] { "polaziste_i_odrediste",
+                "prijevoznik_cijena_distanca" }, new int[] { android.R.id.text1,
+                android.R.id.text2 });
+      //  setListAdapter(adapter);
+
+
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
         // TODO: Change Adapter to display your content
-        mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(),
-                android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
+        //mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
+        mAdapter = adapter;
     }
 
     @Override

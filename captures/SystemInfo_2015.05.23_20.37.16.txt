@@ -1,0 +1,36 @@
+Activity Resolver Table:
+  Non-Data Actions:
+      android.intent.action.MAIN:
+        42a5eb98 hr.tvz.taxizagreb/.MainActivity filter 42a5ed00
+ 
+Packages:
+  Package [hr.tvz.taxizagreb] (421d0a90):
+    userId=10128 gids=[3003, 1015, 1028]
+    sharedUser=null
+    pkg=Package{42a5d950 hr.tvz.taxizagreb}
+    codePath=/data/app/hr.tvz.taxizagreb-2.apk
+    resourcePath=/data/app/hr.tvz.taxizagreb-2.apk
+    nativeLibraryPath=/data/app-lib/hr.tvz.taxizagreb-2
+    versionCode=1
+    applicationInfo=ApplicationInfo{42a5d9f0 hr.tvz.taxizagreb}
+    flags=[ DEBUGGABLE HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP ]
+    versionName=1.0
+    dataDir=/data/data/hr.tvz.taxizagreb
+    targetSdk=21
+    supportsScreens=[small, medium, large, xlarge, resizeable, anyDensity]
+    timeStamp=2015-05-23 20:36:31
+    firstInstallTime=2015-05-18 00:35:01
+    lastUpdateTime=2015-05-23 20:36:31
+    signatures=PackageSignatures{421d0b58 [421a1c28]}
+    permissionsFixed=true haveGids=true installStatus=1
+    pkgFlags=[ DEBUGGABLE HAS_CODE ALLOW_CLEAR_USER_DATA ALLOW_BACKUP ]
+    User 0:  installed=true stopped=false notLaunched=false enabled=0
+    grantedPermissions:
+      android.permission.READ_EXTERNAL_STORAGE
+      com.google.android.providers.gsf.permission.READ_GSERVICES
+      android.permission.WRITE_EXTERNAL_STORAGE
+      android.permission.INTERNET
+      android.permission.ACCESS_FINE_LOCATION
+      android.permission.ACCESS_COARSE_LOCATION
+      android.permission.CALL_PHONE
+      android.permission.ACCESS_NETWORK_STATE

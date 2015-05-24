@@ -21,17 +21,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import junit.framework.TestCase;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
                     FragmentImenik.OnFragmentInteractionListener,
                     FragmentCijenaINavigacija.OnFragmentInteractionListener, FragmentPovijest.OnFragmentInteractionListener {
+
+    TextView polaziste;
+    TextView odrediste;
 
     //android.support.v4.app.FragmentManager manager;
 
@@ -254,12 +266,28 @@ public class MainActivity extends ActionBarActivity
 
     public void clickBtnGPS(View view)
     {
-        
+
     }
 
-    public void clickBtnIzracunaj(View view)
-    {
+    public void clickBtnIzracunaj(View view)    {
 
+        polaziste = (TextView)findViewById(R.id.txtAdresaPolazista);
+        odrediste = (TextView)findViewById(R.id.txtAdresaOdredista);
+
+  /*      SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd", Locale.getDefault());
+        Date date = new Date(2015-05-21);
+*/
+        DbHelper db = new DbHelper(this);
+        DbModel model = new DbModel(polaziste.getText().toString(), odrediste.getText().toString(), 5, "5h","Eko", 23.4);
+        long flag = db.unosUBazu(model);
+        if (flag < 0){
+            Toast.makeText(this, "Neuspio unos", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Uneseno", Toast.LENGTH_SHORT).show();
+        }
+        polaziste.setText("");
+        odrediste.setText("");
     }
 
     public void clickBtnPovijest(View view)
