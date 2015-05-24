@@ -75,4 +75,6 @@
     <string name="btn_karta">Karta</string>
     <string name="title_activity_google_maps">Map</string>
 
+    <string name="valuta">kn</string>
+
 </resources>
