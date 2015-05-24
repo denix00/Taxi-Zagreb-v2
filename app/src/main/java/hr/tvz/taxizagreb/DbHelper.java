@@ -70,7 +70,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     public List<DbModel> ispisiSve() {
         List<DbModel> povijest = new ArrayList<DbModel>();
-        String selectQuery = "SELECT "+POLAZISTE+","+ODREDISTE+" FROM " + TABLE_NAME;
+        String selectQuery = "SELECT * FROM " + TABLE_NAME;
 
         Log.e("LOG", selectQuery);
 
@@ -81,9 +81,13 @@ public class DbHelper extends SQLiteOpenHelper {
         if (c.moveToFirst()) {
             do {
                 DbModel td = new DbModel();
-                td.setPolaziste(c.getString((c.getColumnIndex(POLAZISTE))));
-                td.setOdrediste(c.getString((c.getColumnIndex(ODREDISTE))));
-                // adding to todo list
+                td.setPolaziste(c.getString(c.getColumnIndex(POLAZISTE)));
+                td.setOdrediste(c.getString(c.getColumnIndex(ODREDISTE)));
+                td.setPrijevoznik(c.getString(c.getColumnIndex(PRIJEVOZNIK)));
+                td.setTrajanjePutovanja(c.getString(c.getColumnIndex(TRAJANJE_PUTOVANJA)));
+                td.setDistanca(c.getDouble(c.getColumnIndex(DISTANCA)));
+                td.setCijena(c.getDouble(c.getColumnIndex(CIJENA)));
+                // adding to DbModel list
                 povijest.add(td);
             } while (c.moveToNext());
         }

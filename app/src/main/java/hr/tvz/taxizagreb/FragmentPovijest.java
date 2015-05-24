@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,7 +84,7 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
         for (DbModel t : td) {
             item = new HashMap<String, String>();
             item.put("polaziste_i_odrediste", t.getPolaziste() + " -> " + t.getOdrediste());
-            item.put("prijevoznik_cijena_distanca", t.getPrijevoznik() + " - " + t.getCijena() + "kn - " + t.getDistanca() + "km");
+            item.put("prijevoznik_cijena_distanca", t.getPrijevoznik() + " - " + t.getCijena() + " kn - " + t.getDistanca() + " km");
             list.add(item);
         }
 
