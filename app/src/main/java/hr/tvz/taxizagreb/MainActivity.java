@@ -1,19 +1,18 @@
 package hr.tvz.taxizagreb;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.DialogFragment;
-import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,20 +20,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import junit.framework.TestCase;
-
-import org.w3c.dom.Text;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
 
 
 public class MainActivity extends ActionBarActivity
@@ -271,23 +258,38 @@ public class MainActivity extends ActionBarActivity
 
     public void clickBtnIzracunaj(View view)    {
 
-        polaziste = (TextView)findViewById(R.id.txtAdresaPolazista);
-        odrediste = (TextView)findViewById(R.id.txtAdresaOdredista);
+        if (isNetworkAvailable()) {
+            polaziste = (TextView) findViewById(R.id.txtAdresaPolazista);
+            odrediste = (TextView) findViewById(R.id.txtAdresaOdredista);
+
+            if(polaziste.getText().toString().isEmpty() || odrediste.getText().toString().isEmpty())
+            {
+                //Toast.makeText(this, "Please enter the starting and the destination points", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.prazno_polje, Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+/**
+ *          Ovdje ide sav kôd za dohvacanje podataka sa Google Maps API V2, pa se sprema u bazu
+ */
 
   /*      SimpleDateFormat dateFormat = new SimpleDateFormat(
                 "yyyy-MM-dd", Locale.getDefault());
         Date date = new Date(2015-05-21);
 */
-        DbHelper db = new DbHelper(this);
-        DbModel model = new DbModel(polaziste.getText().toString(), odrediste.getText().toString(), 5, "5h","Eko", 23.4);
-        long flag = db.unosUBazu(model);
-        if (flag < 0){
-            Toast.makeText(this, "Neuspio unos", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(this, "Uneseno", Toast.LENGTH_SHORT).show();
+            DbHelper db = new DbHelper(this);
+            DbModel model = new DbModel(polaziste.getText().toString(), odrediste.getText().toString(), 5, "5h", "Eko", 23.4);
+            long flag = db.unosUBazu(model);
+            if (flag < 0) {
+                Toast.makeText(this, R.string.neuspio_unos, Toast.LENGTH_SHORT).show();
+            } else {
+                //Toast.makeText(this, "Uneseno", Toast.LENGTH_SHORT).show();
+            }
+            polaziste.setText("");
+            odrediste.setText("");
+        }else{
+            Toast.makeText(this, R.string.dostupnost_veze, Toast.LENGTH_LONG).show();
         }
-        polaziste.setText("");
-        odrediste.setText("");
     }
 
     public void clickBtnPovijest(View view)
@@ -308,5 +310,19 @@ public class MainActivity extends ActionBarActivity
 
         /**Pokretanje aktivnosti za zvanje */
         startActivity(intent);
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+    public class DohvatiAsyncTask extends AsyncTask<void, void, void> {
+
+        @Override
+        protected void doInBackground(void... params) {
+
+        }
     }
 }

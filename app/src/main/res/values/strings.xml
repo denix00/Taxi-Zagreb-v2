@@ -76,5 +76,8 @@
     <string name="title_activity_google_maps">Map</string>
 
     <string name="valuta">kn</string>
+    <string name="dostupnost_veze">Veza na Internet nije dostupna</string>
+    <string name="neuspio_unos">Neuspio unos u bazu</string>
 
+    <string name="prazno_polje">Unesite adrese</string>
 </resources>
