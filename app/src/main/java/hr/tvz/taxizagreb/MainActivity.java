@@ -13,6 +13,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,6 +23,22 @@ import android.support.v4.widget.DrawerLayout;
 
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
+import java.io.InputStream;
+import java.util.ArrayList;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 
 public class MainActivity extends ActionBarActivity
@@ -270,7 +287,7 @@ public class MainActivity extends ActionBarActivity
             }
 
 /**
- *          Ovdje ide sav kôd za dohvacanje podataka sa Google Maps API V2, pa se sprema u bazu
+ *          Ovdje ide sav kod za dohvacanje podataka sa Google Maps API V2, pa se sprema u bazu
  */
 
   /*      SimpleDateFormat dateFormat = new SimpleDateFormat(
@@ -318,11 +335,12 @@ public class MainActivity extends ActionBarActivity
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    public class DohvatiAsyncTask extends AsyncTask<void, void, void> {
+  /*  public class DohvatiAsyncTask extends AsyncTask<void, void, void> {
 
         @Override
         protected void doInBackground(void... params) {
 
         }
     }
+    */
 }
