@@ -80,4 +80,24 @@
     <string name="neuspio_unos">Neuspio unos u bazu</string>
 
     <string name="prazno_polje">Unesite adrese</string>
+    <string name="dohvat_podataka">Dohvaćanje podataka\n\nVrijeme dohvaćanja ovisi o brzini Internet veze</string>
+
+    <string name="nepostojece_adrese">Adresa nije pronadena</string>
+
+
+    <string name="cammeo_start">15</string>
+    <string name="cammeo_freekm">2</string>
+    <string name="cammeo_ostalikm">6</string>
+
+    <string name="radio_start">10</string>
+    <string name="radio_freekm">0</string>
+    <string name="radio_ostalikm">6</string>
+
+    <string name="eko_start">8.8</string>
+    <string name="eko_freekm">0</string>
+    <string name="eko_ostalikm">6</string>
+
+    <string name="zebra_start">8.5</string>
+    <string name="zebra_freekm">0</string>
+    <string name="zebra_ostalikm">5.9</string>
 </resources>

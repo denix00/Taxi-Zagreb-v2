@@ -84,7 +84,7 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
         for (DbModel t : td) {
             item = new HashMap<String, String>();
             item.put("polaziste_i_odrediste", t.getPolaziste() + " -> " + t.getOdrediste());
-            item.put("prijevoznik_cijena_distanca", t.getPrijevoznik() + " - " + t.getCijena() + " kn - " + t.getDistanca() + " km");
+            item.put("prijevoznik_cijena_distanca", t.getPrijevoznik() + " - " + t.getCijena() + " kn - " + t.getDistanca());
             list.add(item);
         }
 

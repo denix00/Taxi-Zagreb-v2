@@ -2,6 +2,8 @@ package hr.tvz.taxizagreb;
 
 import android.app.Activity;
 import android.app.DialogFragment;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
@@ -22,6 +24,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -49,6 +53,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -65,6 +70,15 @@ public class MainActivity extends ActionBarActivity
 
     static String jsonString;
 
+    ProgressDialog diag;
+
+    DownloadTask downloadTask;
+
+    String polazisteGl;
+    String odredisteGl;
+    String distancaGl;
+    String vrijemeGl;
+    Double cijenaGl;
     //android.support.v4.app.FragmentManager manager;
 
     /**
@@ -234,43 +248,40 @@ public class MainActivity extends ActionBarActivity
 
 
 
-    public void clickBtnCallCammeo(View v)
-    {
+    public void clickBtnCallCammeo(View v)    {
+        spremanjeUBazu(polazisteGl, odredisteGl, distancaGl, vrijemeGl, "Cammeo Taxi", 20.5);
         call(getResources().getInteger(R.integer.broj_cammeo));
+
     }
 
-    public void clickBtnInfoCammeo(View v)
-    {
+    public void clickBtnInfoCammeo(View v)    {
         Toast.makeText(this, "info cammeo",Toast.LENGTH_LONG).show();
     }
 
-    public void clickBtnCallRadio(View v)
-    {
+    public void clickBtnCallRadio(View v)    {
+        spremanjeUBazu(polazisteGl, odredisteGl, distancaGl, vrijemeGl, "Radio Taxi", 20.5);
         call(getResources().getInteger(R.integer.broj_radio));
     }
 
-    public void clickBtnInfoRadio(View v)
-    {
+    public void clickBtnInfoRadio(View v)    {
         Toast.makeText(this, "info radio",Toast.LENGTH_LONG).show();
     }
 
-    public void clickBtnCallEko(View v)
-    {
+    public void clickBtnCallEko(View v)    {
+        spremanjeUBazu(polazisteGl, odredisteGl,distancaGl, vrijemeGl, "Eko Taxi", 20.5);
         call(getResources().getInteger(R.integer.broj_eko));
     }
 
-    public void clickBtnInfoEko(View v)
-    {
+    public void clickBtnInfoEko(View v)    {
         Toast.makeText(this, "info eko",Toast.LENGTH_LONG).show();
     }
 
-    public void clickBtnCallZebra(View v)
-    {
+    public void clickBtnCallZebra(View v)    {
+        spremanjeUBazu(polazisteGl, odredisteGl,distancaGl, vrijemeGl, "Zebra Taxi", 20.5);
         call(getResources().getInteger(R.integer.broj_zebra));
     }
 
-    public void clickBtnInfoZebra(View v)
-    {
+    public void clickBtnInfoZebra(View v)    {
         DialogFragment infoDialogFragment = new InfoDialog();
         infoDialogFragment.show(getFragmentManager(), "helpProzor");
 
@@ -278,14 +289,12 @@ public class MainActivity extends ActionBarActivity
         //((TextView)findViewById(R.id.txtDialogNaslov)).setText(R.string.naslov_zebra);
     }
 
-    public void clickBtnMap(View v)
-    {
+    public void clickBtnMap(View v)    {
         Intent map = new Intent(this, GoogleMaps.class);
         startActivity(map);
     }
 
-    public void clickBtnGPS(View view)
-    {
+    public void clickBtnGPS(View view)    {
 
     }
 
@@ -305,6 +314,8 @@ public class MainActivity extends ActionBarActivity
             String polazisteString = checkStreetName(txtPolaziste);
             String odredisteString = checkStreetName(txtOdrediste);
 
+            polazisteGl = txtPolaziste.getText().toString();
+            odredisteGl = txtOdrediste.getText().toString();
 /**
  *          Ovdje ide sav kod za dohvacanje podataka sa Google Maps API V2, pa se sprema u bazu
  */
@@ -313,38 +324,27 @@ public class MainActivity extends ActionBarActivity
 
             Log.i("JSONUrl ", url);
 
-            DownloadTask downloadTask = new DownloadTask();
+            downloadTask = new DownloadTask();
             downloadTask.execute(url);
 
-
-            DbHelper db = new DbHelper(this);
-            //                                                  distanca, vrijeme, prijevoznik, cijena
-            DbModel model = new DbModel(txtPolaziste.getText().toString(), txtOdrediste.getText().toString(), "7", "5h", "Eko", 23.4);
-            long flag = db.unosUBazu(model);
-            if (flag < 0) {
-                Toast.makeText(this, R.string.neuspio_unos, Toast.LENGTH_SHORT).show();
-            } else {
-                //Toast.makeText(this, "Uneseno", Toast.LENGTH_SHORT).show();
-            }
         }else{
             Toast.makeText(this, R.string.dostupnost_veze, Toast.LENGTH_LONG).show();
         }
+    }
 
   /*      SimpleDateFormat dateFormat = new SimpleDateFormat(
                 "yyyy-MM-dd", Locale.getDefault());
         Date date = new Date(2015-05-21);
 
 
+
 */
-    }
 
-    public void clickBtnPovijest(View view)
-    {
+    public void clickBtnPovijest(View view)    {
 
     }
 
-    public void call(int phone)
-    {
+    public void call(int phone)    {
         /** Stvaranje objekta aktivnosti koja pokrece ugradenu mogusnost zvanja ( ACTION_CALL ) */
         Intent intent = new Intent("android.intent.action.CALL");
 
@@ -364,8 +364,7 @@ public class MainActivity extends ActionBarActivity
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    public String checkStreetName(TextView ulicaTxt)
-    {
+    public String checkStreetName(TextView ulicaTxt)    {
 
         String ulica = ulicaTxt.getText().toString();
         ulica = ulica.toLowerCase(Locale.getDefault());
@@ -385,6 +384,53 @@ public class MainActivity extends ActionBarActivity
         }
         return ulica;
     }
+
+    public void spremanjeUBazu(String polaziste, String odrediste, String distanca, String vrijeme, String prijevoznik, Double cijena) {
+        DbHelper db = new DbHelper(this);
+        //                                                  distanca, vrijeme, prijevoznik, cijena
+        DbModel model = new DbModel(polaziste, odrediste, distanca, vrijeme, prijevoznik, cijena);
+        long flag = db.unosUBazu(model);
+        if (flag < 0) {
+            Toast.makeText(this, R.string.neuspio_unos, Toast.LENGTH_SHORT).show();
+        } else {
+            //Toast.makeText(this, "Uneseno", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void izracunajCijenu(float kilometara){
+        float cijena = 0;
+        DecimalFormat decFormat = new DecimalFormat("##0.00");
+
+        Log.i("CijenaCam",getResources().getString(R.string.cammeo_start));
+        Log.i("CijenaCam2",Float.toString(Float.parseFloat(getResources().getString(R.string.cammeo_start))));
+
+        cijena += Float.parseFloat(getResources().getString(R.string.cammeo_start));
+        if(kilometara <= 2)                {
+            ((TextView)findViewById(R.id.txtCammeoCijena)).setText(decFormat.format(cijena) + " kn");
+        }else{
+            cijena += (kilometara - 2) * Float.parseFloat(getResources().getString(R.string.cammeo_ostalikm));
+            ((TextView)findViewById(R.id.txtCammeoCijena)).setText(decFormat.format(cijena) + " kn");
+        }
+
+        cijena = 0;
+        cijena += Float.parseFloat(getResources().getString(R.string.radio_start));
+        cijena += kilometara * Float.parseFloat(getResources().getString(R.string.radio_ostalikm));
+        ((TextView)findViewById(R.id.txtRadioCijena)).setText(decFormat.format(cijena) + " kn");
+
+
+        cijena = 0;
+        cijena += Float.parseFloat(getResources().getString(R.string.eko_start));
+        cijena += kilometara * Float.parseFloat(getResources().getString(R.string.eko_ostalikm));
+        ((TextView)findViewById(R.id.txtEkoCijena)).setText(decFormat.format(cijena) + " kn");
+
+        cijena = 0;
+        cijena += Float.parseFloat(getResources().getString(R.string.zebra_start));
+        cijena += kilometara * Float.parseFloat(getResources().getString(R.string.zebra_ostalikm));
+        ((TextView)findViewById(R.id.txtZebraCijena)).setText(decFormat.format(cijena) + " kn");
+
+    }
+
+
 
     /** A method to download json data from url */
     private String downloadUrl(String strUrl) throws IOException {
@@ -427,7 +473,24 @@ public class MainActivity extends ActionBarActivity
 
 
     // Fetches data from url passed
-    private class DownloadTask extends AsyncTask<String, Void, String> {
+    private class DownloadTask extends AsyncTask<String, Integer, String> {
+
+        @Override
+        protected void onPreExecute() {
+            diag = new ProgressDialog(MainActivity.this);
+            diag.setMessage(getResources().getString(R.string.dohvat_podataka));
+            diag.setIndeterminate(false);
+            diag.setCancelable(true);
+            diag.setOnCancelListener(new DialogInterface.OnCancelListener() {
+
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    downloadTask.cancel(false);
+                }
+            });
+            diag.show();
+            super.onPreExecute();
+        };
 
         // Downloading data in non-ui thread
         @Override
@@ -439,6 +502,7 @@ public class MainActivity extends ActionBarActivity
             try{
                 // Fetching the data from web service
                 data = downloadUrl(url[0]);
+                publishProgress(1);
             }catch(Exception e){
                 Log.d("Background Task",e.toString());
             }
@@ -459,27 +523,53 @@ public class MainActivity extends ActionBarActivity
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            diag.dismiss();
         }
     }
 
     private void JSONParserSimple (String url) throws IOException, JSONException
     {
         final JSONObject json = new JSONObject(url);
-        JSONArray routeArray = json.getJSONArray("routes");
-        JSONObject routes = routeArray.getJSONObject(0);
 
-        JSONArray newTempARr = routes.getJSONArray("legs");
-        JSONObject newDisTimeOb = newTempARr.getJSONObject(0);
+        Log.i("statusDohvata", json.getString("status"));
 
-        JSONObject distOb = newDisTimeOb.getJSONObject("distance");
-        JSONObject timeOb = newDisTimeOb.getJSONObject("duration");
+        if(json.getString("status").equals("OK")) {
+            JSONArray routeArray = json.getJSONArray("routes");
+            JSONObject routes = routeArray.getJSONObject(0);
 
-        Log.i("Distance :", distOb.getString("text"));
-        Log.i("TimeDi :", timeOb.getString("text"));
+            JSONArray newTempARr = routes.getJSONArray("legs");
+            JSONObject newDisTimeOb = newTempARr.getJSONObject(0);
 
-        TextView txtDistanca = (TextView) findViewById(R.id.txtUdaljenost);
-        TextView txtVrijeme = (TextView) findViewById(R.id.txtVrijemeVoznje);
-        txtDistanca.setText(distOb.getString("text"));
-        txtVrijeme.setText(timeOb.getString("text"));
+            JSONObject distOb = newDisTimeOb.getJSONObject("distance");
+            JSONObject timeOb = newDisTimeOb.getJSONObject("duration");
+
+            Log.i("Distance :", distOb.getString("text"));
+            Log.i("TimeDi :", timeOb.getString("text"));
+
+            //Postavljanje vrijednosti u TextView za udaljenost i vrijeme
+            ((TextView) findViewById(R.id.txtUdaljenost)).setText(distOb.getString("text"));
+            ((TextView) findViewById(R.id.txtVrijemeVoznje)).setText(timeOb.getString("text"));
+
+            //postavljanje vrijednosti u globalne varijable za spremanje u bazu
+            distancaGl = distOb.getString("text");
+            vrijemeGl = timeOb.getString("text");
+
+            ((ImageButton) findViewById(R.id.btn_cijena_cammeo_call)).setClickable(true);
+            ((ImageButton) findViewById(R.id.btn_cijena_eko_call)).setClickable(true);
+            ((ImageButton) findViewById(R.id.btn_cijena_radio_call)).setClickable(true);
+            ((ImageButton) findViewById(R.id.btn_cijena_zebra_call)).setClickable(true);
+
+            ((Button) findViewById(R.id.btn_cijena_map)).setClickable(true);
+
+            float distanca = Float.parseFloat(distancaGl.substring(0, distancaGl.indexOf(" ")));
+            izracunajCijenu(distanca);
+        }else{
+            ((TextView)findViewById(R.id.txtUdaljenost)).setText(R.string.nepostojece_adrese);
+            ((TextView)findViewById(R.id.txtVrijemeVoznje)).setText("");
+            ((TextView)findViewById(R.id.txtCammeoCijena)).setText("");
+            ((TextView)findViewById(R.id.txtRadioCijena)).setText("");
+            ((TextView)findViewById(R.id.txtEkoCijena)).setText("");
+            ((TextView)findViewById(R.id.txtZebraCijena)).setText("");
+        }
     }
 }

@@ -106,9 +106,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/btn_karta"
             android:text="@string/btn_karta"
-            android:id="@+id/button"
+            android:id="@+id/btn_cijena_map"
             android:layout_gravity="end"
-            android:clickable="true"
             android:onClick="clickBtnMap"/>
     </LinearLayout>
 
@@ -154,10 +153,10 @@
                     android:contentDescription="@string/desc_cammeo_call"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/btn_imenik_cammeo_call"
+                    android:id="@+id/btn_cijena_cammeo_call"
                     android:src="@drawable/ic_action_call"
                     android:onClick="clickBtnCallCammeo"
-                    android:clickable="true"
+                    android:clickable="false"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true" />
@@ -201,10 +200,10 @@
                     android:contentDescription="@string/desc_radio_call"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/btn_imenik_radio_call"
+                    android:id="@+id/btn_cijena_radio_call"
                     android:src="@drawable/ic_action_call"
                     android:onClick="clickBtnCallRadio"
-                    android:clickable="true"
+                    android:clickable="false"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true" />
@@ -247,10 +246,10 @@
                     android:contentDescription="@string/desc_radio_call"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/btn_imenik_eko_call"
+                    android:id="@+id/btn_cijena_eko_call"
                     android:src="@drawable/ic_action_call"
                     android:onClick="clickBtnCallEko"
-                    android:clickable="true"
+                    android:clickable="false"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true" />
@@ -291,10 +290,10 @@
                     android:contentDescription="@string/desc_radio_call"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/btn_imenik_zebra_call"
+                    android:id="@+id/btn_cijena_zebra_call"
                     android:src="@drawable/ic_action_call"
                     android:onClick="clickBtnCallZebra"
-                    android:clickable="true"
+                    android:clickable="false"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentEnd="true" />
