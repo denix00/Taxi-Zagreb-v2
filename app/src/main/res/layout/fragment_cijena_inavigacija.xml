@@ -96,6 +96,8 @@
         android:background="@color/pozadina_zuta">
 
         <TextView
+            android:layout_marginLeft="@dimen/margin_udaljenost_vrijeme_left"
+            android:layout_marginStart="@dimen/margin_udaljenost_vrijeme_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -103,6 +105,8 @@
             android:id="@+id/txtUdaljenost" />
 
         <TextView
+            android:layout_marginLeft="@dimen/margin_udaljenost_vrijeme_left"
+            android:layout_marginStart="@dimen/margin_udaljenost_vrijeme_left"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"

@@ -31,4 +31,6 @@
     <dimen name="btn_karta">-52dp</dimen>
 
     <dimen name="btn_izracunaj">10dp</dimen>
+
+    <dimen name="margin_udaljenost_vrijeme_left">10dp</dimen>
 </resources>

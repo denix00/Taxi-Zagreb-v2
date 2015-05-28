@@ -72,7 +72,7 @@ public class FragmentCijenaINavigacija extends Fragment {
         ((ImageButton)v.findViewById(R.id.btn_cijena_cammeo_call)).setClickable(false);
         ((ImageButton)v.findViewById(R.id.btn_cijena_radio_call)).setClickable(false);
         ((ImageButton)v.findViewById(R.id.btn_cijena_eko_call)).setClickable(false);
-        ((ImageButton)v.findViewById(R.id.btn_cijena_radio_call)).setClickable(false);
+        ((ImageButton)v.findViewById(R.id.btn_cijena_zebra_call)).setClickable(false);
 
         return v;
     }

@@ -1,6 +1,7 @@
 package hr.tvz.taxizagreb;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -10,6 +11,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.preference.Preference;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -256,6 +258,10 @@ public class MainActivity extends ActionBarActivity
 
     public void clickBtnInfoCammeo(View v)    {
         Toast.makeText(this, "info cammeo",Toast.LENGTH_LONG).show();
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
     }
 
     public void clickBtnCallRadio(View v)    {
