@@ -340,8 +340,13 @@ public class MainActivity extends ActionBarActivity
 
 */
 
-    public void clickBtnPovijest(View view)    {
+    public void clickBtnPovijest(View view){
 
+    }
+
+    public void clickReset(View v){
+        ((TextView)findViewById(R.id.txtAdresaPolazista)).setText("");
+        ((TextView)findViewById(R.id.txtAdresaOdredista)).setText("");
     }
 
     public void call(int phone)    {
@@ -564,6 +569,7 @@ public class MainActivity extends ActionBarActivity
             float distanca = Float.parseFloat(distancaGl.substring(0, distancaGl.indexOf(" ")));
             izracunajCijenu(distanca);
         }else{
+            //ciscenje polja
             ((TextView)findViewById(R.id.txtUdaljenost)).setText(R.string.nepostojece_adrese);
             ((TextView)findViewById(R.id.txtVrijemeVoznje)).setText("");
             ((TextView)findViewById(R.id.txtCammeoCijena)).setText("");

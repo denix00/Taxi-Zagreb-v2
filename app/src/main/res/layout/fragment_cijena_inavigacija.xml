@@ -60,25 +60,34 @@
                 android:inputType="textPostalAddress"
                 android:ems="9"
                 android:id="@+id/txtAdresaOdredista"
-                android:hint="@string/adresa_polazista" />
+                android:hint="@string/adresa_odredista" />
 
             <Button
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/btn_izracunaj"
-                android:id="@+id/btnIzracunaj"
+                android:text="@string/btn_reset"
+                android:id="@+id/btnReset"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
-                android:onClick="clickBtnIzracunaj"/>
+                android:onClick="clickReset"/>
 
 
         </RelativeLayout>
 
     </LinearLayout>
 
-<!--Podaci o ruti-->
+    <Button
+        android:layout_marginLeft="@dimen/btn_izracunaj"
+        android:layout_marginRight="@dimen/btn_izracunaj"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_izracunaj"
+        android:id="@+id/btnIzracunaj"
+        android:layout_gravity="center_horizontal"
+        android:onClick="clickBtnIzracunaj"/>
+    <!--Podaci o ruti-->
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"

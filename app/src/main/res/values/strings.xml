@@ -59,10 +59,11 @@
     <string name="naslov_eko">Eko Taxi</string>
     <string name="naslov_zebra">Zebra Taxi</string>
 
-    <string name="adresa_polazista">Adresa polazista</string>
-    <string name="adresa_odredista">Adresa dolazista</string>
+    <string name="adresa_polazista">Adresa polazišta</string>
+    <string name="adresa_odredista">Adresa dolazišta</string>
     <string name="btn_GPS">GPS</string>
-    <string name="btn_izracunaj">Izracunaj</string>
+    <string name="btn_izracunaj">Izračunaj</string>
+    <string name="btn_reset">Reset</string>
     <string name="btn_povijest">Povijest</string>
 
     <string name="txt_na"></string>
