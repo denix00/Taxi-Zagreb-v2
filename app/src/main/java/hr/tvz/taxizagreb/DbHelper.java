@@ -27,13 +27,13 @@ public class DbHelper extends SQLiteOpenHelper {
   //  private static final String DATUM = "datum";
     private static final String PRIJEVOZNIK = "prijevoznik";
 
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
 
     private static final String CREATE_TABLE = "CREATE TABLE " +
             TABLE_NAME +"("+KEY_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+
             POLAZISTE+" VARCHAR(255),"+ODREDISTE+" VARCHAR(255),"+
-            DISTANCA+" DECIMAL(5,2),"+TRAJANJE_PUTOVANJA+" VARCHAR(50),"+
-            PRIJEVOZNIK+" VARCHAR(20),"+CIJENA+" DECIMAL(5,2)"+");";
+            DISTANCA+" VARCHAR(10),"+TRAJANJE_PUTOVANJA+" VARCHAR(20),"+
+            PRIJEVOZNIK+" VARCHAR(20),"+CIJENA+" DECIMAL(6,2)"+");";
 
     public DbHelper (Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -85,7 +85,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 td.setOdrediste(c.getString(c.getColumnIndex(ODREDISTE)));
                 td.setPrijevoznik(c.getString(c.getColumnIndex(PRIJEVOZNIK)));
                 td.setTrajanjePutovanja(c.getString(c.getColumnIndex(TRAJANJE_PUTOVANJA)));
-                td.setDistanca(c.getDouble(c.getColumnIndex(DISTANCA)));
+                td.setDistanca(c.getString(c.getColumnIndex(DISTANCA)));
                 td.setCijena(c.getDouble(c.getColumnIndex(CIJENA)));
                 // adding to DbModel list
                 povijest.add(td);

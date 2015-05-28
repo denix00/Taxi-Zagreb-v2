@@ -10,13 +10,13 @@ public class DbModel {
 
     String polaziste;
     String odrediste;
-    double distanca;
+    String distanca;
     String trajanjePutovanja;
     //   Date datum;
     double cijena;
     String prijevoznik;
 
-    public DbModel(String polaziste, String odrediste, double distanca, String trajanjePutovanja, String prijevoznik, double cijena) {
+    public DbModel(String polaziste, String odrediste, String distanca, String trajanjePutovanja, String prijevoznik, double cijena) {
         this.polaziste = polaziste;
         this.odrediste = odrediste;
         this.distanca = distanca;
@@ -46,11 +46,11 @@ public class DbModel {
         this.odrediste = odrediste;
     }
 
-    public double getDistanca() {
+    public String getDistanca() {
         return distanca;
     }
 
-    public void setDistanca(double distanca) {
+    public void setDistanca(String distanca) {
         this.distanca = distanca;
     }
 

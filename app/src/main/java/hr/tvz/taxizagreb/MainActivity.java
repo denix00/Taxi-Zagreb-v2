@@ -3,6 +3,7 @@ package hr.tvz.taxizagreb;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -24,18 +25,34 @@ import android.support.v4.widget.DrawerLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import org.w3c.dom.Text;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -46,8 +63,7 @@ public class MainActivity extends ActionBarActivity
                     FragmentImenik.OnFragmentInteractionListener,
                     FragmentCijenaINavigacija.OnFragmentInteractionListener, FragmentPovijest.OnFragmentInteractionListener {
 
-    TextView polaziste;
-    TextView odrediste;
+    static String jsonString;
 
     //android.support.v4.app.FragmentManager manager;
 
@@ -273,40 +289,53 @@ public class MainActivity extends ActionBarActivity
 
     }
 
-    public void clickBtnIzracunaj(View view)    {
+    public void clickBtnIzracunaj(View view) throws IOException, JSONException {
 
         if (isNetworkAvailable()) {
-            polaziste = (TextView) findViewById(R.id.txtAdresaPolazista);
-            odrediste = (TextView) findViewById(R.id.txtAdresaOdredista);
+            TextView txtPolaziste = (TextView) findViewById(R.id.txtAdresaPolazista);
+            TextView txtOdrediste = (TextView) findViewById(R.id.txtAdresaOdredista);
 
-            if(polaziste.getText().toString().isEmpty() || odrediste.getText().toString().isEmpty())
+            if(txtPolaziste.getText().toString().isEmpty() || txtOdrediste.getText().toString().isEmpty())
             {
-                //Toast.makeText(this, "Please enter the starting and the destination points", Toast.LENGTH_SHORT).show();
                 Toast.makeText(this, R.string.prazno_polje, Toast.LENGTH_SHORT).show();
                 return;
             }
 
+            //string s podcrtima = string bez podcrta
+            String polazisteString = checkStreetName(txtPolaziste);
+            String odredisteString = checkStreetName(txtOdrediste);
+
 /**
  *          Ovdje ide sav kod za dohvacanje podataka sa Google Maps API V2, pa se sprema u bazu
  */
+          //  String url = "http://maps.googleapis.com/maps/api/directions/json?origin=jarun_24_zagreb&destination=maksimirska_cesta_128&sensor=false";
+            String url = "http://maps.googleapis.com/maps/api/directions/json?origin="+polazisteString+"&destination="+odredisteString+"&mode=driving&sensor=false";
 
-  /*      SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "yyyy-MM-dd", Locale.getDefault());
-        Date date = new Date(2015-05-21);
-*/
+            Log.i("JSONUrl ", url);
+
+            DownloadTask downloadTask = new DownloadTask();
+            downloadTask.execute(url);
+
+
             DbHelper db = new DbHelper(this);
-            DbModel model = new DbModel(polaziste.getText().toString(), odrediste.getText().toString(), 5, "5h", "Eko", 23.4);
+            //                                                  distanca, vrijeme, prijevoznik, cijena
+            DbModel model = new DbModel(txtPolaziste.getText().toString(), txtOdrediste.getText().toString(), "7", "5h", "Eko", 23.4);
             long flag = db.unosUBazu(model);
             if (flag < 0) {
                 Toast.makeText(this, R.string.neuspio_unos, Toast.LENGTH_SHORT).show();
             } else {
                 //Toast.makeText(this, "Uneseno", Toast.LENGTH_SHORT).show();
             }
-            polaziste.setText("");
-            odrediste.setText("");
         }else{
             Toast.makeText(this, R.string.dostupnost_veze, Toast.LENGTH_LONG).show();
         }
+
+  /*      SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd", Locale.getDefault());
+        Date date = new Date(2015-05-21);
+
+
+*/
     }
 
     public void clickBtnPovijest(View view)
@@ -335,12 +364,122 @@ public class MainActivity extends ActionBarActivity
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-  /*  public class DohvatiAsyncTask extends AsyncTask<void, void, void> {
+    public String checkStreetName(TextView ulicaTxt)
+    {
 
+        String ulica = ulicaTxt.getText().toString();
+        ulica = ulica.toLowerCase(Locale.getDefault());
+
+        if( ! ulica.contains("zagreb"))        {
+            ulica = ulica.concat(", zagreb");
+        }
+
+        ulicaTxt.setText(ulica);
+
+        for(int i=0; i<ulica.length(); i++){
+            String temp = ulica;
+            if(ulica.charAt(i) == ' ') {
+                temp = ulica.substring(0,i) + '_' + ulica.substring(i+1);
+            }
+            ulica = temp;
+        }
+        return ulica;
+    }
+
+    /** A method to download json data from url */
+    private String downloadUrl(String strUrl) throws IOException {
+        String data = "";
+        InputStream iStream = null;
+        HttpURLConnection urlConnection = null;
+        try{
+            URL url = new URL(strUrl);
+
+            // Creating an http connection to communicate with url
+            urlConnection = (HttpURLConnection) url.openConnection();
+
+            // Connecting to url
+            urlConnection.connect();
+
+            // Reading data from url
+            iStream = urlConnection.getInputStream();
+
+            BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
+
+            StringBuffer sb = new StringBuffer();
+
+            String line = "";
+            while( ( line = br.readLine()) != null){
+                sb.append(line);
+            }
+
+            data = sb.toString();
+
+            br.close();
+
+        }catch(Exception e){
+            Log.d("Exception", "Exception while downloading url");
+        }finally{
+     //       iStream.close();
+     //       urlConnection.disconnect();
+        }
+        return data;
+    }
+
+
+    // Fetches data from url passed
+    private class DownloadTask extends AsyncTask<String, Void, String> {
+
+        // Downloading data in non-ui thread
         @Override
-        protected void doInBackground(void... params) {
+        protected String doInBackground(String... url) {
 
+            // For storing data from web service
+            String data = "";
+
+            try{
+                // Fetching the data from web service
+                data = downloadUrl(url[0]);
+            }catch(Exception e){
+                Log.d("Background Task",e.toString());
+            }
+            return data;
+        }
+
+        // Executes in UI thread, after the execution of
+        // doInBackground()
+        @Override
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+
+            jsonString = result;
+            try {
+                JSONParserSimple(jsonString);
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
-    */
+
+    private void JSONParserSimple (String url) throws IOException, JSONException
+    {
+        final JSONObject json = new JSONObject(url);
+        JSONArray routeArray = json.getJSONArray("routes");
+        JSONObject routes = routeArray.getJSONObject(0);
+
+        JSONArray newTempARr = routes.getJSONArray("legs");
+        JSONObject newDisTimeOb = newTempARr.getJSONObject(0);
+
+        JSONObject distOb = newDisTimeOb.getJSONObject("distance");
+        JSONObject timeOb = newDisTimeOb.getJSONObject("duration");
+
+        Log.i("Distance :", distOb.getString("text"));
+        Log.i("TimeDi :", timeOb.getString("text"));
+
+        TextView txtDistanca = (TextView) findViewById(R.id.txtUdaljenost);
+        TextView txtVrijeme = (TextView) findViewById(R.id.txtVrijemeVoznje);
+        txtDistanca.setText(distOb.getString("text"));
+        txtVrijeme.setText(timeOb.getString("text"));
+    }
 }
