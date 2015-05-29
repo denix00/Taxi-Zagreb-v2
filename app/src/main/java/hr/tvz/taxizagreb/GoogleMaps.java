@@ -37,6 +37,7 @@ public class GoogleMaps extends ActionBarActivity {
 
     LatLng polLatLng;
     LatLng odrLatLng;
+    String jsonString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,14 @@ public class GoogleMaps extends ActionBarActivity {
         Bundle extra = this.getIntent().getExtras();
         polLatLng = new LatLng(extra.getDouble("polLat"), extra.getDouble("polLng"));
         odrLatLng = new LatLng(extra.getDouble("odrLat"), extra.getDouble("odrLng"));
-        
+        jsonString = extra.getString("jsonString");
+
+        Log.i("LatLngPM", Double.toString(polLatLng.latitude));
+        Log.i("LatLngPM", Double.toString(polLatLng.longitude));
+        Log.i("LatLngOM", Double.toString(odrLatLng.latitude));
+        Log.i("LatLngOM", Double.toString(odrLatLng.longitude));
+        Log.i("LatLngString", jsonString);
+
         // Initializing
         markerPoints = new ArrayList<LatLng>();
 

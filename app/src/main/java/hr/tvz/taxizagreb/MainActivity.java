@@ -293,6 +293,7 @@ public class MainActivity extends ActionBarActivity
         map.putExtra("polLng",polLatLng.longitude);
         map.putExtra("odrLat",odrLatLng.latitude);
         map.putExtra("odrLng",odrLatLng.longitude);
+        map.putExtra("jsonString", jsonString);
         startActivity(map);
     }
 
