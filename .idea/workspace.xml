@@ -5,6 +5,9 @@
       <config />
     </shared>
   </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="86b96c90-437f-4b95-8da7-d6bb9447e295" name="Default" comment="" />
     <ignored path="Taxi-Zagreb-v2.iws" />
@@ -33,198 +36,40 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.724138">
-              <caret line="428" column="8" selection-start-line="428" selection-start-column="8" selection-end-line="428" selection-end-column="62" />
+            <state vertical-scroll-proportion="0.3328592">
+              <caret line="305" column="16" selection-start-line="305" selection-start-column="16" selection-end-line="305" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5233#5267#0" expanded="true" />
-                <element signature="e#5337#5371#0" expanded="true" />
-                <element signature="e#5441#5475#0" expanded="true" />
                 <element signature="class#PlaceholderFragment#0;class#MainActivity#0" expanded="false" />
-                <element signature="e#8584#8632#0" expanded="true" />
-                <element signature="e#8782#8808#0" expanded="true" />
-                <element signature="e#8810#8834#0" expanded="true" />
-                <element signature="e#9081#9128#0" expanded="true" />
-                <element signature="e#9275#9300#0" expanded="true" />
-                <element signature="e#9302#9325#0" expanded="true" />
-                <element signature="e#9564#9609#0" expanded="true" />
-                <element signature="e#9752#9775#0" expanded="true" />
-                <element signature="e#9777#9798#0" expanded="true" />
-                <element signature="e#10045#10092#0" expanded="true" />
-                <element signature="e#10167#10192#0" expanded="true" />
-                <element signature="e#10194#10217#0" expanded="true" />
-                <element signature="e#10861#10882#0" expanded="true" />
-                <element signature="e#11858#11882#0" expanded="true" />
-                <element signature="e#14579#14600#0" expanded="true" />
-                <element signature="e#14879#14926#0" expanded="true" />
-                <element signature="e#14988#15035#0" expanded="true" />
-                <element signature="e#15108#15155#0" expanded="true" />
-                <element signature="e#15390#15440#0" expanded="true" />
-                <element signature="e#15627#15673#0" expanded="true" />
-                <element signature="e#15729#15778#0" expanded="true" />
-                <element signature="e#15946#15990#0" expanded="true" />
-                <element signature="e#16044#16091#0" expanded="true" />
-                <element signature="e#16258#16304#0" expanded="true" />
-                <element signature="e#16360#16409#0" expanded="true" />
-                <element signature="e#17916#17966#0" expanded="true" />
-                <element signature="e#18086#18296#0" expanded="true" />
-                <element signature="e#18295#18296#0" expanded="true" />
-                <element signature="e#21264#21291#0" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InfoDialog.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/InfoDialog.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="29" column="68" selection-start-line="29" selection-start-column="68" selection-end-line="29" selection-end-column="68" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FragmentCijenaINavigacija.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/FragmentCijenaINavigacija.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="76" column="17" selection-start-line="76" selection-start-column="17" selection-end-line="76" selection-end-column="17" />
-              <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="fragment_cijena_inavigacija.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_cijena_inavigacija.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-12.551724">
+              <caret line="123" column="36" selection-start-line="123" selection-start-column="36" selection-end-line="123" selection-end-column="36" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fragment_imenik.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_imenik.xml">
           <provider selected="true" editor-type-id="android-designer">
             <state />
           </provider>
           <provider editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="108" column="78" selection-start-line="108" selection-start-column="78" selection-end-line="108" selection-end-column="78" />
-              <folding>
-                <element signature="e#456#485#0" expanded="true" />
-                <element signature="e#1046#1072#0" expanded="true" />
-                <element signature="e#1286#1303#0" expanded="true" />
-                <element signature="e#1804#1826#0" expanded="true" />
-                <element signature="e#2581#2607#0" expanded="true" />
-                <element signature="e#2821#2840#0" expanded="true" />
-                <element signature="e#3188#3210#0" expanded="true" />
-                <element signature="e#3246#3268#0" expanded="true" />
-                <element signature="e#3379#3402#0" expanded="true" />
-                <element signature="e#3740#3769#0" expanded="true" />
-                <element signature="e#3878#3917#0" expanded="true" />
-                <element signature="e#3957#3996#0" expanded="true" />
-                <element signature="e#4191#4207#0" expanded="true" />
-                <element signature="e#4312#4351#0" expanded="true" />
-                <element signature="e#4391#4430#0" expanded="true" />
-                <element signature="e#4625#4641#0" expanded="true" />
-                <element signature="e#4726#4752#0" expanded="true" />
-                <element signature="e#4906#4924#0" expanded="true" />
-                <element signature="e#4950#4969#0" expanded="true" />
-                <element signature="e#5320#5349#0" expanded="true" />
-                <element signature="e#5630#5660#0" expanded="true" />
-                <element signature="e#5919#5943#0" expanded="true" />
-                <element signature="e#5985#6015#0" expanded="true" />
-                <element signature="e#6058#6089#0" expanded="true" />
-                <element signature="e#6281#6321#0" expanded="true" />
-                <element signature="e#6369#6409#0" expanded="true" />
-                <element signature="e#6636#6652#0" expanded="true" />
-                <element signature="e#6978#7004#0" expanded="true" />
-                <element signature="e#7851#7881#0" expanded="true" />
-                <element signature="e#8140#8164#0" expanded="true" />
-                <element signature="e#8211#8236#0" expanded="true" />
-                <element signature="e#8278#8308#0" expanded="true" />
-                <element signature="e#8351#8382#0" expanded="true" />
-                <element signature="e#8572#8612#0" expanded="true" />
-                <element signature="e#8660#8700#0" expanded="true" />
-                <element signature="e#8927#8943#0" expanded="true" />
-                <element signature="e#9266#9291#0" expanded="true" />
-                <element signature="e#10135#10165#0" expanded="true" />
-                <element signature="e#10424#10448#0" expanded="true" />
-                <element signature="e#10495#10520#0" expanded="true" />
-                <element signature="e#10562#10592#0" expanded="true" />
-                <element signature="e#10635#10666#0" expanded="true" />
-                <element signature="e#10852#10892#0" expanded="true" />
-                <element signature="e#10940#10980#0" expanded="true" />
-                <element signature="e#11207#11223#0" expanded="true" />
-                <element signature="e#11540#11565#0" expanded="true" />
-                <element signature="e#12625#12649#0" expanded="true" />
-                <element signature="e#12691#12721#0" expanded="true" />
-                <element signature="e#12764#12795#0" expanded="true" />
-                <element signature="e#12986#13026#0" expanded="true" />
-                <element signature="e#13073#13113#0" expanded="true" />
-                <element signature="e#13340#13356#0" expanded="true" />
-                <element signature="e#13679#13704#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="global.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/global.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="3" column="60" selection-start-line="3" selection-start-column="60" selection-end-line="3" selection-end-column="60" />
-              <folding>
-                <element signature="e#180#205#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="6" column="73" selection-start-line="6" selection-start-column="73" selection-end-line="6" selection-end-column="73" />
-              <folding>
-                <element signature="e#260#284#0" expanded="false" />
-                <element signature="e#379#404#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DbHelper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/DbHelper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="35" column="58" selection-start-line="35" selection-start-column="58" selection-end-line="35" selection-end-column="58" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dimens.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/dimens.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="34" column="24" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-18.48">
-              <caret line="111" column="46" selection-start-line="111" selection-start-column="46" selection-end-line="111" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FragmentPovijest.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/FragmentPovijest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.2532005">
-              <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -1826,10 +1671,10 @@
         <option value="$PROJECT_DIR$/app/src/main/res/menu/main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/DIalogFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/DialogFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/InfoDialog.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/FragmentPovijest.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/InfoDialog.java" />
       </list>
     </option>
   </component>
@@ -1992,6 +1837,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="menu" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Taxi-Zagreb-v2" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2278,7 +2141,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31735888" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2295,7 +2158,7 @@
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19581959" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14978679" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14978679" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32893288" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -2332,17 +2195,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/DbModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="25" column="24" selection-start-line="25" selection-start-column="13" selection-end-line="25" selection-end-column="24" />
-          <folding>
-            <element signature="e#1164#1165#0" expanded="false" />
-            <element signature="e#1204#1205#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/FragmentPovijest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2357,39 +2209,7 @@
           <caret line="73" column="48" selection-start-line="73" selection-start-column="48" selection-end-line="73" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5233#5267#0" expanded="true" />
-            <element signature="e#5337#5371#0" expanded="true" />
-            <element signature="e#5441#5475#0" expanded="true" />
             <element signature="class#PlaceholderFragment#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#8584#8632#0" expanded="true" />
-            <element signature="e#8782#8808#0" expanded="true" />
-            <element signature="e#8810#8834#0" expanded="true" />
-            <element signature="e#9081#9128#0" expanded="true" />
-            <element signature="e#9275#9300#0" expanded="true" />
-            <element signature="e#9302#9325#0" expanded="true" />
-            <element signature="e#9564#9609#0" expanded="true" />
-            <element signature="e#9752#9775#0" expanded="true" />
-            <element signature="e#9777#9798#0" expanded="true" />
-            <element signature="e#10045#10092#0" expanded="true" />
-            <element signature="e#10167#10192#0" expanded="true" />
-            <element signature="e#10194#10217#0" expanded="true" />
-            <element signature="e#10861#10882#0" expanded="true" />
-            <element signature="e#11858#11882#0" expanded="true" />
-            <element signature="e#14579#14600#0" expanded="true" />
-            <element signature="e#14879#14926#0" expanded="true" />
-            <element signature="e#14988#15035#0" expanded="true" />
-            <element signature="e#15108#15155#0" expanded="true" />
-            <element signature="e#15390#15440#0" expanded="true" />
-            <element signature="e#15627#15673#0" expanded="true" />
-            <element signature="e#15729#15778#0" expanded="true" />
-            <element signature="e#15946#15990#0" expanded="true" />
-            <element signature="e#16044#16091#0" expanded="true" />
-            <element signature="e#16258#16304#0" expanded="true" />
-            <element signature="e#16360#16409#0" expanded="true" />
-            <element signature="e#17916#17966#0" expanded="true" />
-            <element signature="e#18086#18296#0" expanded="true" />
-            <element signature="e#18295#18296#0" expanded="true" />
-            <element signature="e#21264#21291#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2438,39 +2258,7 @@
           <caret line="73" column="48" selection-start-line="73" selection-start-column="48" selection-end-line="73" selection-end-column="48" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5233#5267#0" expanded="true" />
-            <element signature="e#5337#5371#0" expanded="true" />
-            <element signature="e#5441#5475#0" expanded="true" />
             <element signature="class#PlaceholderFragment#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#8584#8632#0" expanded="true" />
-            <element signature="e#8782#8808#0" expanded="true" />
-            <element signature="e#8810#8834#0" expanded="true" />
-            <element signature="e#9081#9128#0" expanded="true" />
-            <element signature="e#9275#9300#0" expanded="true" />
-            <element signature="e#9302#9325#0" expanded="true" />
-            <element signature="e#9564#9609#0" expanded="true" />
-            <element signature="e#9752#9775#0" expanded="true" />
-            <element signature="e#9777#9798#0" expanded="true" />
-            <element signature="e#10045#10092#0" expanded="true" />
-            <element signature="e#10167#10192#0" expanded="true" />
-            <element signature="e#10194#10217#0" expanded="true" />
-            <element signature="e#10861#10882#0" expanded="true" />
-            <element signature="e#11858#11882#0" expanded="true" />
-            <element signature="e#14579#14600#0" expanded="true" />
-            <element signature="e#14879#14926#0" expanded="true" />
-            <element signature="e#14988#15035#0" expanded="true" />
-            <element signature="e#15108#15155#0" expanded="true" />
-            <element signature="e#15390#15440#0" expanded="true" />
-            <element signature="e#15627#15673#0" expanded="true" />
-            <element signature="e#15729#15778#0" expanded="true" />
-            <element signature="e#15946#15990#0" expanded="true" />
-            <element signature="e#16044#16091#0" expanded="true" />
-            <element signature="e#16258#16304#0" expanded="true" />
-            <element signature="e#16360#16409#0" expanded="true" />
-            <element signature="e#17916#17966#0" expanded="true" />
-            <element signature="e#18086#18296#0" expanded="true" />
-            <element signature="e#18295#18296#0" expanded="true" />
-            <element signature="e#21264#21291#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2519,39 +2307,7 @@
           <caret line="273" column="0" selection-start-line="273" selection-start-column="0" selection-end-line="275" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5233#5267#0" expanded="true" />
-            <element signature="e#5337#5371#0" expanded="true" />
-            <element signature="e#5441#5475#0" expanded="true" />
             <element signature="class#PlaceholderFragment#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#8584#8632#0" expanded="true" />
-            <element signature="e#8782#8808#0" expanded="true" />
-            <element signature="e#8810#8834#0" expanded="true" />
-            <element signature="e#9081#9128#0" expanded="true" />
-            <element signature="e#9275#9300#0" expanded="true" />
-            <element signature="e#9302#9325#0" expanded="true" />
-            <element signature="e#9564#9609#0" expanded="true" />
-            <element signature="e#9752#9775#0" expanded="true" />
-            <element signature="e#9777#9798#0" expanded="true" />
-            <element signature="e#10045#10092#0" expanded="true" />
-            <element signature="e#10167#10192#0" expanded="true" />
-            <element signature="e#10194#10217#0" expanded="true" />
-            <element signature="e#10861#10882#0" expanded="true" />
-            <element signature="e#11858#11882#0" expanded="true" />
-            <element signature="e#14579#14600#0" expanded="true" />
-            <element signature="e#14879#14926#0" expanded="true" />
-            <element signature="e#14988#15035#0" expanded="true" />
-            <element signature="e#15108#15155#0" expanded="true" />
-            <element signature="e#15390#15440#0" expanded="true" />
-            <element signature="e#15627#15673#0" expanded="true" />
-            <element signature="e#15729#15778#0" expanded="true" />
-            <element signature="e#15946#15990#0" expanded="true" />
-            <element signature="e#16044#16091#0" expanded="true" />
-            <element signature="e#16258#16304#0" expanded="true" />
-            <element signature="e#16360#16409#0" expanded="true" />
-            <element signature="e#17916#17966#0" expanded="true" />
-            <element signature="e#18086#18296#0" expanded="true" />
-            <element signature="e#18295#18296#0" expanded="true" />
-            <element signature="e#21264#21291#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2581,39 +2337,7 @@
           <caret line="271" column="68" selection-start-line="271" selection-start-column="68" selection-end-line="271" selection-end-column="68" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5233#5267#0" expanded="true" />
-            <element signature="e#5337#5371#0" expanded="true" />
-            <element signature="e#5441#5475#0" expanded="true" />
             <element signature="class#PlaceholderFragment#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#8584#8632#0" expanded="true" />
-            <element signature="e#8782#8808#0" expanded="true" />
-            <element signature="e#8810#8834#0" expanded="true" />
-            <element signature="e#9081#9128#0" expanded="true" />
-            <element signature="e#9275#9300#0" expanded="true" />
-            <element signature="e#9302#9325#0" expanded="true" />
-            <element signature="e#9564#9609#0" expanded="true" />
-            <element signature="e#9752#9775#0" expanded="true" />
-            <element signature="e#9777#9798#0" expanded="true" />
-            <element signature="e#10045#10092#0" expanded="true" />
-            <element signature="e#10167#10192#0" expanded="true" />
-            <element signature="e#10194#10217#0" expanded="true" />
-            <element signature="e#10861#10882#0" expanded="true" />
-            <element signature="e#11858#11882#0" expanded="true" />
-            <element signature="e#14579#14600#0" expanded="true" />
-            <element signature="e#14879#14926#0" expanded="true" />
-            <element signature="e#14988#15035#0" expanded="true" />
-            <element signature="e#15108#15155#0" expanded="true" />
-            <element signature="e#15390#15440#0" expanded="true" />
-            <element signature="e#15627#15673#0" expanded="true" />
-            <element signature="e#15729#15778#0" expanded="true" />
-            <element signature="e#15946#15990#0" expanded="true" />
-            <element signature="e#16044#16091#0" expanded="true" />
-            <element signature="e#16258#16304#0" expanded="true" />
-            <element signature="e#16360#16409#0" expanded="true" />
-            <element signature="e#17916#17966#0" expanded="true" />
-            <element signature="e#18086#18296#0" expanded="true" />
-            <element signature="e#18295#18296#0" expanded="true" />
-            <element signature="e#21264#21291#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2643,39 +2367,7 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5233#5267#0" expanded="true" />
-            <element signature="e#5337#5371#0" expanded="true" />
-            <element signature="e#5441#5475#0" expanded="true" />
             <element signature="class#PlaceholderFragment#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#8584#8632#0" expanded="true" />
-            <element signature="e#8782#8808#0" expanded="true" />
-            <element signature="e#8810#8834#0" expanded="true" />
-            <element signature="e#9081#9128#0" expanded="true" />
-            <element signature="e#9275#9300#0" expanded="true" />
-            <element signature="e#9302#9325#0" expanded="true" />
-            <element signature="e#9564#9609#0" expanded="true" />
-            <element signature="e#9752#9775#0" expanded="true" />
-            <element signature="e#9777#9798#0" expanded="true" />
-            <element signature="e#10045#10092#0" expanded="true" />
-            <element signature="e#10167#10192#0" expanded="true" />
-            <element signature="e#10194#10217#0" expanded="true" />
-            <element signature="e#10861#10882#0" expanded="true" />
-            <element signature="e#11858#11882#0" expanded="true" />
-            <element signature="e#14579#14600#0" expanded="true" />
-            <element signature="e#14879#14926#0" expanded="true" />
-            <element signature="e#14988#15035#0" expanded="true" />
-            <element signature="e#15108#15155#0" expanded="true" />
-            <element signature="e#15390#15440#0" expanded="true" />
-            <element signature="e#15627#15673#0" expanded="true" />
-            <element signature="e#15729#15778#0" expanded="true" />
-            <element signature="e#15946#15990#0" expanded="true" />
-            <element signature="e#16044#16091#0" expanded="true" />
-            <element signature="e#16258#16304#0" expanded="true" />
-            <element signature="e#16360#16409#0" expanded="true" />
-            <element signature="e#17916#17966#0" expanded="true" />
-            <element signature="e#18086#18296#0" expanded="true" />
-            <element signature="e#18295#18296#0" expanded="true" />
-            <element signature="e#21264#21291#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2696,17 +2388,6 @@
             <element signature="e#1164#1165#0" expanded="false" />
             <element signature="e#1204#1205#0" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2777,16 +2458,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/GoogleMapsDirection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1615509">
-          <caret line="5" column="7" selection-start-line="5" selection-start-column="7" selection-end-line="5" selection-end-column="7" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2811,28 +2482,6 @@
         <state vertical-scroll-proportion="0.23642172">
           <caret line="1038" column="16" selection-start-line="1038" selection-start-column="16" selection-end-line="1038" selection-end-column="16" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_imenik.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/GoogleMaps.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="7" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
-          <folding>
-            <element signature="e#1920#3866#0" expanded="false" />
-            <element signature="e#3865#3866#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2876,71 +2525,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_cijena_inavigacija.xml">
-      <provider selected="true" editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="108" column="78" selection-start-line="108" selection-start-column="78" selection-end-line="108" selection-end-column="78" />
-          <folding>
-            <element signature="e#456#485#0" expanded="true" />
-            <element signature="e#1046#1072#0" expanded="true" />
-            <element signature="e#1286#1303#0" expanded="true" />
-            <element signature="e#1804#1826#0" expanded="true" />
-            <element signature="e#2581#2607#0" expanded="true" />
-            <element signature="e#2821#2840#0" expanded="true" />
-            <element signature="e#3188#3210#0" expanded="true" />
-            <element signature="e#3246#3268#0" expanded="true" />
-            <element signature="e#3379#3402#0" expanded="true" />
-            <element signature="e#3740#3769#0" expanded="true" />
-            <element signature="e#3878#3917#0" expanded="true" />
-            <element signature="e#3957#3996#0" expanded="true" />
-            <element signature="e#4191#4207#0" expanded="true" />
-            <element signature="e#4312#4351#0" expanded="true" />
-            <element signature="e#4391#4430#0" expanded="true" />
-            <element signature="e#4625#4641#0" expanded="true" />
-            <element signature="e#4726#4752#0" expanded="true" />
-            <element signature="e#4906#4924#0" expanded="true" />
-            <element signature="e#4950#4969#0" expanded="true" />
-            <element signature="e#5320#5349#0" expanded="true" />
-            <element signature="e#5630#5660#0" expanded="true" />
-            <element signature="e#5919#5943#0" expanded="true" />
-            <element signature="e#5985#6015#0" expanded="true" />
-            <element signature="e#6058#6089#0" expanded="true" />
-            <element signature="e#6281#6321#0" expanded="true" />
-            <element signature="e#6369#6409#0" expanded="true" />
-            <element signature="e#6636#6652#0" expanded="true" />
-            <element signature="e#6978#7004#0" expanded="true" />
-            <element signature="e#7851#7881#0" expanded="true" />
-            <element signature="e#8140#8164#0" expanded="true" />
-            <element signature="e#8211#8236#0" expanded="true" />
-            <element signature="e#8278#8308#0" expanded="true" />
-            <element signature="e#8351#8382#0" expanded="true" />
-            <element signature="e#8572#8612#0" expanded="true" />
-            <element signature="e#8660#8700#0" expanded="true" />
-            <element signature="e#8927#8943#0" expanded="true" />
-            <element signature="e#9266#9291#0" expanded="true" />
-            <element signature="e#10135#10165#0" expanded="true" />
-            <element signature="e#10424#10448#0" expanded="true" />
-            <element signature="e#10495#10520#0" expanded="true" />
-            <element signature="e#10562#10592#0" expanded="true" />
-            <element signature="e#10635#10666#0" expanded="true" />
-            <element signature="e#10852#10892#0" expanded="true" />
-            <element signature="e#10940#10980#0" expanded="true" />
-            <element signature="e#11207#11223#0" expanded="true" />
-            <element signature="e#11540#11565#0" expanded="true" />
-            <element signature="e#12625#12649#0" expanded="true" />
-            <element signature="e#12691#12721#0" expanded="true" />
-            <element signature="e#12764#12795#0" expanded="true" />
-            <element signature="e#12986#13026#0" expanded="true" />
-            <element signature="e#13073#13113#0" expanded="true" />
-            <element signature="e#13340#13356#0" expanded="true" />
-            <element signature="e#13679#13704#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/global.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2951,97 +2535,122 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/FragmentPovijest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="73" selection-start-line="6" selection-start-column="73" selection-end-line="6" selection-end-column="73" />
-          <folding>
-            <element signature="e#260#284#0" expanded="false" />
-            <element signature="e#379#404#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/FragmentCijenaINavigacija.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="76" column="17" selection-start-line="76" selection-start-column="17" selection-end-line="76" selection-end-column="17" />
+          <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/InfoDialog.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="68" selection-start-line="29" selection-start-column="68" selection-end-line="29" selection-end-column="68" />
+        <state vertical-scroll-proportion="0.17069702">
+          <caret line="6" column="73" selection-start-line="6" selection-start-column="73" selection-end-line="6" selection-end-column="73" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-18.48">
+        <state vertical-scroll-proportion="0.7640118">
           <caret line="111" column="46" selection-start-line="111" selection-start-column="46" selection-end-line="111" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/DbHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.53911805">
+          <caret line="35" column="58" selection-start-line="35" selection-start-column="58" selection-end-line="35" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/GoogleMaps.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.11379801">
+          <caret line="32" column="7" selection-start-line="32" selection-start-column="7" selection-end-line="32" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/FragmentCijenaINavigacija.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.65433854">
+          <caret line="76" column="17" selection-start-line="76" selection-start-column="17" selection-end-line="76" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/NavigationDrawerFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25604552">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/InfoDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.601707">
+          <caret line="51" column="2" selection-start-line="51" selection-start-column="2" selection-end-line="51" selection-end-column="2" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_main.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_imenik.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_cijena_inavigacija.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.551724">
+          <caret line="123" column="36" selection-start-line="123" selection-start-column="36" selection-end-line="123" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.724138">
-          <caret line="428" column="8" selection-start-line="428" selection-start-column="8" selection-end-line="428" selection-end-column="62" />
+        <state vertical-scroll-proportion="0.3328592">
+          <caret line="305" column="16" selection-start-line="305" selection-start-column="16" selection-end-line="305" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5233#5267#0" expanded="true" />
-            <element signature="e#5337#5371#0" expanded="true" />
-            <element signature="e#5441#5475#0" expanded="true" />
             <element signature="class#PlaceholderFragment#0;class#MainActivity#0" expanded="false" />
-            <element signature="e#8584#8632#0" expanded="true" />
-            <element signature="e#8782#8808#0" expanded="true" />
-            <element signature="e#8810#8834#0" expanded="true" />
-            <element signature="e#9081#9128#0" expanded="true" />
-            <element signature="e#9275#9300#0" expanded="true" />
-            <element signature="e#9302#9325#0" expanded="true" />
-            <element signature="e#9564#9609#0" expanded="true" />
-            <element signature="e#9752#9775#0" expanded="true" />
-            <element signature="e#9777#9798#0" expanded="true" />
-            <element signature="e#10045#10092#0" expanded="true" />
-            <element signature="e#10167#10192#0" expanded="true" />
-            <element signature="e#10194#10217#0" expanded="true" />
-            <element signature="e#10861#10882#0" expanded="true" />
-            <element signature="e#11858#11882#0" expanded="true" />
-            <element signature="e#14579#14600#0" expanded="true" />
-            <element signature="e#14879#14926#0" expanded="true" />
-            <element signature="e#14988#15035#0" expanded="true" />
-            <element signature="e#15108#15155#0" expanded="true" />
-            <element signature="e#15390#15440#0" expanded="true" />
-            <element signature="e#15627#15673#0" expanded="true" />
-            <element signature="e#15729#15778#0" expanded="true" />
-            <element signature="e#15946#15990#0" expanded="true" />
-            <element signature="e#16044#16091#0" expanded="true" />
-            <element signature="e#16258#16304#0" expanded="true" />
-            <element signature="e#16360#16409#0" expanded="true" />
-            <element signature="e#17916#17966#0" expanded="true" />
-            <element signature="e#18086#18296#0" expanded="true" />
-            <element signature="e#18295#18296#0" expanded="true" />
-            <element signature="e#21264#21291#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/DbHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="58" selection-start-line="35" selection-start-column="58" selection-end-line="35" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/hr/tvz/taxizagreb/FragmentPovijest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.2532005">
-          <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>

@@ -49,11 +49,11 @@ public class InfoDialog extends DialogFragment {
         return builder.create();*/
 
     }
-
+/*
     public void setNaslovIOpis()
     {
         naslov.setText("Naslov dialoga");
         info.setText("Neki info sadrzaj");
     }
-
+*/
 }
