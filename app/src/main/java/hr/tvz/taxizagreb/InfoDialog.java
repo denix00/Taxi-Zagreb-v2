@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 //klasa za ispis informacija o aplikaciji i timu, u obliku Dialoga
@@ -24,6 +25,8 @@ public class InfoDialog extends DialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
+        return builder.create();
+/*
         LayoutInflater inflater = getActivity().getLayoutInflater();
 
         //ucitaj dizajn za dialog
@@ -43,7 +46,8 @@ public class InfoDialog extends DialogFragment {
         naslov.setText("Naslov dialoga");
 
         //prikazi dialog
-        return builder.create();
+        return builder.create();*/
+
     }
 
     public void setNaslovIOpis()

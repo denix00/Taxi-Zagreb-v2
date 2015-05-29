@@ -76,6 +76,11 @@ public class MainActivity extends ActionBarActivity
 
     DownloadTask downloadTask;
 
+    float cijenaCammeo;
+    float cijenaEko;
+    float cijenaRadio;
+    float cijenaZebra;
+
     String polazisteGl;
     String odredisteGl;
     String distancaGl;
@@ -251,48 +256,51 @@ public class MainActivity extends ActionBarActivity
 
 
     public void clickBtnCallCammeo(View v)    {
-        spremanjeUBazu(polazisteGl, odredisteGl, distancaGl, vrijemeGl, "Cammeo Taxi", 20.5);
+        if(v.getId() == R.id.btn_cijena_cammeo_call) {
+            spremanjeUBazu(polazisteGl, odredisteGl, distancaGl, vrijemeGl, "Cammeo Taxi", (double) cijenaCammeo);
+        }
         call(getResources().getInteger(R.integer.broj_cammeo));
 
     }
 
     public void clickBtnInfoCammeo(View v)    {
-        Toast.makeText(this, "info cammeo",Toast.LENGTH_LONG).show();
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
+     //   Toast.makeText(this, "info cammeo",Toast.LENGTH_LONG).show();
+        infoDialog(R.string.info_title_cammeo, R.string.info_nap_cammeo);
     }
 
     public void clickBtnCallRadio(View v)    {
-        spremanjeUBazu(polazisteGl, odredisteGl, distancaGl, vrijemeGl, "Radio Taxi", 20.5);
+        if(v.getId() == R.id.btn_cijena_radio_call) {
+            spremanjeUBazu(polazisteGl, odredisteGl, distancaGl, vrijemeGl, "Radio Taxi", (double) cijenaRadio);
+        }
         call(getResources().getInteger(R.integer.broj_radio));
     }
 
     public void clickBtnInfoRadio(View v)    {
-        Toast.makeText(this, "info radio",Toast.LENGTH_LONG).show();
+    //    Toast.makeText(this, "info radio",Toast.LENGTH_LONG).show();
+        infoDialog(R.string.info_title_radio, R.string.info_nap_radio);
     }
 
     public void clickBtnCallEko(View v)    {
-        spremanjeUBazu(polazisteGl, odredisteGl,distancaGl, vrijemeGl, "Eko Taxi", 20.5);
+        if(v.getId() == R.id.btn_cijena_eko_call) {
+            spremanjeUBazu(polazisteGl, odredisteGl, distancaGl, vrijemeGl, "Eko Taxi", (double) cijenaEko);
+        }
         call(getResources().getInteger(R.integer.broj_eko));
     }
 
     public void clickBtnInfoEko(View v)    {
-        Toast.makeText(this, "info eko",Toast.LENGTH_LONG).show();
+     //   Toast.makeText(this, "info eko",Toast.LENGTH_LONG).show();
+        infoDialog(R.string.info_title_eko, R.string.info_nap_eko);
     }
 
     public void clickBtnCallZebra(View v)    {
-        spremanjeUBazu(polazisteGl, odredisteGl,distancaGl, vrijemeGl, "Zebra Taxi", 20.5);
+        if(v.getId() == R.id.btn_cijena_zebra_call) {
+            spremanjeUBazu(polazisteGl, odredisteGl, distancaGl, vrijemeGl, "Zebra Taxi", (double) cijenaZebra);
+        }
         call(getResources().getInteger(R.integer.broj_zebra));
     }
 
     public void clickBtnInfoZebra(View v)    {
-        DialogFragment infoDialogFragment = new InfoDialog();
-        infoDialogFragment.show(getFragmentManager(), "helpProzor");
-
-      //  ((TextView)infoDialogFragment.getView().findViewById(R.id.txtDialogNaslov)).setText(R.string.naslov_zebra);
-        //((TextView)findViewById(R.id.txtDialogNaslov)).setText(R.string.naslov_zebra);
+       infoDialog(R.string.info_title_zebra, R.string.info_nap_zebra);
     }
 
     public void clickBtnMap(View v)    {
@@ -355,6 +363,15 @@ public class MainActivity extends ActionBarActivity
         ((TextView)findViewById(R.id.txtAdresaOdredista)).setText("");
     }
 
+    public void infoDialog(int naslov, int poruka){
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.setMessage(getResources().getString(poruka));
+        alertDialog.setTitle(getResources().getString(naslov));
+        alertDialog.show();
+    }
+
     public void call(int phone)    {
         /** Stvaranje objekta aktivnosti koja pokrece ugradenu mogusnost zvanja ( ACTION_CALL ) */
         Intent intent = new Intent("android.intent.action.CALL");
@@ -409,35 +426,35 @@ public class MainActivity extends ActionBarActivity
     }
 
     public void izracunajCijenu(float kilometara){
-        float cijena = 0;
         DecimalFormat decFormat = new DecimalFormat("##0.00");
 
         Log.i("CijenaCam",getResources().getString(R.string.cammeo_start));
         Log.i("CijenaCam2",Float.toString(Float.parseFloat(getResources().getString(R.string.cammeo_start))));
 
-        cijena += Float.parseFloat(getResources().getString(R.string.cammeo_start));
+        cijenaCammeo = 0;
+        cijenaCammeo += Float.parseFloat(getResources().getString(R.string.cammeo_start));
         if(kilometara <= 2)                {
-            ((TextView)findViewById(R.id.txtCammeoCijena)).setText(decFormat.format(cijena) + " kn");
+            ((TextView)findViewById(R.id.txtCammeoCijena)).setText(decFormat.format(cijenaCammeo) + " kn");
         }else{
-            cijena += (kilometara - 2) * Float.parseFloat(getResources().getString(R.string.cammeo_ostalikm));
-            ((TextView)findViewById(R.id.txtCammeoCijena)).setText(decFormat.format(cijena) + " kn");
+            cijenaCammeo += (kilometara - 2) * Float.parseFloat(getResources().getString(R.string.cammeo_ostalikm));
+            ((TextView)findViewById(R.id.txtCammeoCijena)).setText(decFormat.format(cijenaCammeo) + " kn");
         }
 
-        cijena = 0;
-        cijena += Float.parseFloat(getResources().getString(R.string.radio_start));
-        cijena += kilometara * Float.parseFloat(getResources().getString(R.string.radio_ostalikm));
-        ((TextView)findViewById(R.id.txtRadioCijena)).setText(decFormat.format(cijena) + " kn");
+        cijenaRadio = 0;
+        cijenaRadio += Float.parseFloat(getResources().getString(R.string.radio_start));
+        cijenaRadio += kilometara * Float.parseFloat(getResources().getString(R.string.radio_ostalikm));
+        ((TextView)findViewById(R.id.txtRadioCijena)).setText(decFormat.format(cijenaRadio) + " kn");
 
 
-        cijena = 0;
-        cijena += Float.parseFloat(getResources().getString(R.string.eko_start));
-        cijena += kilometara * Float.parseFloat(getResources().getString(R.string.eko_ostalikm));
-        ((TextView)findViewById(R.id.txtEkoCijena)).setText(decFormat.format(cijena) + " kn");
+        cijenaEko = 0;
+        cijenaEko += Float.parseFloat(getResources().getString(R.string.eko_start));
+        cijenaEko += kilometara * Float.parseFloat(getResources().getString(R.string.eko_ostalikm));
+        ((TextView)findViewById(R.id.txtEkoCijena)).setText(decFormat.format(cijenaEko) + " kn");
 
-        cijena = 0;
-        cijena += Float.parseFloat(getResources().getString(R.string.zebra_start));
-        cijena += kilometara * Float.parseFloat(getResources().getString(R.string.zebra_ostalikm));
-        ((TextView)findViewById(R.id.txtZebraCijena)).setText(decFormat.format(cijena) + " kn");
+        cijenaZebra = 0;
+        cijenaZebra += Float.parseFloat(getResources().getString(R.string.zebra_start));
+        cijenaZebra += kilometara * Float.parseFloat(getResources().getString(R.string.zebra_ostalikm));
+        ((TextView)findViewById(R.id.txtZebraCijena)).setText(decFormat.format(cijenaZebra) + " kn");
 
     }
 

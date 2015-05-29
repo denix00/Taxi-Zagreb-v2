@@ -16,6 +16,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -76,6 +77,8 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        DecimalFormat decFormat = new DecimalFormat("##0.00");
+
         DbHelper db = new DbHelper(getActivity());
         List<DbModel> td = db.ispisiSve();
 
@@ -84,7 +87,7 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
         for (DbModel t : td) {
             item = new HashMap<String, String>();
             item.put("polaziste_i_odrediste", t.getPolaziste() + " -> " + t.getOdrediste());
-            item.put("prijevoznik_cijena_distanca", t.getPrijevoznik() + " - " + t.getCijena() + " kn - " + t.getDistanca());
+            item.put("prijevoznik_cijena_distanca", t.getPrijevoznik() + " - " + decFormat.format(t.getCijena()) + " kn - " + t.getDistanca());
             list.add(item);
         }
 
