@@ -35,13 +35,19 @@ public class GoogleMaps extends ActionBarActivity {
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     ArrayList<LatLng> markerPoints;
 
+    LatLng polLatLng;
+    LatLng odrLatLng;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_google_maps);
       //  setUpMapIfNeeded();
 
-
+        Bundle extra = this.getIntent().getExtras();
+        polLatLng = new LatLng(extra.getDouble("polLat"), extra.getDouble("polLng"));
+        odrLatLng = new LatLng(extra.getDouble("odrLat"), extra.getDouble("odrLng"));
+        
         // Initializing
         markerPoints = new ArrayList<LatLng>();
 
