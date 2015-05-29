@@ -1,15 +1,14 @@
 package hr.tvz.taxizagreb;
 
-import android.app.ActionBar;
+import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -18,14 +17,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.json.JSONObject;
-import org.w3c.dom.Document;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -70,55 +62,42 @@ public class GoogleMaps extends ActionBarActivity {
             // Enable MyLocation Button in the Map
             mMap.setMyLocationEnabled(true);
 
+            for(int i = 0; i < 2; i++ ){
             // Setting onclick event listener for the map
-            mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
 
-                @Override
-                public void onMapClick(LatLng point) {
+                // Adding new item to the ArrayList
+                //u prvom prolazu koristi polaziste, u drogom odrediste
+                LatLng latLng = polLatLng;
+                if(i == 1) latLng = odrLatLng;
 
-                    // Already two locations
-                    if(markerPoints.size()>1){
-                        markerPoints.clear();
-                        mMap.clear();
-                    }
+                markerPoints.add(latLng);
 
-                    // Adding new item to the ArrayList
-                    markerPoints.add(point);
+                // Creating MarkerOptions
+                MarkerOptions options = new MarkerOptions();
 
-                    // Creating MarkerOptions
-                    MarkerOptions options = new MarkerOptions();
+                // Setting the position of the marker
+                options.position(latLng);
 
-                    // Setting the position of the marker
-                    options.position(point);
-
-                    /**
-                     * For the start location, the color of marker is GREEN and
-                     * for the end location, the color of marker is RED.
-                     */
-                    if(markerPoints.size()==1){
-                        options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
-                    }else if(markerPoints.size()==2){
-                        options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-                    }
-
-                    // Add new marker to the Google Map Android API V2
-                    mMap.addMarker(options);
-
-                    // Checks, whether start and end locations are captured
-                    if(markerPoints.size() >= 2){
-                        LatLng origin = markerPoints.get(0);
-                        LatLng dest = markerPoints.get(1);
-
-                        // Getting URL to the Google Directions API
-                        String url = getDirectionsUrl(origin, dest);
-
-                        DownloadTask downloadTask = new DownloadTask();
-
-                        // Start downloading json data from Google Directions API
-                        downloadTask.execute(url);
-                    }
+                /**
+                 * For the start location, the color of marker is GREEN and
+                 * for the end location, the color of marker is RED.
+                 */
+                if(i == 0){
+                    options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                }else if(i == 1){
+                    options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                 }
-            });
+
+                // Add new marker to the Google Map Android API V2
+                mMap.addMarker(options);
+
+                DownloadTask downloadTask = new DownloadTask();
+                // Add new marker to the Google Map Android API V2
+                mMap.addMarker(options);
+
+                // Start downloading json data from Google Directions API
+                downloadTask.execute();
+            }
         }
     }
 
@@ -173,97 +152,32 @@ public class GoogleMaps extends ActionBarActivity {
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
     }
 
-    private String getDirectionsUrl(LatLng origin,LatLng dest){
-
-        // Origin of route
-        String str_origin = "origin="+origin.latitude+","+origin.longitude;
-
-        // Destination of route
-        String str_dest = "destination="+dest.latitude+","+dest.longitude;
-
-        // Sensor enabled
-        String sensor = "sensor=false";
-
-        // Building the parameters to the web service
-        String parameters = str_origin+"&"+str_dest+"&"+sensor;
-
-        // Output format
-        String output = "json";
-
-        // Building the url to the web service
-        String url = "https://maps.googleapis.com/maps/api/directions/"+output+"?"+parameters;
-
-        return url;
-    }
-
-    /** A method to download json data from url */
-    private String downloadUrl(String strUrl) throws IOException {
-        String data = "";
-        InputStream iStream = null;
-        HttpURLConnection urlConnection = null;
-        try{
-            URL url = new URL(strUrl);
-
-            // Creating an http connection to communicate with url
-            urlConnection = (HttpURLConnection) url.openConnection();
-
-            // Connecting to url
-            urlConnection.connect();
-
-            // Reading data from url
-            iStream = urlConnection.getInputStream();
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
-
-            StringBuffer sb = new StringBuffer();
-
-            String line = "";
-            while( ( line = br.readLine()) != null){
-                sb.append(line);
-            }
-
-            data = sb.toString();
-
-            br.close();
-
-        }catch(Exception e){
-            Log.d("Exception", "Exception while downloading url");
-        }finally{
-            iStream.close();
-            urlConnection.disconnect();
-        }
-        return data;
-    }
 
     // Fetches data from url passed
-    private class DownloadTask extends AsyncTask<String, Void, String> {
+    private class DownloadTask extends AsyncTask<Void, Void, String> {
 
-        // Downloading data in non-ui thread
+        // Iscrtavanje u pozadinskoj dretvi
         @Override
-        protected String doInBackground(String... url) {
-
-            // For storing data from web service
-            String data = "";
-
-            try{
-                // Fetching the data from web service
-                data = downloadUrl(url[0]);
-            }catch(Exception e){
-                Log.d("Background Task",e.toString());
-            }
-            return data;
-        }
-
-        // Executes in UI thread, after the execution of
-        // doInBackground()
-        @Override
-        protected void onPostExecute(String result) {
-            super.onPostExecute(result);
+        protected String doInBackground(Void... temp) {
 
             ParserTask parserTask = new ParserTask();
+            parserTask.execute(jsonString);
 
-            // Invokes the thread for parsing the JSON data
-            parserTask.execute(result);
+            return "";
+        }
+        protected void onPostExecute(String result) {
+            super.onPostExecute(result);
+            double centLat;
+            double centLng;
+            if(polLatLng.latitude > odrLatLng.latitude) centLat = (polLatLng.latitude - odrLatLng.latitude) / 2 + odrLatLng.latitude;
+            else centLat = (odrLatLng.latitude - polLatLng.latitude) / 2 + polLatLng.latitude;
+
+            if(polLatLng.longitude > odrLatLng.longitude) centLng = (polLatLng.longitude - odrLatLng.longitude) / 2 + odrLatLng.longitude;
+            else centLng = (odrLatLng.longitude - polLatLng.longitude) / 2 + polLatLng.longitude;
+
+            LatLng centLatLng = new LatLng(centLat,centLng);
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(centLatLng));
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(12), 2000, null);
         }
     }
 
