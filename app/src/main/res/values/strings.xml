@@ -17,18 +17,18 @@
 
 
     <string name="imenik_Cammeo_ime">Cammeo Taxi</string>
-    <string name="imenik_Cammeo_cijena_poziv">1,25kn/2,50kn</string>
+    <string name="imenik_Cammeo_cijena_poziv">2,40 kn</string>
 
     <string name="imenik_Eko_ime">Eko Taxi</string>
-    <string name="imenik_Eko_cijena_poziv">1,24kn/2,49kn</string>
+    <string name="imenik_Eko_cijena_poziv">2,49 kn</string>
 
     <string name="imenik_Radio_ime">Radio Taxi</string>
-    <string name="imenik_Radio_cijena_poziv">0,63kn/1,87kn</string>
+    <string name="imenik_Radio_cijena_poziv">2,50 kn</string>
 
     <string name="imenik_Zebra_ime">Zebra Taxi</string>
-    <string name="imenik_Zebra_cijena_poziv">1,25kn/2,45kn</string>
+    <string name="imenik_Zebra_cijena_poziv">2,45 kn</string>
 
-    <string name="imenik_fix_mob">fix/mob</string>
+    <string name="imenik_fix_mob">poziv</string>
 
     <string name="imenik_btn_info">i</string>
 
