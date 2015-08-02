@@ -33,4 +33,6 @@
     <dimen name="btn_izracunaj">10dp</dimen>
 
     <dimen name="margin_udaljenost_vrijeme_left">10dp</dimen>
+
+    <dimen name="gps_reset_width">85dp</dimen>
 </resources>

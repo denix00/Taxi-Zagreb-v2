@@ -32,21 +32,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/btn_GPS"
                 android:id="@+id/btnGPS"
-                android:layout_alignBottom="@+id/txtAdresaPolazista"
-                android:layout_toRightOf="@+id/txtAdresaPolazista"
-                android:layout_toEndOf="@+id/txtAdresaPolazista"
-                android:onClick="clickBtnGPS"/>
-
-            <Button
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/btn_povijest"
-                android:id="@+id/btnPovijest"
-                android:layout_alignBottom="@+id/btnGPS"
+                android:onClick="clickBtnGPS"
+                android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true"
-                android:onClick="clickBtnPovijest"/>
+                android:width="@dimen/gps_reset_width"
+                android:layout_alignParentEnd="true" />
+
         </RelativeLayout>
 
         <RelativeLayout
@@ -71,6 +62,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true"
+                android:width="@dimen/gps_reset_width"
                 android:onClick="clickReset"/>
 
 
@@ -121,6 +113,7 @@
             android:text="@string/btn_karta"
             android:id="@+id/btn_cijena_map"
             android:layout_gravity="end"
+            android:maxWidth="@dimen/gps_reset_width"
             android:onClick="clickBtnMap"/>
     </LinearLayout>
 

@@ -16,6 +16,7 @@ import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -197,6 +198,15 @@ public class MainActivity extends ActionBarActivity
 
     }
 
+
+    /**Disabling menu button*/
+    @Override
+    public boolean onMenuOpened(final int featureId, final Menu menu) {
+        super.onMenuOpened(featureId, menu);
+        return false;
+    }
+
+
     /**
      * A placeholder fragment containing a simple view.
      */
@@ -343,9 +353,6 @@ public class MainActivity extends ActionBarActivity
 
 */
 
-    public void clickBtnPovijest(View view){
-
-    }
 
     public void clickReset(View v){
         ((TextView)findViewById(R.id.txtAdresaPolazista)).setText("");
