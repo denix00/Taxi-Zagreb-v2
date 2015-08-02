@@ -35,4 +35,6 @@
     <dimen name="margin_udaljenost_vrijeme_left">10dp</dimen>
 
     <dimen name="gps_reset_width">85dp</dimen>
+
+    <dimen name="marker_dimen">35dp</dimen>
 </resources>

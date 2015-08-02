@@ -18,13 +18,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:layout_marginTop="@dimen/cijena_logo_top"
+                android:layout_width="@dimen/marker_dimen"
+                android:layout_height="@dimen/marker_dimen"
+                android:id="@+id/imgMarkerPolaziste"
+                android:background="@drawable/marker_pol"/>
+
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPostalAddress"
                 android:ems="9"
                 android:id="@+id/txtAdresaPolazista"
-                android:hint="@string/adresa_polazista" />
+                android:hint="@string/adresa_polazista"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentStart="false"
+                android:layout_toEndOf="@id/imgMarkerPolaziste" />
 
             <Button
                 style="?android:attr/buttonStyleSmall"
@@ -45,13 +55,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:layout_marginTop="@dimen/cijena_logo_top"
+                android:layout_width="@dimen/marker_dimen"
+                android:layout_height="@dimen/marker_dimen"
+                android:id="@+id/imgMarkerOdrediste"
+                android:background="@drawable/marker_odr"/>
+
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:inputType="textPostalAddress"
                 android:ems="9"
                 android:id="@+id/txtAdresaOdredista"
-                android:hint="@string/adresa_odredista" />
+                android:hint="@string/adresa_odredista"
+                android:layout_alignParentEnd="false"
+                android:layout_alignParentStart="false"
+                android:layout_toEndOf="@id/imgMarkerOdrediste"/>
 
             <Button
                 style="?android:attr/buttonStyleSmall"
