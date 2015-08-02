@@ -243,7 +243,7 @@ public class MainActivity extends ActionBarActivity
         if(v.getId() == R.id.btn_cijena_cammeo_call) {
             spremanjeUBazu(polazisteGl, odredisteGl, distancaGl, vrijemeGl, "Cammeo Taxi", (double) cijenaCammeo);
         }
-        call(getResources().getInteger(R.integer.broj_cammeo));
+        call(getResources().getString(R.string.broj_cammeo));
 
     }
 
@@ -256,7 +256,7 @@ public class MainActivity extends ActionBarActivity
         if(v.getId() == R.id.btn_cijena_radio_call) {
             spremanjeUBazu(polazisteGl, odredisteGl, distancaGl, vrijemeGl, "Radio Taxi", (double) cijenaRadio);
         }
-        call(getResources().getInteger(R.integer.broj_radio));
+        call(getResources().getString(R.string.broj_radio));
     }
 
     public void clickBtnInfoRadio(View v)    {
@@ -268,7 +268,7 @@ public class MainActivity extends ActionBarActivity
         if(v.getId() == R.id.btn_cijena_eko_call) {
             spremanjeUBazu(polazisteGl, odredisteGl, distancaGl, vrijemeGl, "Eko Taxi", (double) cijenaEko);
         }
-        call(getResources().getInteger(R.integer.broj_eko));
+        call(getResources().getString(R.string.broj_eko));
     }
 
     public void clickBtnInfoEko(View v)    {
@@ -280,7 +280,7 @@ public class MainActivity extends ActionBarActivity
         if(v.getId() == R.id.btn_cijena_zebra_call) {
             spremanjeUBazu(polazisteGl, odredisteGl, distancaGl, vrijemeGl, "Zebra Taxi", (double) cijenaZebra);
         }
-        call(getResources().getInteger(R.integer.broj_zebra));
+        call(getResources().getString(R.string.broj_zebra));
     }
 
     public void clickBtnInfoZebra(View v)    {
@@ -361,7 +361,7 @@ public class MainActivity extends ActionBarActivity
         alertDialog.show();
     }
 
-    public void call(int phone)    {
+    public void call(String phone)    {
         /** Stvaranje objekta aktivnosti koja pokrece ugradenu mogusnost zvanja ( ACTION_CALL ) */
         Intent intent = new Intent("android.intent.action.CALL");
 

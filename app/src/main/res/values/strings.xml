@@ -110,4 +110,12 @@
     <string name="info_title_eko">Eko Taxi</string>
     <string name="info_nap_zebra">Ovdje idu neke napomene vezane uz Zebra Taxi</string>
     <string name="info_title_zebra">Taxi Zebra</string>
+
+
+
+
+    <string name="broj_cammeo">1212</string>
+    <string name="broj_radio">1777</string>
+    <string name="broj_eko">1414</string>
+    <string name="broj_zebra">0607557</string>
 </resources>
