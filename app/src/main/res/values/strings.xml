@@ -102,19 +102,19 @@
     <string name="zebra_freekm">0</string>
     <string name="zebra_ostalikm">5.9</string>
 
-    <string name="info_nap_cammeo">Ovdje idu neke napomene vezane uz Taxi Cammeo</string>
+    <string name="info_nap_cammeo">Cijena poziva: 2,40 kn\nStart: 15 kn\nCijena po km: 6 kn\nPrva dva km besplatna</string>
     <string name="info_title_cammeo">Taxi Cammeo</string>
-    <string name="info_nap_radio">Ovdje idu neke napomene vezane uz Radio Taxi Zagreb</string>
+    <string name="info_nap_radio">Cijena poziva: 2,50 kn\nStart: 10 kn\nCijena po km: 6 kn</string>
     <string name="info_title_radio">Radio Taxi Zagreb</string>
-    <string name="info_nap_eko">Ovdje idu neke napomene vezane uz Eko Taxi</string>
+    <string name="info_nap_eko">Cijena poziva: 2,49 kn\nStart: 8,80 kn\nCijena po km: 6 kn</string>
     <string name="info_title_eko">Eko Taxi</string>
-    <string name="info_nap_zebra">Ovdje idu neke napomene vezane uz Zebra Taxi</string>
+    <string name="info_nap_zebra">Cijena poziva: 2,45 kn\nStart: 8,50 kn\nCijena po km: 5,90 kn</string>
     <string name="info_title_zebra">Taxi Zebra</string>
 
 
 
 
-    <string name="broj_cammeo">1212</string>
+    <string name="broj_cammeo">011212</string>
     <string name="broj_radio">1777</string>
     <string name="broj_eko">1414</string>
     <string name="broj_zebra">0607557</string>
