@@ -1,5 +1,6 @@
 package hr.tvz.taxizagreb;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -24,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -591,10 +593,19 @@ public class MainActivity extends ActionBarActivity
             distancaGl = distOb.getString("text");
             vrijemeGl = timeOb.getString("text");
 
+
+            /**Omogucavanje call buttona na ekranu Cijena i navigacija, micanje Gray efekta*/
             ((ImageButton) findViewById(R.id.btn_cijena_cammeo_call)).setClickable(true);
             ((ImageButton) findViewById(R.id.btn_cijena_eko_call)).setClickable(true);
             ((ImageButton) findViewById(R.id.btn_cijena_radio_call)).setClickable(true);
             ((ImageButton) findViewById(R.id.btn_cijena_zebra_call)).setClickable(true);
+
+            ((ImageButton) findViewById(R.id.btn_cijena_cammeo_call)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_call));
+            ((ImageButton) findViewById(R.id.btn_cijena_eko_call)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_call));
+            ((ImageButton) findViewById(R.id.btn_cijena_radio_call)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_call));
+            ((ImageButton) findViewById(R.id.btn_cijena_zebra_call)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_call));
+
+            hideSoftKeyboard();
 
             ((Button) findViewById(R.id.btn_cijena_map)).setClickable(true);
 
@@ -609,5 +620,12 @@ public class MainActivity extends ActionBarActivity
             ((TextView)findViewById(R.id.txtEkoCijena)).setText("");
             ((TextView)findViewById(R.id.txtZebraCijena)).setText("");
         }
+    }
+
+
+    /**Metoda za sakrivanje tipkovnice*/
+    public void hideSoftKeyboard() {
+        InputMethodManager inputMethodManager = (InputMethodManager)  this.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
     }
 }
