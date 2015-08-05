@@ -446,11 +446,14 @@ public class MainActivity extends ActionBarActivity
 
             polazisteGl = txtPolaziste.getText().toString();
             odredisteGl = txtOdrediste.getText().toString();
+
+            Log.i("polasisteGL", polazisteGl);
+            Log.i("polasisteGL", odredisteGl);
 /**
  *          Ovdje ide sav kod za dohvacanje podataka sa Google Maps API V2, pa se sprema u bazu
  */
 
-            String gradFilter = ",zagreb";
+            String gradFilter = ",_zagreb";
           //  String url = "http://maps.googleapis.com/maps/api/directions/json?origin=jarun_24_zagreb&destination=maksimirska_cesta_128&sensor=false";
             String url = "http://maps.googleapis.com/maps/api/directions/json?origin="+polazisteString + gradFilter +"&destination="+odredisteString + gradFilter +"&mode=driving&sensor=false";
 
@@ -517,13 +520,13 @@ public class MainActivity extends ActionBarActivity
         String ulica = ulicaTxt.getText().toString();
         ulica = ulica.toLowerCase(Locale.getDefault());
 
-        /** izbaceno da ne pise ,zagreb u polju za unos
-        if( ! ulica.contains("zagreb"))        {
+        // izbaceno da ne pise ,zagreb u polju za unos
+    /**    if( ! ulica.contains("zagreb"))        {
             ulica = ulica.concat(", zagreb");
         }
 
         ulicaTxt.setText(ulica);
-         */
+*/
         for(int i=0; i<ulica.length(); i++){
             String temp = ulica;
             if(ulica.charAt(i) == ' ') {
