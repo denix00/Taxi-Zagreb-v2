@@ -123,6 +123,7 @@ public class MainActivity extends ActionBarActivity
          //   Bundle bundlePodaci = getIntent().getExtras();
            // String odredisteTemp = getIntent().getExtras().getString("odrediste");
             Bundle bundlePodaci = new Bundle();
+            bundlePodaci.putString("tip", "cijena");
             bundlePodaci.putString("polaziste", polazisteGl);
             bundlePodaci.putString("odrediste", odredisteGl);
             bundlePodaci.putFloat("cijenaCammeo", cijenaCammeo);
@@ -456,6 +457,10 @@ public class MainActivity extends ActionBarActivity
             downloadTask = new DownloadTask();
             downloadTask.execute(url);
 
+            txtOdrediste.setEnabled(false);
+            txtPolaziste.setEnabled(false);
+
+
         }else{
             Toast.makeText(this, R.string.dostupnost_veze, Toast.LENGTH_LONG).show();
         }
@@ -471,8 +476,9 @@ public class MainActivity extends ActionBarActivity
 
 
     public void clickReset(View v){
-        ((TextView)findViewById(R.id.txtAdresaPolazista)).setText("");
-        ((TextView)findViewById(R.id.txtAdresaOdredista)).setText("");
+
+        resetTextViews(false, false);
+        enableButtons(false);
     }
 
     public void infoDialog(int naslov, int poruka){
@@ -709,15 +715,7 @@ public class MainActivity extends ActionBarActivity
 
 
             /**Omogucavanje call buttona na ekranu Cijena i navigacija, micanje Gray efekta*/
-            ((ImageButton) findViewById(R.id.btn_cijena_cammeo_call)).setClickable(true);
-            ((ImageButton) findViewById(R.id.btn_cijena_eko_call)).setClickable(true);
-            ((ImageButton) findViewById(R.id.btn_cijena_radio_call)).setClickable(true);
-            ((ImageButton) findViewById(R.id.btn_cijena_zebra_call)).setClickable(true);
-
-            ((ImageButton) findViewById(R.id.btn_cijena_cammeo_call)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_call));
-            ((ImageButton) findViewById(R.id.btn_cijena_eko_call)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_call));
-            ((ImageButton) findViewById(R.id.btn_cijena_radio_call)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_call));
-            ((ImageButton) findViewById(R.id.btn_cijena_zebra_call)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_call));
+            enableButtons(true);
 
             hideSoftKeyboard();
 
@@ -727,12 +725,7 @@ public class MainActivity extends ActionBarActivity
             izracunajCijenu(distanca);
         }else{
             //ciscenje polja i ispis da adresa nije pronadena
-            ((TextView)findViewById(R.id.txtUdaljenost)).setText(R.string.nepostojece_adrese);
-            ((TextView)findViewById(R.id.txtVrijemeVoznje)).setText("");
-            ((TextView)findViewById(R.id.txtCammeoCijena)).setText("");
-            ((TextView)findViewById(R.id.txtRadioCijena)).setText("");
-            ((TextView)findViewById(R.id.txtEkoCijena)).setText("");
-            ((TextView)findViewById(R.id.txtZebraCijena)).setText("");
+            resetTextViews(true, false);
         }
     }
 
@@ -741,5 +734,53 @@ public class MainActivity extends ActionBarActivity
     public void hideSoftKeyboard() {
         InputMethodManager inputMethodManager = (InputMethodManager)  this.getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
+    }
+
+    //ako je argument 1, tada adresa nije pronadena i ta poruka se dodaje, inace sve se postavlja na prazno
+    public void resetTextViews(Boolean addressNotFound, Boolean lockFields){
+        //ako adresa nije pronadena, ne cisti polja da se unos moze editirati
+        if(! addressNotFound){
+            ((TextView)findViewById(R.id.txtAdresaOdredista)).setText("");
+            ((TextView)findViewById(R.id.txtAdresaPolazista)).setText("");
+        }
+
+        ((TextView)findViewById(R.id.txtUdaljenost)).setText("");
+        ((TextView)findViewById(R.id.txtVrijemeVoznje)).setText("");
+        ((TextView)findViewById(R.id.txtCammeoCijena)).setText("");
+        ((TextView)findViewById(R.id.txtRadioCijena)).setText("");
+        ((TextView)findViewById(R.id.txtEkoCijena)).setText("");
+        ((TextView)findViewById(R.id.txtZebraCijena)).setText("");
+
+        if(lockFields){
+         //   ((TextView)findViewById(R.id.txtAdresaOdredista)).setFocusable(! lockFields);
+        //    ((TextView)findViewById(R.id.txtAdresaOdredista)).setEnabled(lockFields == false);
+        //    ((TextView)findViewById(R.id.txtAdresaPolazista)).setEnabled(lockFields == false);
+         //   ((TextView)findViewById(R.id.txtAdresaPolazista)).setFocusable(! lockFields);
+         //   ((TextView)findViewById(R.id.txtAdresaPolazista)).setFocusableInTouchMode(! lockFields);
+         //   ((TextView)findViewById(R.id.txtAdresaOdredista)).setFocusableInTouchMode(! lockFields);
+        }
+
+        if(addressNotFound)
+            ((TextView)findViewById(R.id.txtUdaljenost)).setText(R.string.nepostojece_adrese);
+    }
+
+    public void enableButtons(Boolean enable){
+        ((ImageButton) findViewById(R.id.btn_cijena_cammeo_call)).setClickable(enable);
+        ((ImageButton) findViewById(R.id.btn_cijena_eko_call)).setClickable(enable);
+        ((ImageButton) findViewById(R.id.btn_cijena_radio_call)).setClickable(enable);
+        ((ImageButton) findViewById(R.id.btn_cijena_zebra_call)).setClickable(enable);
+        ((Button) findViewById(R.id.btn_cijena_map)).setClickable(enable);
+
+        if(enable) {
+            ((ImageButton) findViewById(R.id.btn_cijena_cammeo_call)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_call));
+            ((ImageButton) findViewById(R.id.btn_cijena_eko_call)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_call));
+            ((ImageButton) findViewById(R.id.btn_cijena_radio_call)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_call));
+            ((ImageButton) findViewById(R.id.btn_cijena_zebra_call)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_call));
+        }else{
+            ((ImageButton) findViewById(R.id.btn_cijena_cammeo_call)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_call_gray));
+            ((ImageButton) findViewById(R.id.btn_cijena_eko_call)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_call_gray));
+            ((ImageButton) findViewById(R.id.btn_cijena_radio_call)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_call_gray));
+            ((ImageButton) findViewById(R.id.btn_cijena_zebra_call)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_call_gray));
+        }
     }
 }

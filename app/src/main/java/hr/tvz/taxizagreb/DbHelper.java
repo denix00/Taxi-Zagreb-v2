@@ -94,4 +94,19 @@ public class DbHelper extends SQLiteOpenHelper {
 
         return povijest;
     }
+
+    public List<String> getPoint(int location){
+        DbModel dbModel = new DbModel();
+        List<String> polOdr = new ArrayList<String>();
+        String selectQuery = "SELECT " + POLAZISTE + "," + ODREDISTE + " FROM " + TABLE_NAME + " LIMIT 1 OFFSET " + location + ";";
+        Log.i("selectQuery", selectQuery);
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor c = db.rawQuery(selectQuery, null);
+        c.moveToFirst();
+        polOdr.add(c.getString(c.getColumnIndex(POLAZISTE)));
+        polOdr.add(c.getString(c.getColumnIndex(ODREDISTE)));
+
+        return polOdr;
+    }
 }

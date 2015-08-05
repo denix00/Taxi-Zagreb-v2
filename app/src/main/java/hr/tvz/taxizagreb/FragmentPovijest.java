@@ -14,12 +14,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
+
+import com.google.android.gms.wearable.DataEventBuffer;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TooManyListenersException;
 
 import hr.tvz.taxizagreb.dummy.DummyContent;
 
@@ -145,7 +149,25 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
         if (null != mListener) {
             // Notify the active callbacks interface (the activity, if the
             // fragment is attached to one) that an item has been selected.
-            mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
+            Log.i("povijest", "odabran je " + position + " po redu");
+           // mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
+
+            FragmentCijenaINavigacija navigacijaCijena = new FragmentCijenaINavigacija();
+
+            DbHelper db = new DbHelper(getActivity());
+            List<String> podaciBaza = new ArrayList<String>();
+
+            podaciBaza = db.getPoint(position);
+
+            Bundle podaciBundle = new Bundle();
+            podaciBundle.putString("tip", "povijest");
+            podaciBundle.putString("polaziste", podaciBaza.get(0));
+            podaciBundle.putString("odrediste", podaciBaza.get(1));
+
+            navigacijaCijena.setArguments(podaciBundle);
+
+          //  navigacijaCijena.setArguments(bundlePodaci);
+            getFragmentManager().beginTransaction().replace(R.id.container, navigacijaCijena, "navigacijaCijena").commit();
         }
     }
 
@@ -176,5 +198,4 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
         // TODO: Update argument type and name
         public void onFragmentInteraction(String id);
     }
-
 }
