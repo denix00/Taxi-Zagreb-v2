@@ -72,7 +72,6 @@ public class MainActivity extends ActionBarActivity
     static String odredisteGl;
     static String distancaGl;
     static String vrijemeGl;
-    Double cijenaGl;
     //android.support.v4.app.FragmentManager manager;
 
 
@@ -462,10 +461,6 @@ public class MainActivity extends ActionBarActivity
             downloadTask = new DownloadTask();
             downloadTask.execute(url);
 
-            txtOdrediste.setEnabled(false);
-            txtPolaziste.setEnabled(false);
-
-
         }else{
             Toast.makeText(this, R.string.dostupnost_veze, Toast.LENGTH_LONG).show();
         }
@@ -482,8 +477,9 @@ public class MainActivity extends ActionBarActivity
 
     public void clickReset(View v){
 
-        resetTextViews(false, false);
-        enableButtons(false);
+        resetTextViews(false);
+        enableEnterTextviews(true);
+        enableCallButtons(false);
     }
 
     public void infoDialog(int naslov, int poruka){
@@ -721,7 +717,7 @@ public class MainActivity extends ActionBarActivity
 
 
             /**Omogucavanje call buttona na ekranu Cijena i navigacija, micanje Gray efekta*/
-            enableButtons(true);
+            enableCallButtons(true);
 
             hideSoftKeyboard();
 
@@ -729,9 +725,15 @@ public class MainActivity extends ActionBarActivity
 
             float distanca = Float.parseFloat(distancaGl.substring(0, distancaGl.indexOf(" ")));
             izracunajCijenu(distanca);
+
+
+            //zakljucaj polja za unos
+            enableEnterTextviews(false);
+
+
         }else{
             //ciscenje polja i ispis da adresa nije pronadena
-            resetTextViews(true, false);
+            resetTextViews(true);
         }
     }
 
@@ -743,7 +745,7 @@ public class MainActivity extends ActionBarActivity
     }
 
     //ako je argument 1, tada adresa nije pronadena i ta poruka se dodaje, inace sve se postavlja na prazno
-    public void resetTextViews(Boolean addressNotFound, Boolean lockFields){
+    public void resetTextViews(Boolean addressNotFound){
         //ako adresa nije pronadena, ne cisti polja da se unos moze editirati
         if(! addressNotFound){
             ((TextView)findViewById(R.id.txtAdresaOdredista)).setText("");
@@ -757,20 +759,16 @@ public class MainActivity extends ActionBarActivity
         ((TextView)findViewById(R.id.txtEkoCijena)).setText("");
         ((TextView)findViewById(R.id.txtZebraCijena)).setText("");
 
-        if(lockFields){
-         //   ((TextView)findViewById(R.id.txtAdresaOdredista)).setFocusable(! lockFields);
-        //    ((TextView)findViewById(R.id.txtAdresaOdredista)).setEnabled(lockFields == false);
-        //    ((TextView)findViewById(R.id.txtAdresaPolazista)).setEnabled(lockFields == false);
-         //   ((TextView)findViewById(R.id.txtAdresaPolazista)).setFocusable(! lockFields);
-         //   ((TextView)findViewById(R.id.txtAdresaPolazista)).setFocusableInTouchMode(! lockFields);
-         //   ((TextView)findViewById(R.id.txtAdresaOdredista)).setFocusableInTouchMode(! lockFields);
-        }
-
         if(addressNotFound)
             ((TextView)findViewById(R.id.txtUdaljenost)).setText(R.string.nepostojece_adrese);
     }
 
-    public void enableButtons(Boolean enable){
+    public void enableEnterTextviews(Boolean enable){
+        ((TextView)findViewById(R.id.txtAdresaPolazista)).setEnabled(enable);
+        ((TextView)findViewById(R.id.txtAdresaOdredista)).setEnabled(enable);
+    }
+
+    public void enableCallButtons(Boolean enable){
         ((ImageButton) findViewById(R.id.btn_cijena_cammeo_call)).setClickable(enable);
         ((ImageButton) findViewById(R.id.btn_cijena_eko_call)).setClickable(enable);
         ((ImageButton) findViewById(R.id.btn_cijena_radio_call)).setClickable(enable);
