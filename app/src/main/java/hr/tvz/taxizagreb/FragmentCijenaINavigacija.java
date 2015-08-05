@@ -4,11 +4,15 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
+
+import java.text.DecimalFormat;
 
 
 /**
@@ -30,6 +34,10 @@ public class FragmentCijenaINavigacija extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private String odrediste;
+    private String polaziste;
+ //   private boolean zastavica = false;
 
     /**
      * Use this factory method to create a new instance of
@@ -60,6 +68,12 @@ public class FragmentCijenaINavigacija extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        /**
+        if(savedInstanceState != null){
+            this.polaziste = savedInstanceState.getString("polaziste");
+            this.odrediste = savedInstanceState.getString("odrediste");
+            this.zastavica = true;
+        }*/
     }
 
     @Override
@@ -68,12 +82,71 @@ public class FragmentCijenaINavigacija extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_cijena_inavigacija, container, false);
 
-        ((Button)v.findViewById(R.id.btn_cijena_map)).setClickable(false);
-        ((ImageButton)v.findViewById(R.id.btn_cijena_cammeo_call)).setClickable(false);
-        ((ImageButton)v.findViewById(R.id.btn_cijena_radio_call)).setClickable(false);
-        ((ImageButton)v.findViewById(R.id.btn_cijena_eko_call)).setClickable(false);
-        ((ImageButton)v.findViewById(R.id.btn_cijena_zebra_call)).setClickable(false);
+        //ako sam primio podatke, postavi ih
+        Log.i("podaci", "OnCreateView");
+        Bundle bundlePodaci = getArguments();
 
+        ((Button) v.findViewById(R.id.btn_cijena_map)).setClickable(false);
+        ((ImageButton) v.findViewById(R.id.btn_cijena_cammeo_call)).setClickable(false);
+        ((ImageButton) v.findViewById(R.id.btn_cijena_radio_call)).setClickable(false);
+        ((ImageButton) v.findViewById(R.id.btn_cijena_eko_call)).setClickable(false);
+        ((ImageButton) v.findViewById(R.id.btn_cijena_zebra_call)).setClickable(false);
+
+        //ako je pokrenutaKarta 1, ne onemogucuje tipke za pozivanje i kartu, jer su podaci vec skinuti
+        if(bundlePodaci != null) {
+            if (bundlePodaci.getBoolean("pokrenutaKarta")) {
+                ((Button) v.findViewById(R.id.btn_cijena_map)).setClickable(true);
+                ((ImageButton) v.findViewById(R.id.btn_cijena_cammeo_call)).setClickable(true);
+                ((ImageButton) v.findViewById(R.id.btn_cijena_radio_call)).setClickable(true);
+                ((ImageButton) v.findViewById(R.id.btn_cijena_eko_call)).setClickable(true);
+                ((ImageButton) v.findViewById(R.id.btn_cijena_zebra_call)).setClickable(true);
+
+                ((ImageButton) v.findViewById(R.id.btn_cijena_cammeo_call)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_call));
+                ((ImageButton) v.findViewById(R.id.btn_cijena_eko_call)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_call));
+                ((ImageButton) v.findViewById(R.id.btn_cijena_radio_call)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_call));
+                ((ImageButton) v.findViewById(R.id.btn_cijena_zebra_call)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_call));
+            }
+        }
+
+
+        if(bundlePodaci != null) {
+            Log.i("podaci", "primio sam podatke, getArguments() nije null");
+            String polTemp = bundlePodaci.getString("polaziste");
+            String odrTemp = bundlePodaci.getString("odrediste");
+            float cijenaCammeoTemp= bundlePodaci.getFloat("cijenaCammeo");
+            float cijenaRadioTemp = bundlePodaci.getFloat("cijenaRadio");
+            float cijenaEkoTemp = bundlePodaci.getFloat("cijenaEko");
+            float cijenaZebraTemp = bundlePodaci.getFloat("cijenaZebra");
+            String distancaTemp = bundlePodaci.getString("distanca");
+            String vrijemeTemp = bundlePodaci.getString("vrijeme");
+
+            DecimalFormat decFormat = new DecimalFormat("##0.00");
+
+            ((TextView) v.findViewById(R.id.txtAdresaPolazista)).setText(polTemp);
+            ((TextView) v.findViewById(R.id.txtAdresaOdredista)).setText(odrTemp);
+            ((TextView) v.findViewById(R.id.txtUdaljenost)).setText(distancaTemp);
+            ((TextView) v.findViewById(R.id.txtVrijemeVoznje)).setText(vrijemeTemp);
+            ((TextView) v.findViewById(R.id.txtCammeoCijena)).setText(decFormat.format(cijenaCammeoTemp) + " kn");
+            ((TextView) v.findViewById(R.id.txtRadioCijena)).setText(decFormat.format(cijenaRadioTemp) + " kn");
+            ((TextView) v.findViewById(R.id.txtEkoCijena)).setText(decFormat.format(cijenaEkoTemp) + " kn");
+            ((TextView) v.findViewById(R.id.txtZebraCijena)).setText(decFormat.format(cijenaZebraTemp) + " kn");
+        }
+/**
+        if(savedInstanceState != null) {
+            ((TextView) v.findViewById(R.id.txtAdresaPolazista)).setText(savedInstanceState.getString("polaziste"));
+            ((TextView) v.findViewById(R.id.txtAdresaOdredista)).setText(savedInstanceState.getString("odrediste"));
+            Log.i("OnCreateViewPolaziste", savedInstanceState.getString("polaziste"));
+            Log.i("OnCreateViewOdrediste", savedInstanceState.getString("odrediste"));
+        }
+        */
+        /**
+        if(zastavica) {
+            ((TextView) v.findViewById(R.id.txtAdresaPolazista)).setText(polaziste);
+            ((TextView) v.findViewById(R.id.txtAdresaOdredista)).setText(odrediste);
+            Log.i("onCreateViewPolaziste", polaziste);
+            Log.i("onCreateViewOdrediste", odrediste);
+        }
+*/
         return v;
     }
 
@@ -114,6 +187,25 @@ public class FragmentCijenaINavigacija extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
+    }
+
+/**
+    @Override
+    public void onSaveInstanceState(Bundle outstate){
+        super.onSaveInstanceState(outstate);
+        String polazisteTemp =  (((TextView)getActivity().findViewById(R.id.txtAdresaPolazista)).getText()).toString();
+        outstate.putString("polaziste", polazisteTemp);
+        String odredisteTemp =  (((TextView)getActivity().findViewById(R.id.txtAdresaOdredista)).getText()).toString();
+        outstate.putString ("polaziste", odredisteTemp);
+
+        Log.i("onSavePolaziste", polazisteTemp);
+        Log.i("onSaveOdrediste", odredisteTemp);
+    }
+*/
+    public void setPolazisteOdredisteTxt (String pol, String odr)
+    {
+        ((TextView)getActivity().findViewById(R.id.txtAdresaPolazista)).setText(pol);
+        ((TextView)getActivity().findViewById(R.id.txtAdresaOdredista)).setText(odr);
     }
 
 }

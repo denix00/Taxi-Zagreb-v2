@@ -60,20 +60,23 @@ public class MainActivity extends ActionBarActivity
 
     DownloadTask downloadTask;
 
-    LatLng polLatLng;
-    LatLng odrLatLng;
+    static LatLng polLatLng;
+    static LatLng odrLatLng;
 
-    float cijenaCammeo;
-    float cijenaEko;
-    float cijenaRadio;
-    float cijenaZebra;
+    static float cijenaCammeo;
+    static float cijenaEko;
+    static float cijenaRadio;
+    static float cijenaZebra;
 
-    String polazisteGl;
-    String odredisteGl;
-    String distancaGl;
-    String vrijemeGl;
+    static String polazisteGl;
+    static String odredisteGl;
+    static String distancaGl;
+    static String vrijemeGl;
     Double cijenaGl;
     //android.support.v4.app.FragmentManager manager;
+
+
+    static String zastavica = "";
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -99,9 +102,115 @@ public class MainActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
+        /**neuspio pokusaj
+        if(savedInstanceState != null) {
+            Log.i("SavedInstance", "nije null");
+            if (savedInstanceState.getBoolean("zastavica")) {
+                getFragmentManager().beginTransaction().replace(R.id.container, new FragmentCijenaINavigacija()).commit();
+            }
+        }
+         */
        // manager = getSupportFragmentManager();
     }
 
+/**Dobar pokusaj, radi*/
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        if(zastavica.equals("karta")){
+            //dohvat spremljenih podataka
+         //   Bundle bundlePodaci = getIntent().getExtras();
+           // String odredisteTemp = getIntent().getExtras().getString("odrediste");
+            Bundle bundlePodaci = new Bundle();
+            bundlePodaci.putString("polaziste", polazisteGl);
+            bundlePodaci.putString("odrediste", odredisteGl);
+            bundlePodaci.putFloat("cijenaCammeo", cijenaCammeo);
+            bundlePodaci.putFloat("cijenaRadio", cijenaRadio);
+            bundlePodaci.putFloat("cijenaEko", cijenaEko);
+            bundlePodaci.putFloat("cijenaZebra", cijenaZebra);
+            bundlePodaci.putString("distanca", distancaGl);
+            bundlePodaci.putString("vrijeme", vrijemeGl);
+            //kako bi buttoni za pozivanje ostali aktivirani
+            bundlePodaci.putBoolean("pokrenutaKarta", true);
+            Log.i("podaci", "podaci primljeni u OnResume" + bundlePodaci.getString("polaziste"));
+
+            FragmentCijenaINavigacija navigacijaCijena = new FragmentCijenaINavigacija();
+            navigacijaCijena.setArguments(bundlePodaci);
+            getFragmentManager().beginTransaction().replace(R.id.container, navigacijaCijena, "navigacijaCijena").commit();
+        }
+        zastavica = "";
+    }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();;
+        //spremanje podataka za popunjavanje fragmenta pri povratku u glavnu aplikaciju
+      //  Bundle izlaz = new Bundle();
+     //   izlaz.putString("polaziste", polazisteGl);
+     //   izlaz.putString("odrediste", odredisteGl);
+     //   getIntent().putExtras(izlaz);
+     //   Log.i("podaci", "podaci spremljeni u OnStop");
+    }
+/** Pokusaj spremanja stanja aplikacije */
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+
+        savedInstanceState.putBoolean("zastavica", true);
+        Log.i("SavedInstance", "pokrenut");
+    }
+        /**
+        if(! jsonString.isEmpty()) {
+            savedInstanceState.putString("json", jsonString);
+            savedInstanceState.putDouble("polLat", polLatLng.latitude);
+            savedInstanceState.putDouble("polLng", polLatLng.longitude);
+            savedInstanceState.putDouble("odrLat", odrLatLng.latitude);
+            savedInstanceState.putDouble("odrLng", odrLatLng.longitude);
+            savedInstanceState.putString("polaziste", polazisteGl);
+            savedInstanceState.putString("odrediste", odredisteGl);
+            savedInstanceState.putString("distanca", distancaGl);
+            savedInstanceState.putString("vrijeme", vrijemeGl);
+            savedInstanceState.putFloat("cijenaCammeo", cijenaCammeo);
+            savedInstanceState.putFloat("cijenaRadio", cijenaRadio);
+            savedInstanceState.putFloat("cijenaEko", cijenaEko);
+            savedInstanceState.putFloat("cijenaZebra", cijenaZebra);
+        }
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        Log.i("SavedInstance", "Pokrenut restore");
+        getFragmentManager().beginTransaction().replace(R.id.container, new FragmentCijenaINavigacija()).commit();
+    }
+        /**
+        jsonString = savedInstanceState.getString("json");
+        polLatLng = new LatLng(savedInstanceState.getDouble("polLat"), savedInstanceState.getDouble("polLng"));
+        odrLatLng = new LatLng(savedInstanceState.getDouble("odrLat"), savedInstanceState.getDouble("odrLng"));
+        polazisteGl = savedInstanceState.getString("polaziste");
+        odredisteGl = savedInstanceState.getString("odrediste");
+        distancaGl = savedInstanceState.getString("distanca");
+        vrijemeGl = savedInstanceState.getString("vrijeme");
+        cijenaCammeo = savedInstanceState.getFloat("cijenaCammeo");
+        cijenaRadio = savedInstanceState.getFloat("cijenaRadio");
+        cijenaEko = savedInstanceState.getFloat("cijenaEko");
+        cijenaZebra = savedInstanceState.getFloat("cijenaZebra");
+
+
+        ((TextView)findViewById(R.id.txtAdresaPolazista)).setText(polazisteGl);
+        ((TextView)findViewById(R.id.txtAdresaOdredista)).setText(odredisteGl);
+        ((TextView)findViewById(R.id.txtCammeoCijena)).setText(String.valueOf(cijenaCammeo) );
+        ((TextView)findViewById(R.id.txtRadioCijena)).setText(String.valueOf(cijenaRadio));
+        ((TextView)findViewById(R.id.txtEkoCijena)).setText(String.valueOf(cijenaEko));
+        ((TextView)findViewById(R.id.txtZebraCijena)).setText(String.valueOf(cijenaZebra));
+        ((TextView)findViewById(R.id.txtVrijemeVoznje)).setText(String.valueOf(vrijemeGl));
+        ((TextView)findViewById(R.id.txtUdaljenost)).setText(String.valueOf(distancaGl));
+
+    }
+*/
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
@@ -118,22 +227,26 @@ public class MainActivity extends ActionBarActivity
               //  transaction.add(R.id.container, imenik, "imenik");
               //  transaction.commit();
 
-                getFragmentManager().beginTransaction()
-                        .add(R.id.container, new FragmentImenik(), "imenik").commit();
+                getFragmentManager().beginTransaction().replace(R.id.container, new FragmentImenik(), "imenik").commit();
+
+            //    getFragmentManager().beginTransaction().replace(R.id.container, new FragmentImenik()).addToBackStack("imenik").commit();
 
 
                // Toast.makeText(this, "odabran je: 1 ", Toast.LENGTH_SHORT).show();
                 break;
             case 1:
                // Toast.makeText(this, "odabran je: 2 ", Toast.LENGTH_SHORT).show();
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.container, new FragmentCijenaINavigacija()).commit();
+                getFragmentManager().beginTransaction().replace(R.id.container, new FragmentCijenaINavigacija()).commit();
+
+            //    getFragmentManager().beginTransaction().replace(R.id.container, new FragmentCijenaINavigacija()).addToBackStack("imenik").commit();
+
                 break;
             case 2:
             //    Toast.makeText(this, "odabran je: 3 ", Toast.LENGTH_SHORT).show();
 
-                getFragmentManager().beginTransaction()
-                        .replace(R.id.container, new FragmentPovijest()).commit();
+                getFragmentManager().beginTransaction().replace(R.id.container, new FragmentPovijest()).commit();
+            //    getFragmentManager().beginTransaction().replace(R.id.container, new FragmentPovijest()).addToBackStack("imenik").commit();
+
                 break;
         }
     }
@@ -300,6 +413,7 @@ public class MainActivity extends ActionBarActivity
     }
 
     public void clickBtnMap(View v)    {
+        zastavica = "karta";
         Intent map = new Intent(this, GoogleMaps.class);
         map.putExtra("polLat",polLatLng.latitude);
         map.putExtra("polLng",polLatLng.longitude);
