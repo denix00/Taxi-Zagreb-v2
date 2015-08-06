@@ -436,7 +436,7 @@ public class MainActivity extends ActionBarActivity
         LocationListener listener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                ((TextView) findViewById(R.id.txtAdresaPolazista)).setText("Moja lokacija");
+                ((TextView) findViewById(R.id.txtAdresaPolazista)).setText("Lokacija utvrđena");
                 ((TextView) findViewById(R.id.txtAdresaPolazista)).setEnabled(false);
             //    Toast.makeText(this, "GPS lokacija utvrđena", Toast.LENGTH_LONG).show();
 

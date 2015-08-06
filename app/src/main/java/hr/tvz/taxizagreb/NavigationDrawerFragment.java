@@ -1,5 +1,7 @@
 package hr.tvz.taxizagreb;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
@@ -11,6 +13,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -253,7 +256,24 @@ public class NavigationDrawerFragment extends Fragment {
         }
 
         if (item.getItemId() == R.id.action_help) {
-            Toast.makeText(getActivity(), "Help.", Toast.LENGTH_SHORT).show();
+
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
+
+            //     AlertDialog alertDialog = alertDialogBuilder.create();
+            //      alertDialog.setMessage(getResources().getString(poruka));
+            //     alertDialog.setTitle(getResources().getString(naslov));
+            alertDialogBuilder.setMessage(Html.fromHtml(getResources().getString(R.string.help_dialog_poruka)));
+            alertDialogBuilder.setTitle(getResources().getString(R.string.action_help));
+            alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                }
+            });
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
+
+
             return true;
         }
 
