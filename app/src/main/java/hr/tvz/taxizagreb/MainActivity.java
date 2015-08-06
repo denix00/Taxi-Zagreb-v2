@@ -464,7 +464,7 @@ public class MainActivity extends ActionBarActivity
         };
        // manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5, 20, listener);
         manager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, listener, null);
-       // manager.requestSingleUpdate(LocationManager.GPS_PROVIDER, listener, null);
+      //  manager.requestSingleUpdate(LocationManager.GPS_PROVIDER, listener, null);
 
 
         Toast.makeText(this, "Molimo pričekajte da GPS utvrdi lokaciju", Toast.LENGTH_LONG).show();

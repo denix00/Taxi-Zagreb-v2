@@ -38,6 +38,8 @@ import hr.tvz.taxizagreb.dummy.DummyContent;
  */
 public class FragmentPovijest extends Fragment implements AbsListView.OnItemClickListener {
 
+    private static boolean prazno = false;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -95,12 +97,28 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
             list.add(item);
         }
 
-        SimpleAdapter adapter = new SimpleAdapter(getActivity(), list, android.R.layout.simple_list_item_2, new String[] { "polaziste_i_odrediste",
-                "prijevoznik_cijena_distanca" }, new int[] { android.R.id.text1,
-                android.R.id.text2 });
-      //  setListAdapter(adapter);
+        //ako nema podataka u bazi ispisi da nema podataka
+        if(list.isEmpty())
+        {
+            item = new HashMap<String, String>();
+            item.put("nema_podataka", getResources().getString(R.string.povijest_nema_podataka));
+            item.put("prazno", "");
+            list.add(item);
 
+            SimpleAdapter adapter = new SimpleAdapter(getActivity(), list, android.R.layout.simple_list_item_2, new String[] { "nema_podataka",
+                    "prazno" }, new int[] { android.R.id.text1,
+                    android.R.id.text2 });
+            mAdapter = adapter;
+            //ako je lista prazna, postavi zastavicu
+            prazno = true;
 
+        }else {
+            SimpleAdapter adapter = new SimpleAdapter(getActivity(), list, android.R.layout.simple_list_item_2, new String[]{"polaziste_i_odrediste",
+                    "prijevoznik_cijena_distanca"}, new int[]{android.R.id.text1,
+                    android.R.id.text2});
+            mAdapter = adapter;
+            //  setListAdapter(adapter);
+        }
 
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
@@ -109,7 +127,7 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
 
         // TODO: Change Adapter to display your content
         //mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
-        mAdapter = adapter;
+        //mAdapter = adapter;
     }
 
     @Override
@@ -152,22 +170,28 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
             Log.i("povijest", "odabran je " + position + " po redu");
            // mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
 
-            FragmentCijenaINavigacija navigacijaCijena = new FragmentCijenaINavigacija();
+            if(prazno){
+                FragmentCijenaINavigacija navigacijaCijena = new FragmentCijenaINavigacija();
+                getFragmentManager().beginTransaction().replace(R.id.container, navigacijaCijena, "navigacijaCijena").commit();
+            }else {
 
-            DbHelper db = new DbHelper(getActivity());
-            List<String> podaciBaza = new ArrayList<String>();
+                FragmentCijenaINavigacija navigacijaCijena = new FragmentCijenaINavigacija();
 
-            podaciBaza = db.getPoint(position);
+                DbHelper db = new DbHelper(getActivity());
+                List<String> podaciBaza = new ArrayList<String>();
 
-            Bundle podaciBundle = new Bundle();
-            podaciBundle.putString("tip", "povijest");
-            podaciBundle.putString("polaziste", podaciBaza.get(0));
-            podaciBundle.putString("odrediste", podaciBaza.get(1));
+                podaciBaza = db.getPoint(position);
 
-            navigacijaCijena.setArguments(podaciBundle);
+                Bundle podaciBundle = new Bundle();
+                podaciBundle.putString("tip", "povijest");
+                podaciBundle.putString("polaziste", podaciBaza.get(0));
+                podaciBundle.putString("odrediste", podaciBaza.get(1));
 
-          //  navigacijaCijena.setArguments(bundlePodaci);
-            getFragmentManager().beginTransaction().replace(R.id.container, navigacijaCijena, "navigacijaCijena").commit();
+                navigacijaCijena.setArguments(podaciBundle);
+
+                //  navigacijaCijena.setArguments(bundlePodaci);
+                getFragmentManager().beginTransaction().replace(R.id.container, navigacijaCijena, "navigacijaCijena").commit();
+            }
         }
     }
 

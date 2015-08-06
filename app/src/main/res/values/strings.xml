@@ -121,18 +121,20 @@
 
     <string name="help_dialog_poruka">
          <![CDATA[
-        <b>Taxi</b> Zagreb je aplikacija koja korisnicima omogućuje procjenu cijene vožnji za prijevoznike na području grada Zagreba, te pozivanje istih.<br><br>
+        <b>Taxi</b> Zagreb je aplikacija koja korisnicima omogućuje procjenu cijene vožnji za prijevoznike na području grada Zagreba te pozivanje istih.<br><br>
         <b>Imenik:</b> pozivanje taxi prijevoznika klikom na <u>gumb za zvanje</u> i prikazivanje tarifa klikom na <u>gumb za informacije</u>.<br><br>
-        <b>Cijena i navigacija:</b> u polja za adrese potrebno je unesti ime ulice s područja grada Zagreba, te kliknuti na gumb <u>IZRAČUNAJ</u>.<br>
-        Prikazati će se koliko traje putovanje, koliko je dug nakraći put, te cijene pojedinog taxi prijevoznika.<br>
-        Omogućiti će se gumb <u>KARTA</u> i gumbi za pozivanje.<br>
+        <b>Cijena i navigacija:</b> u polja za adrese potrebno je unesti ime ulice s područja grada Zagreba te kliknuti na gumb <u>IZRAČUNAJ</u>.<br>
+        Prikazat će se koliko traje putovanje, koliko je dug nakraći put i cijene pojedinog taxi prijevoznika.<br>
+        Omogućit će se gumb <u>KARTA</u> i gumbi za pozivanje.<br>
         <u>KARTA</u> prikazuje najkraću rutu te lokaciju korisnika.<br>
-        <u>Gumb za pozivanje</u> započet će poziv prema taxi prijevozniku, a informacije o ruti će se spremiti u Povijest.<br>
+        <u>Gumb za pozivanje</u> započet će poziv prema taxi prijevozniku, a informacije o ruti spremit će se u Povijest.<br>
         <u>Gumb GPS</u> omogućuje lociranje korisnika na temelju lokacije u mreži.<br>
         <u>Gumb Očisti</u> briše podatke iz svih polja.<br><br>
-        <b>Povijest:</b> klikom na pojedinu stavku aplikacija će otići na ekran Cijena i navigacija te će popuniti polja za unos podacima iz stavke.<br><br>
+        <b>Povijest:</b> klikom na pojedinu stavku aplikacija će prikazati ekran Cijena i navigacija te će popuniti polja za unos podacima iz stavke.<br><br>
         <b>Izradio: Denis Glad</b>
         ]]>
 
     </string>
+
+    <string name="povijest_nema_podataka">Nema podataka</string>
 </resources>
