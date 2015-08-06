@@ -38,7 +38,7 @@ import hr.tvz.taxizagreb.dummy.DummyContent;
  */
 public class FragmentPovijest extends Fragment implements AbsListView.OnItemClickListener {
 
-    private static boolean prazno = false;
+    private boolean prazno = false;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -171,10 +171,12 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
            // mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
 
             if(prazno){
+                Log.i("povijest", "povijest je prazna");
                 FragmentCijenaINavigacija navigacijaCijena = new FragmentCijenaINavigacija();
                 getFragmentManager().beginTransaction().replace(R.id.container, navigacijaCijena, "navigacijaCijena").commit();
             }else {
 
+                Log.i("povijest", "povijest nije prazna");
                 FragmentCijenaINavigacija navigacijaCijena = new FragmentCijenaINavigacija();
 
                 DbHelper db = new DbHelper(getActivity());
