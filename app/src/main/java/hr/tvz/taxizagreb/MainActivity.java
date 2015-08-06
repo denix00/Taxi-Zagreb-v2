@@ -6,10 +6,14 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.renderscript.Allocation;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -76,6 +80,9 @@ public class MainActivity extends ActionBarActivity
 
 
     static String zastavica = "";
+
+    static double GPSLat = 0;
+    static double GPSLng = 0;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -425,6 +432,42 @@ public class MainActivity extends ActionBarActivity
 
     public void clickBtnGPS(View view)    {
 
+        LocationManager manager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        LocationListener listener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                ((TextView) findViewById(R.id.txtAdresaPolazista)).setText("Moja lokacija");
+                ((TextView) findViewById(R.id.txtAdresaPolazista)).setEnabled(false);
+            //    Toast.makeText(this, "GPS lokacija utvrđena", Toast.LENGTH_LONG).show();
+
+                GPSLat = location.getLatitude();
+                GPSLng = location.getLongitude();
+                Log.i("gps", String.valueOf(location.getLatitude()));
+                Log.i("gps", String.valueOf(location.getLongitude()));
+            }
+
+            @Override
+            public void onStatusChanged(String s, int i, Bundle bundle) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String s) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String s) {
+
+
+            }
+        };
+       // manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5, 20, listener);
+        manager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, listener, null);
+       // manager.requestSingleUpdate(LocationManager.GPS_PROVIDER, listener, null);
+
+
+        Toast.makeText(this, "Molimo pričekajte da GPS utvrdi lokaciju", Toast.LENGTH_LONG).show();
     }
 
     public void clickBtnIzracunaj(View view) throws IOException, JSONException {
@@ -439,8 +482,11 @@ public class MainActivity extends ActionBarActivity
                 return;
             }
 
+            String polazisteString = "Moja lokacija";
             //string s podcrtima = string bez podcrta
-            String polazisteString = checkStreetName(txtPolaziste);
+            if( GPSLat == 0) {
+                polazisteString = checkStreetName(txtPolaziste);
+            }
             String odredisteString = checkStreetName(txtOdrediste);
 
             polazisteGl = txtPolaziste.getText().toString();
@@ -453,9 +499,13 @@ public class MainActivity extends ActionBarActivity
  */
 
             String gradFilter = ",_zagreb";
+            String url = "";
           //  String url = "http://maps.googleapis.com/maps/api/directions/json?origin=jarun_24_zagreb&destination=maksimirska_cesta_128&sensor=false";
-            String url = "http://maps.googleapis.com/maps/api/directions/json?origin="+polazisteString + gradFilter +"&destination="+odredisteString + gradFilter +"&mode=driving&sensor=false";
-
+            if(GPSLat != 0){
+                url = "http://maps.googleapis.com/maps/api/directions/json?origin=" + GPSLat + "," + GPSLng + "&destination=" + odredisteString + gradFilter + "&mode=driving&sensor=false";
+            }else {
+                url = "http://maps.googleapis.com/maps/api/directions/json?origin=" + polazisteString + gradFilter + "&destination=" + odredisteString + gradFilter + "&mode=driving&sensor=false";
+            }
             Log.i("JSONUrl ", url);
 
             downloadTask = new DownloadTask();
@@ -480,6 +530,8 @@ public class MainActivity extends ActionBarActivity
         resetTextViews(false);
         enableEnterTextviews(true);
         enableCallButtons(false);
+        GPSLat = 0;
+        GPSLng = 0;
     }
 
     public void infoDialog(int naslov, int poruka){
@@ -688,6 +740,24 @@ public class MainActivity extends ActionBarActivity
 
             JSONObject distOb = newDisTimeOb.getJSONObject("distance");
             JSONObject timeOb = newDisTimeOb.getJSONObject("duration");
+
+            //ukoliko se koristi GPS, tada postavi naziv ulice na kojoj se nalazim
+            if(GPSLat != 0) {
+                String myLocation = newDisTimeOb.getString("start_address");
+                String tempString;
+                //izbacivanje viska podataka iz naziva ulice
+                int location = 1;
+                for(int i=0; i<myLocation.length(); i++){
+                    if(myLocation.charAt(i) == ',') {
+                     location = i;
+                    break;
+                    }
+                }
+                myLocation = myLocation.substring(0, location);
+
+                ((TextView) findViewById(R.id.txtAdresaPolazista)).setText(myLocation);
+                polazisteGl = myLocation;
+            }
 
             /**za latlng*/
 
