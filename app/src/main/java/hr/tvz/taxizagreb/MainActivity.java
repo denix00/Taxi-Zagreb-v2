@@ -537,9 +537,18 @@ public class MainActivity extends ActionBarActivity
     public void infoDialog(int naslov, int poruka){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 
+   //     AlertDialog alertDialog = alertDialogBuilder.create();
+  //      alertDialog.setMessage(getResources().getString(poruka));
+   //     alertDialog.setTitle(getResources().getString(naslov));
+        alertDialogBuilder.setMessage(getResources().getString(poruka));
+        alertDialogBuilder.setTitle(getResources().getString(naslov));
+        alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
         AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.setMessage(getResources().getString(poruka));
-        alertDialog.setTitle(getResources().getString(naslov));
         alertDialog.show();
     }
 
