@@ -24,7 +24,6 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String DISTANCA = "distanca";
     private static final String TRAJANJE_PUTOVANJA = "trajanjePutovanja";
     private static final String CIJENA = "cijena";
-  //  private static final String DATUM = "datum";
     private static final String PRIJEVOZNIK = "prijevoznik";
 
     private static final int DATABASE_VERSION = 4;

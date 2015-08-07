@@ -259,10 +259,6 @@ public class NavigationDrawerFragment extends Fragment {
         if (item.getItemId() == R.id.action_help) {
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-
-            //     AlertDialog alertDialog = alertDialogBuilder.create();
-            //      alertDialog.setMessage(getResources().getString(poruka));
-            //     alertDialog.setTitle(getResources().getString(naslov));
             alertDialogBuilder.setMessage(Html.fromHtml(getResources().getString(R.string.help_dialog_poruka)));
             alertDialogBuilder.setTitle(getResources().getString(R.string.action_help));
             alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -290,8 +286,6 @@ public class NavigationDrawerFragment extends Fragment {
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setTitle(R.string.app_name);
-    //    actionBar.setDisplayHomeAsUpEnabled(true);
-    //    actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer);
     }
 
     private ActionBar getActionBar() {
@@ -307,11 +301,4 @@ public class NavigationDrawerFragment extends Fragment {
          */
         void onNavigationDrawerItemSelected(int position);
     }
-/**
-    public void restoreActionBar () {
-        ActionBar actionBar = getActionBar();
-        actionBar.setNavigationMode( ActionBar.NAVIGATION_MODE_STANDARD );
-        actionBar.setDisplayShowTitleEnabled( true );
-        actionBar.setTitle( getResources().getString(R.string.title_section2) );
-    }*/
 }

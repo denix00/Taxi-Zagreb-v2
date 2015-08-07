@@ -39,10 +39,6 @@ public class FragmentCijenaINavigacija extends Fragment {
 
     private String odrediste;
     private String polaziste;
- //   private boolean zastavica = false;
-
-//    TextView txtPolaziste;
-//    TextView txtOdrediste;
 
     /**
      * Use this factory method to create a new instance of
@@ -73,14 +69,6 @@ public class FragmentCijenaINavigacija extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        /**
-        if(savedInstanceState != null){
-            this.polaziste = savedInstanceState.getString("polaziste");
-            this.odrediste = savedInstanceState.getString("odrediste");
-            this.zastavica = true;
-        }*/
-
-
     }
 
     @Override
@@ -88,13 +76,7 @@ public class FragmentCijenaINavigacija extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_cijena_inavigacija, container, false);
-/**
-        txtOdrediste = (TextView) v.findViewById(R.id.txtAdresaOdredista);
-        txtPolaziste = (TextView) v.findViewById(R.id.txtAdresaPolazista);
-        View.OnFocusChangeListener ofcListener = new MyFocusChangeListener();
-        txtOdrediste.setOnFocusChangeListener(ofcListener);
-        txtPolaziste.setOnFocusChangeListener(ofcListener);
-*/
+
         //ako sam primio podatke, postavi ih
         Log.i("podaci", "OnCreateView");
         Bundle bundlePodaci = getArguments();
@@ -123,7 +105,6 @@ public class FragmentCijenaINavigacija extends Fragment {
             }
         }
 
-
         if(bundlePodaci != null) {
             if(bundlePodaci.getString("tip").equals("cijena")) {
                 Log.i("podaci", "primio sam podatke, getArguments() nije null");
@@ -146,10 +127,10 @@ public class FragmentCijenaINavigacija extends Fragment {
                 ((TextView) v.findViewById(R.id.txtRadioCijena)).setText(decFormat.format(cijenaRadioTemp) + " kn");
                 ((TextView) v.findViewById(R.id.txtEkoCijena)).setText(decFormat.format(cijenaEkoTemp) + " kn");
                 ((TextView) v.findViewById(R.id.txtZebraCijena)).setText(decFormat.format(cijenaZebraTemp) + " kn");
+
+                ((TextView) v.findViewById(R.id.txtAdresaPolazista)).setEnabled(false);
+                ((TextView) v.findViewById(R.id.txtAdresaOdredista)).setEnabled(false);
             }
-            //onemogucavanje izmjene sadrzaja
-         //   ((TextView) v.findViewById(R.id.txtAdresaPolazista)).setFocusable(false);
-        //    ((TextView) v.findViewById(R.id.txtAdresaOdredista)).setFocusable(false);
 
             else if(bundlePodaci.getString("tip").equals("povijest")){
                 String polTemp = bundlePodaci.getString("polaziste");
@@ -158,22 +139,6 @@ public class FragmentCijenaINavigacija extends Fragment {
                 ((TextView) v.findViewById(R.id.txtAdresaOdredista)).setText(odrTemp);
             }
         }
-/**
-        if(savedInstanceState != null) {
-            ((TextView) v.findViewById(R.id.txtAdresaPolazista)).setText(savedInstanceState.getString("polaziste"));
-            ((TextView) v.findViewById(R.id.txtAdresaOdredista)).setText(savedInstanceState.getString("odrediste"));
-            Log.i("OnCreateViewPolaziste", savedInstanceState.getString("polaziste"));
-            Log.i("OnCreateViewOdrediste", savedInstanceState.getString("odrediste"));
-        }
-        */
-        /**
-        if(zastavica) {
-            ((TextView) v.findViewById(R.id.txtAdresaPolazista)).setText(polaziste);
-            ((TextView) v.findViewById(R.id.txtAdresaOdredista)).setText(odrediste);
-            Log.i("onCreateViewPolaziste", polaziste);
-            Log.i("onCreateViewOdrediste", odrediste);
-        }
-*/
         return v;
     }
 
@@ -215,35 +180,4 @@ public class FragmentCijenaINavigacija extends Fragment {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
     }
-
-/**
-    @Override
-    public void onSaveInstanceState(Bundle outstate){
-        super.onSaveInstanceState(outstate);
-        String polazisteTemp =  (((TextView)getActivity().findViewById(R.id.txtAdresaPolazista)).getText()).toString();
-        outstate.putString("polaziste", polazisteTemp);
-        String odredisteTemp =  (((TextView)getActivity().findViewById(R.id.txtAdresaOdredista)).getText()).toString();
-        outstate.putString ("polaziste", odredisteTemp);
-
-        Log.i("onSavePolaziste", polazisteTemp);
-        Log.i("onSaveOdrediste", odredisteTemp);
-    }
-*/
-/**
-    private class MyFocusChangeListener implements View.OnFocusChangeListener {
-        @Override
-        public void onFocusChange(View v, boolean hasFocus){
-            Log.i("onFocusChange", "onFocusChange");
-
-            if(v.getId() == R.id.txtAdresaPolazista && !hasFocus) {
-                Log.i("onFocusChange", "metoda za skrivanje");
-                InputMethodManager imm =  (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(txtPolaziste.getWindowToken(), 0);
-            }else if(v.getId() == R.id.txtAdresaOdredista && !hasFocus) {
-
-                InputMethodManager imm =  (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(txtOdrediste.getWindowToken(), 0);
-            }
-        }
-    }*/
 }

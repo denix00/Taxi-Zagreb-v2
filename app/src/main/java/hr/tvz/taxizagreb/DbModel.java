@@ -12,7 +12,6 @@ public class DbModel {
     String odrediste;
     String distanca;
     String trajanjePutovanja;
-    //   Date datum;
     double cijena;
     String prijevoznik;
 
@@ -22,7 +21,6 @@ public class DbModel {
         this.distanca = distanca;
         this.trajanjePutovanja = trajanjePutovanja;
         this.cijena = cijena;
-       // this.datum = datum;
         this.prijevoznik = prijevoznik;
     }
 
@@ -61,15 +59,6 @@ public class DbModel {
     public void setTrajanjePutovanja(String trajanjePutovanja) {
         this.trajanjePutovanja = trajanjePutovanja;
     }
-
- /*   public Date getDatum() {
-        return datum;
-    }
-
-    public void setDatum(Date datum) {
-        this.datum = datum;
-    }
-    */
 
 
     public double getCijena() {
