@@ -117,6 +117,7 @@ public class MainActivity extends ActionBarActivity
         }
          */
        // manager = getSupportFragmentManager();
+
     }
 
 /**Dobar pokusaj, radi*/
@@ -244,6 +245,7 @@ public class MainActivity extends ActionBarActivity
             case 1:
                // Toast.makeText(this, "odabran je: 2 ", Toast.LENGTH_SHORT).show();
                 getFragmentManager().beginTransaction().replace(R.id.container, new FragmentCijenaINavigacija()).commit();
+
 
             //    getFragmentManager().beginTransaction().replace(R.id.container, new FragmentCijenaINavigacija()).addToBackStack("imenik").commit();
 

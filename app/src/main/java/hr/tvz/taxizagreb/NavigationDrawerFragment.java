@@ -247,6 +247,7 @@ public class NavigationDrawerFragment extends Fragment {
             showGlobalContextActionBar();
         }
         super.onCreateOptionsMenu(menu, inflater);
+//        restoreActionBar();
     }
 
     @Override
@@ -306,4 +307,11 @@ public class NavigationDrawerFragment extends Fragment {
          */
         void onNavigationDrawerItemSelected(int position);
     }
+/**
+    public void restoreActionBar () {
+        ActionBar actionBar = getActionBar();
+        actionBar.setNavigationMode( ActionBar.NAVIGATION_MODE_STANDARD );
+        actionBar.setDisplayShowTitleEnabled( true );
+        actionBar.setTitle( getResources().getString(R.string.title_section2) );
+    }*/
 }

@@ -1,6 +1,7 @@
 package hr.tvz.taxizagreb;
 
 import android.app.Activity;
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -8,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -38,6 +40,9 @@ public class FragmentCijenaINavigacija extends Fragment {
     private String odrediste;
     private String polaziste;
  //   private boolean zastavica = false;
+
+//    TextView txtPolaziste;
+//    TextView txtOdrediste;
 
     /**
      * Use this factory method to create a new instance of
@@ -74,6 +79,8 @@ public class FragmentCijenaINavigacija extends Fragment {
             this.odrediste = savedInstanceState.getString("odrediste");
             this.zastavica = true;
         }*/
+
+
     }
 
     @Override
@@ -81,7 +88,13 @@ public class FragmentCijenaINavigacija extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_cijena_inavigacija, container, false);
-
+/**
+        txtOdrediste = (TextView) v.findViewById(R.id.txtAdresaOdredista);
+        txtPolaziste = (TextView) v.findViewById(R.id.txtAdresaPolazista);
+        View.OnFocusChangeListener ofcListener = new MyFocusChangeListener();
+        txtOdrediste.setOnFocusChangeListener(ofcListener);
+        txtPolaziste.setOnFocusChangeListener(ofcListener);
+*/
         //ako sam primio podatke, postavi ih
         Log.i("podaci", "OnCreateView");
         Bundle bundlePodaci = getArguments();
@@ -216,4 +229,21 @@ public class FragmentCijenaINavigacija extends Fragment {
         Log.i("onSaveOdrediste", odredisteTemp);
     }
 */
+/**
+    private class MyFocusChangeListener implements View.OnFocusChangeListener {
+        @Override
+        public void onFocusChange(View v, boolean hasFocus){
+            Log.i("onFocusChange", "onFocusChange");
+
+            if(v.getId() == R.id.txtAdresaPolazista && !hasFocus) {
+                Log.i("onFocusChange", "metoda za skrivanje");
+                InputMethodManager imm =  (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(txtPolaziste.getWindowToken(), 0);
+            }else if(v.getId() == R.id.txtAdresaOdredista && !hasFocus) {
+
+                InputMethodManager imm =  (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(txtOdrediste.getWindowToken(), 0);
+            }
+        }
+    }*/
 }

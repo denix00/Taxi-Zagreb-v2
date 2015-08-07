@@ -34,7 +34,8 @@
                 android:hint="@string/adresa_polazista"
                 android:layout_alignParentEnd="false"
                 android:layout_alignParentStart="false"
-                android:layout_toEndOf="@id/imgMarkerPolaziste" />
+                android:layout_toEndOf="@id/imgMarkerPolaziste"
+                 />
 
             <Button
                 style="?android:attr/buttonStyleSmall"
@@ -71,7 +72,7 @@
                 android:hint="@string/adresa_odredista"
                 android:layout_alignParentEnd="false"
                 android:layout_alignParentStart="false"
-                android:layout_toEndOf="@id/imgMarkerOdrediste"/>
+                android:layout_toEndOf="@id/imgMarkerOdrediste" />
 
             <Button
                 style="?android:attr/buttonStyleSmall"
