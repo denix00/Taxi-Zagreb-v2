@@ -65,6 +65,9 @@ public class FragmentCijenaINavigacija extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // poziv metode za restoranje imena fragmenta u actionBaru. Rijesilo problem kada se klikom na stavku u povijesti i
+        // prelaskom na fragment Cijena i Navigacija nije promijenilo ime fragmenta u actionBaru.
+        ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.title_section2));
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);

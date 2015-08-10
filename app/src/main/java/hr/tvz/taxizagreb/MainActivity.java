@@ -301,12 +301,12 @@ public class MainActivity extends ActionBarActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+/** disableano je u menuiu, pa nije potrebno
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
+*/
         return super.onOptionsItemSelected(item);
     }
 
@@ -867,5 +867,11 @@ public class MainActivity extends ActionBarActivity
             ((ImageButton) findViewById(R.id.btn_cijena_radio_call)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_call_gray));
             ((ImageButton) findViewById(R.id.btn_cijena_zebra_call)).setImageDrawable(getResources().getDrawable(R.drawable.ic_action_call_gray));
         }
+    }
+
+
+    //restoranje imena fragmenta u actionbaru
+    public void setActionBarTitle(String title) {
+        getSupportActionBar().setTitle(title);
     }
 }
