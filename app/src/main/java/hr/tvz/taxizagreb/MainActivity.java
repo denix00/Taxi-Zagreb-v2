@@ -1,5 +1,6 @@
 package hr.tvz.taxizagreb;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -12,12 +13,15 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.renderscript.Allocation;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,6 +36,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -70,6 +76,8 @@ public class MainActivity extends ActionBarActivity
     static String odredisteGl;
     static String distancaGl;
     static String vrijemeGl;
+    //android.support.v4.app.FragmentManager manager;
+
 
     static String zastavica = "";
 
@@ -100,6 +108,16 @@ public class MainActivity extends ActionBarActivity
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
 
+        /**neuspio pokusaj
+        if(savedInstanceState != null) {
+            Log.i("SavedInstance", "nije null");
+            if (savedInstanceState.getBoolean("zastavica")) {
+                getFragmentManager().beginTransaction().replace(R.id.container, new FragmentCijenaINavigacija()).commit();
+            }
+        }
+         */
+       // manager = getSupportFragmentManager();
+
     }
 
 /**Dobar pokusaj, radi*/
@@ -108,6 +126,9 @@ public class MainActivity extends ActionBarActivity
     {
         super.onResume();
         if(zastavica.equals("karta")){
+            //dohvat spremljenih podataka
+         //   Bundle bundlePodaci = getIntent().getExtras();
+           // String odredisteTemp = getIntent().getExtras().getString("odrediste");
             Bundle bundlePodaci = new Bundle();
             bundlePodaci.putString("tip", "cijena");
             bundlePodaci.putString("polaziste", polazisteGl);
@@ -129,6 +150,17 @@ public class MainActivity extends ActionBarActivity
         zastavica = "";
     }
 
+
+    @Override
+    protected void onStop() {
+        super.onStop();;
+        //spremanje podataka za popunjavanje fragmenta pri povratku u glavnu aplikaciju
+      //  Bundle izlaz = new Bundle();
+     //   izlaz.putString("polaziste", polazisteGl);
+     //   izlaz.putString("odrediste", odredisteGl);
+     //   getIntent().putExtras(izlaz);
+     //   Log.i("podaci", "podaci spremljeni u OnStop");
+    }
 /** Pokusaj spremanja stanja aplikacije */
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -137,7 +169,56 @@ public class MainActivity extends ActionBarActivity
         savedInstanceState.putBoolean("zastavica", true);
         Log.i("SavedInstance", "pokrenut");
     }
+        /**
+        if(! jsonString.isEmpty()) {
+            savedInstanceState.putString("json", jsonString);
+            savedInstanceState.putDouble("polLat", polLatLng.latitude);
+            savedInstanceState.putDouble("polLng", polLatLng.longitude);
+            savedInstanceState.putDouble("odrLat", odrLatLng.latitude);
+            savedInstanceState.putDouble("odrLng", odrLatLng.longitude);
+            savedInstanceState.putString("polaziste", polazisteGl);
+            savedInstanceState.putString("odrediste", odredisteGl);
+            savedInstanceState.putString("distanca", distancaGl);
+            savedInstanceState.putString("vrijeme", vrijemeGl);
+            savedInstanceState.putFloat("cijenaCammeo", cijenaCammeo);
+            savedInstanceState.putFloat("cijenaRadio", cijenaRadio);
+            savedInstanceState.putFloat("cijenaEko", cijenaEko);
+            savedInstanceState.putFloat("cijenaZebra", cijenaZebra);
+        }
+    }
 
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        Log.i("SavedInstance", "Pokrenut restore");
+        getFragmentManager().beginTransaction().replace(R.id.container, new FragmentCijenaINavigacija()).commit();
+    }
+        /**
+        jsonString = savedInstanceState.getString("json");
+        polLatLng = new LatLng(savedInstanceState.getDouble("polLat"), savedInstanceState.getDouble("polLng"));
+        odrLatLng = new LatLng(savedInstanceState.getDouble("odrLat"), savedInstanceState.getDouble("odrLng"));
+        polazisteGl = savedInstanceState.getString("polaziste");
+        odredisteGl = savedInstanceState.getString("odrediste");
+        distancaGl = savedInstanceState.getString("distanca");
+        vrijemeGl = savedInstanceState.getString("vrijeme");
+        cijenaCammeo = savedInstanceState.getFloat("cijenaCammeo");
+        cijenaRadio = savedInstanceState.getFloat("cijenaRadio");
+        cijenaEko = savedInstanceState.getFloat("cijenaEko");
+        cijenaZebra = savedInstanceState.getFloat("cijenaZebra");
+
+
+        ((TextView)findViewById(R.id.txtAdresaPolazista)).setText(polazisteGl);
+        ((TextView)findViewById(R.id.txtAdresaOdredista)).setText(odredisteGl);
+        ((TextView)findViewById(R.id.txtCammeoCijena)).setText(String.valueOf(cijenaCammeo) );
+        ((TextView)findViewById(R.id.txtRadioCijena)).setText(String.valueOf(cijenaRadio));
+        ((TextView)findViewById(R.id.txtEkoCijena)).setText(String.valueOf(cijenaEko));
+        ((TextView)findViewById(R.id.txtZebraCijena)).setText(String.valueOf(cijenaZebra));
+        ((TextView)findViewById(R.id.txtVrijemeVoznje)).setText(String.valueOf(vrijemeGl));
+        ((TextView)findViewById(R.id.txtUdaljenost)).setText(String.valueOf(distancaGl));
+
+    }
+*/
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
@@ -149,16 +230,31 @@ public class MainActivity extends ActionBarActivity
         switch (position)
         {
             case 0:
+             //   FragmentImenik imenik = new FragmentImenik();
+              //  android.support.v4.app.FragmentTransaction transaction = manager.beginTransaction();
+              //  transaction.add(R.id.container, imenik, "imenik");
+              //  transaction.commit();
+
                 getFragmentManager().beginTransaction().replace(R.id.container, new FragmentImenik(), "imenik").commit();
+
+            //    getFragmentManager().beginTransaction().replace(R.id.container, new FragmentImenik()).addToBackStack("imenik").commit();
+
+
                // Toast.makeText(this, "odabran je: 1 ", Toast.LENGTH_SHORT).show();
                 break;
             case 1:
                // Toast.makeText(this, "odabran je: 2 ", Toast.LENGTH_SHORT).show();
                 getFragmentManager().beginTransaction().replace(R.id.container, new FragmentCijenaINavigacija()).commit();
+
+
+            //    getFragmentManager().beginTransaction().replace(R.id.container, new FragmentCijenaINavigacija()).addToBackStack("imenik").commit();
+
                 break;
             case 2:
             //    Toast.makeText(this, "odabran je: 3 ", Toast.LENGTH_SHORT).show();
+
                 getFragmentManager().beginTransaction().replace(R.id.container, new FragmentPovijest()).commit();
+            //    getFragmentManager().beginTransaction().replace(R.id.container, new FragmentPovijest()).addToBackStack("imenik").commit();
 
                 break;
         }
@@ -177,14 +273,14 @@ public class MainActivity extends ActionBarActivity
                 break;
         }
     }
-/*
+
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }
-*/
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -193,7 +289,7 @@ public class MainActivity extends ActionBarActivity
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.main, menu);
-//            restoreActionBar();
+            restoreActionBar();
             return true;
         }
         return super.onCreateOptionsMenu(menu);
@@ -274,6 +370,8 @@ public class MainActivity extends ActionBarActivity
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
+
+
 
     public void clickBtnCallCammeo(View v)    {
         if(v.getId() == R.id.btn_cijena_cammeo_call) {
@@ -370,6 +468,7 @@ public class MainActivity extends ActionBarActivity
         manager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, listener, null);
       //  manager.requestSingleUpdate(LocationManager.GPS_PROVIDER, listener, null);
 
+
         Toast.makeText(this, "Molimo pričekajte da GPS utvrdi lokaciju", Toast.LENGTH_LONG).show();
     }
 
@@ -419,6 +518,15 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
+  /*      SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "yyyy-MM-dd", Locale.getDefault());
+        Date date = new Date(2015-05-21);
+
+
+
+*/
+
+
     public void clickReset(View v){
 
         resetTextViews(false);
@@ -430,6 +538,10 @@ public class MainActivity extends ActionBarActivity
 
     public void infoDialog(int naslov, int poruka){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+   //     AlertDialog alertDialog = alertDialogBuilder.create();
+  //      alertDialog.setMessage(getResources().getString(poruka));
+   //     alertDialog.setTitle(getResources().getString(naslov));
         alertDialogBuilder.setMessage(getResources().getString(poruka));
         alertDialogBuilder.setTitle(getResources().getString(naslov));
         alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -467,6 +579,13 @@ public class MainActivity extends ActionBarActivity
         String ulica = ulicaTxt.getText().toString();
         ulica = ulica.toLowerCase(Locale.getDefault());
 
+        // izbaceno da ne pise ,zagreb u polju za unos
+    /**    if( ! ulica.contains("zagreb"))        {
+            ulica = ulica.concat(", zagreb");
+        }
+
+        ulicaTxt.setText(ulica);
+*/
         for(int i=0; i<ulica.length(); i++){
             String temp = ulica;
             if(ulica.charAt(i) == ' ') {
@@ -520,6 +639,8 @@ public class MainActivity extends ActionBarActivity
 
     }
 
+
+
     /** A method to download json data from url */
     private String downloadUrl(String strUrl) throws IOException {
         String data = "";
@@ -558,6 +679,7 @@ public class MainActivity extends ActionBarActivity
         }
         return data;
     }
+
 
     // Fetches data from url passed
     private class DownloadTask extends AsyncTask<String, Integer, String> {
@@ -685,14 +807,17 @@ public class MainActivity extends ActionBarActivity
             float distanca = Float.parseFloat(distancaGl.substring(0, distancaGl.indexOf(" ")));
             izracunajCijenu(distanca);
 
+
             //zakljucaj polja za unos
             enableEnterTextviews(false);
+
 
         }else{
             //ciscenje polja i ispis da adresa nije pronadena
             resetTextViews(true);
         }
     }
+
 
     /**Metoda za sakrivanje tipkovnice*/
     public void hideSoftKeyboard() {
