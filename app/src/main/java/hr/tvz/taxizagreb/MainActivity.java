@@ -31,6 +31,7 @@ import android.support.v4.widget.DrawerLayout;
 
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -117,6 +118,8 @@ public class MainActivity extends ActionBarActivity
         }
          */
        // manager = getSupportFragmentManager();
+
+
 
     }
 
@@ -438,8 +441,8 @@ public class MainActivity extends ActionBarActivity
         LocationListener listener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
-                ((TextView) findViewById(R.id.txtAdresaPolazista)).setText("Lokacija utvrđena");
-                ((TextView) findViewById(R.id.txtAdresaPolazista)).setEnabled(false);
+                ((EditText) findViewById(R.id.txtAdresaPolazista)).setText("Lokacija utvrđena");
+                ((EditText) findViewById(R.id.txtAdresaPolazista)).setEnabled(false);
             //    Toast.makeText(this, "GPS lokacija utvrđena", Toast.LENGTH_LONG).show();
 
                 GPSLat = location.getLatitude();
@@ -475,8 +478,8 @@ public class MainActivity extends ActionBarActivity
     public void clickBtnIzracunaj(View view) throws IOException, JSONException {
 
         if (isNetworkAvailable()) {
-            TextView txtPolaziste = (TextView) findViewById(R.id.txtAdresaPolazista);
-            TextView txtOdrediste = (TextView) findViewById(R.id.txtAdresaOdredista);
+            EditText txtPolaziste = (EditText) findViewById(R.id.txtAdresaPolazista);
+            EditText txtOdrediste = (EditText) findViewById(R.id.txtAdresaOdredista);
 
             if(txtPolaziste.getText().toString().isEmpty() || txtOdrediste.getText().toString().isEmpty())
             {
@@ -574,7 +577,7 @@ public class MainActivity extends ActionBarActivity
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
-    public String checkStreetName(TextView ulicaTxt)    {
+    public String checkStreetName(EditText ulicaTxt)    {
 
         String ulica = ulicaTxt.getText().toString();
         ulica = ulica.toLowerCase(Locale.getDefault());
@@ -766,7 +769,7 @@ public class MainActivity extends ActionBarActivity
                 }
                 myLocation = myLocation.substring(0, location);
 
-                ((TextView) findViewById(R.id.txtAdresaPolazista)).setText(myLocation);
+                ((EditText) findViewById(R.id.txtAdresaPolazista)).setText(myLocation);
                 polazisteGl = myLocation;
             }
 
@@ -829,8 +832,8 @@ public class MainActivity extends ActionBarActivity
     public void resetTextViews(Boolean addressNotFound){
         //ako adresa nije pronadena, ne cisti polja da se unos moze editirati
         if(! addressNotFound){
-            ((TextView)findViewById(R.id.txtAdresaOdredista)).setText("");
-            ((TextView)findViewById(R.id.txtAdresaPolazista)).setText("");
+            ((EditText)findViewById(R.id.txtAdresaOdredista)).setText("");
+            ((EditText)findViewById(R.id.txtAdresaPolazista)).setText("");
         }
 
         ((TextView)findViewById(R.id.txtUdaljenost)).setText("");
@@ -845,8 +848,8 @@ public class MainActivity extends ActionBarActivity
     }
 
     public void enableEnterTextviews(Boolean enable){
-        ((TextView)findViewById(R.id.txtAdresaPolazista)).setEnabled(enable);
-        ((TextView)findViewById(R.id.txtAdresaOdredista)).setEnabled(enable);
+        ((EditText)findViewById(R.id.txtAdresaPolazista)).setEnabled(enable);
+        ((EditText)findViewById(R.id.txtAdresaOdredista)).setEnabled(enable);
     }
 
     public void enableCallButtons(Boolean enable){

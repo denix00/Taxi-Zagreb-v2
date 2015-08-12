@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
@@ -122,8 +123,8 @@ public class FragmentCijenaINavigacija extends Fragment {
 
                 DecimalFormat decFormat = new DecimalFormat("##0.00");
 
-                ((TextView) v.findViewById(R.id.txtAdresaPolazista)).setText(polTemp);
-                ((TextView) v.findViewById(R.id.txtAdresaOdredista)).setText(odrTemp);
+                ((EditText) v.findViewById(R.id.txtAdresaPolazista)).setText(polTemp);
+                ((EditText) v.findViewById(R.id.txtAdresaOdredista)).setText(odrTemp);
                 ((TextView) v.findViewById(R.id.txtUdaljenost)).setText(distancaTemp);
                 ((TextView) v.findViewById(R.id.txtVrijemeVoznje)).setText(vrijemeTemp);
                 ((TextView) v.findViewById(R.id.txtCammeoCijena)).setText(decFormat.format(cijenaCammeoTemp) + " kn");
@@ -131,15 +132,15 @@ public class FragmentCijenaINavigacija extends Fragment {
                 ((TextView) v.findViewById(R.id.txtEkoCijena)).setText(decFormat.format(cijenaEkoTemp) + " kn");
                 ((TextView) v.findViewById(R.id.txtZebraCijena)).setText(decFormat.format(cijenaZebraTemp) + " kn");
 
-                ((TextView) v.findViewById(R.id.txtAdresaPolazista)).setEnabled(false);
-                ((TextView) v.findViewById(R.id.txtAdresaOdredista)).setEnabled(false);
+                ((EditText) v.findViewById(R.id.txtAdresaPolazista)).setEnabled(false);
+                ((EditText) v.findViewById(R.id.txtAdresaOdredista)).setEnabled(false);
             }
 
             else if(bundlePodaci.getString("tip").equals("povijest")){
                 String polTemp = bundlePodaci.getString("polaziste");
                 String odrTemp = bundlePodaci.getString("odrediste");
-                ((TextView) v.findViewById(R.id.txtAdresaPolazista)).setText(polTemp);
-                ((TextView) v.findViewById(R.id.txtAdresaOdredista)).setText(odrTemp);
+                ((EditText) v.findViewById(R.id.txtAdresaPolazista)).setText(polTemp);
+                ((EditText) v.findViewById(R.id.txtAdresaOdredista)).setText(odrTemp);
             }
         }
         return v;
