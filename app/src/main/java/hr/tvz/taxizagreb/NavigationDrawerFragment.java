@@ -62,6 +62,8 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
 
+    private boolean disableHelpButton = false;
+
     public NavigationDrawerFragment() {
     }
 
@@ -259,10 +261,6 @@ public class NavigationDrawerFragment extends Fragment {
         if (item.getItemId() == R.id.action_help) {
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
-
-            //     AlertDialog alertDialog = alertDialogBuilder.create();
-            //      alertDialog.setMessage(getResources().getString(poruka));
-            //     alertDialog.setTitle(getResources().getString(naslov));
             alertDialogBuilder.setMessage(Html.fromHtml(getResources().getString(R.string.help_dialog_poruka)));
             alertDialogBuilder.setTitle(getResources().getString(R.string.action_help));
             alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -313,5 +311,15 @@ public class NavigationDrawerFragment extends Fragment {
         actionBar.setNavigationMode( ActionBar.NAVIGATION_MODE_STANDARD );
         actionBar.setDisplayShowTitleEnabled( true );
         actionBar.setTitle( getResources().getString(R.string.title_section2) );
+    }
+
+/** neuspio pokusaj za mijenjanje selecta na itemu
+    public void changeSelectedItem(int position){
+        mCurrentSelectedPosition = position;
+    }
+    */
+
+    public void disableHelpBtn(boolean statement){
+        this.disableHelpButton = statement;
     }
 }

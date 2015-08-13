@@ -193,6 +193,10 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
 
                 //  navigacijaCijena.setArguments(bundlePodaci);
                 getFragmentManager().beginTransaction().replace(R.id.container, navigacijaCijena, "navigacijaCijena").commit();
+
+/** neuspio pokusaj za mijenjanje selecta na itemu
+                ((MainActivity) getActivity()).changeItemSelectedNavigationDrawer(2);
+ */
             }
         }
     }

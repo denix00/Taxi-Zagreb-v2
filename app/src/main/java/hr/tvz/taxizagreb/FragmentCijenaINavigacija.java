@@ -81,6 +81,15 @@ public class FragmentCijenaINavigacija extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_cijena_inavigacija, container, false);
 
+/*
+        //postavljanje focus listenera na polja za unos
+        EditText etOdr = (EditText) v.findViewById(R.id.txtAdresaOdredista);
+        EditText etPol = (EditText) v.findViewById(R.id.txtAdresaPolazista);
+        View.OnFocusChangeListener ofcListener = new MyFocusChangeListener();
+        etPol.setOnFocusChangeListener(ofcListener);
+        etOdr.setOnFocusChangeListener(ofcListener);
+*/
+
         //ako sam primio podatke, postavi ih
         Log.i("podaci", "OnCreateView");
         Bundle bundlePodaci = getArguments();

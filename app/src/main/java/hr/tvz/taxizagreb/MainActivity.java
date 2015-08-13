@@ -118,9 +118,6 @@ public class MainActivity extends ActionBarActivity
         }
          */
        // manager = getSupportFragmentManager();
-
-
-
     }
 
 /**Dobar pokusaj, radi*/
@@ -877,4 +874,11 @@ public class MainActivity extends ActionBarActivity
     public void setActionBarTitle(String title) {
         getSupportActionBar().setTitle(title);
     }
+
+/** neuspio pokusaj za mijenjanje selecta na itemu
+    public void changeItemSelectedNavigationDrawer(int position){
+        mNavigationDrawerFragment.changeSelectedItem(position);
+    }
+ */
 }
+

@@ -1,5 +1,6 @@
 package hr.tvz.taxizagreb;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -104,7 +106,10 @@ public class GoogleMaps extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
+        //ucitavanje global menua koji je cist i koji nema dodatne button po sebi jer su nepotrebni.
+        getMenuInflater().inflate(R.menu.global, menu);
+        //onemogucavanje buttona za pomoc
+      //  menu.findItem(R.id.action_help).setEnabled(false);
         return super.onCreateOptionsMenu(menu);
     }
 

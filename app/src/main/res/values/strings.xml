@@ -131,6 +131,7 @@
         <u>Gumb GPS</u> omogućuje lociranje korisnika na temelju lokacije u mreži.<br>
         <u>Gumb Očisti</u> briše podatke iz svih polja.<br><br>
         <b>Povijest:</b> klikom na pojedinu stavku aplikacija će prikazati ekran Cijena i navigacija te će popuniti polja za unos podacima iz stavke.<br><br>
+        <b>Karta:</b> pogled na kartu se tapkanjem i štipanjem ekrana može približiti ili udaljiti. Klikom na tipku za lociranje (gore desno) ekran se centrira na lokaciju korisnika.<br><br>
         <b>Izradio: Denis Glad</b>
         ]]>
 
