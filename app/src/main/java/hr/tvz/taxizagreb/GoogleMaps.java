@@ -1,14 +1,11 @@
 package hr.tvz.taxizagreb;
 
-import android.app.ActionBar;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,8 +24,11 @@ import java.util.List;
 public class GoogleMaps extends ActionBarActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+
+    //lista tocaka na mapi
     ArrayList<LatLng> markerPoints;
 
+    //varijable za spremanje koordinata polazista, odredista i json-a koji je odgovor Google Maps API-ja
     LatLng polLatLng;
     LatLng odrLatLng;
     String jsonString;
@@ -36,9 +36,10 @@ public class GoogleMaps extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //postavljanje mape na ekran
         setContentView(R.layout.activity_google_maps);
-      //  setUpMapIfNeeded();
 
+        //dohvacanje podataka koji su dodani uz activity pri instanciranju i pokretanju i spremanje u globalne varijable
         Bundle extra = this.getIntent().getExtras();
         polLatLng = new LatLng(extra.getDouble("polLat"), extra.getDouble("polLng"));
         odrLatLng = new LatLng(extra.getDouble("odrLat"), extra.getDouble("odrLng"));
@@ -50,100 +51,75 @@ public class GoogleMaps extends ActionBarActivity {
         Log.i("LatLngOM", Double.toString(odrLatLng.longitude));
         Log.i("LatLngString", jsonString);
 
-        // Initializing
+
         markerPoints = new ArrayList<LatLng>();
 
-        // Getting reference to SupportMapFragment of the activity_main
+        // referenciranje na fragment od mape
         SupportMapFragment fm = (SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map);
 
-        // Getting Map for the SupportMapFragment
+        // dohvacanje mape
         mMap = fm.getMap();
 
+        // ako mapa postoji
         if(mMap!=null){
 
-            // Enable MyLocation Button in the Map
+            // omogucavanje buttona za centriranje na lokaciju korisnika
             mMap.setMyLocationEnabled(true);
 
+            // u markerPoints listu kao prvom prolazu dodaj polaziste, u drugome odrediste
             for(int i = 0; i < 2; i++ ){
-            // Setting onclick event listener for the map
-
-                // Adding new item to the ArrayList
-                //u prvom prolazu koristi polaziste, u drogom odrediste
+                //u prvom prolazu dodaj polaziste, u drogom odrediste
                 LatLng latLng = polLatLng;
                 if(i == 1) latLng = odrLatLng;
 
                 markerPoints.add(latLng);
 
-                // Creating MarkerOptions
+                // opcije za markere
                 MarkerOptions options = new MarkerOptions();
 
-                // Setting the position of the marker
+                // postavljajnje pozicije markera
                 options.position(latLng);
 
-                /**
-                 * For the start location, the color of marker is GREEN and
-                 * for the end location, the color of marker is RED.
-                 */
+                // za polaziste postavi zeleni marker, za odrediste crveni
                 if(i == 0){
                     options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
                 }else if(i == 1){
                     options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                 }
 
-                // Add new marker to the Google Map Android API V2
+                // dodavanje markera na mapu
                 mMap.addMarker(options);
 
-                DownloadTask downloadTask = new DownloadTask();
-                // Add new marker to the Google Map Android API V2
-                mMap.addMarker(options);
-
-                // Start downloading json data from Google Directions API
-                downloadTask.execute();
+                // intanciranje  i pokretanje JsonParsera
+                DoInBackground DoInBackground = new DoInBackground();
+                DoInBackground.execute();
             }
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        //ucitavanje global menua koji je cist i koji nema dodatne button po sebi jer su nepotrebni.
+        //ucitavanje global menua koji je cist i koji nema dodatne buttone po sebi jer su nepotrebni.
         getMenuInflater().inflate(R.menu.global, menu);
-        //onemogucavanje buttona za pomoc
-      //  menu.findItem(R.id.action_help).setEnabled(false);
         return super.onCreateOptionsMenu(menu);
     }
 
+    // ako activity od mape nije prethodno unisten, po nastavku izvodenja provjeri da li je mapa intancirana i postavljena
     @Override
     protected void onResume() {
         super.onResume();
         setUpMapIfNeeded();
     }
 
-    /**
-     * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
-     * installed) and the map has not already been instantiated.. This will ensure that we only ever
-     * call {@link #setUpMap()} once when {@link #mMap} is not null.
-     * <p/>
-     * If it isn't installed {@link SupportMapFragment} (and
-     * {@link com.google.android.gms.maps.MapView MapView}) will show a prompt for the user to
-     * install/update the Google Play services APK on their device.
-     * <p/>
-     * A user can return to this FragmentActivity after following the prompt and correctly
-     * installing/updating/enabling the Google Play services. Since the FragmentActivity may not
-     * have been completely destroyed during this process (it is likely that it would only be
-     * stopped or paused), {@link #onCreate(Bundle)} may not be called again so we should call this
-     * method in {@link #onResume()} to guarantee that it will be called.
-     */
+    // ako mapa nije instancirana, dohvati ju i postavi.
     private void setUpMapIfNeeded() {
-        // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
-            // Try to obtain the map from the SupportMapFragment.
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
-            // Check if we were successful in obtaining the map.
+/*            // provjera da li je uspjesno dohvacena
             if (mMap != null) {
                 setUpMap();
-            }
+            }*/
         }
     }
 
@@ -153,13 +129,12 @@ public class GoogleMaps extends ActionBarActivity {
      * <p/>
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
-    private void setUpMap() {
+/*    private void setUpMap() {
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
     }
-
-
-    // Fetches data from url passed
-    private class DownloadTask extends AsyncTask<Void, Void, String> {
+*/
+    // klasa za izvodenje radnji u drugoj dretvi
+    private class DoInBackground extends AsyncTask<Void, Void, String> {
 
         // Iscrtavanje u pozadinskoj dretvi
         @Override
@@ -170,6 +145,8 @@ public class GoogleMaps extends ActionBarActivity {
 
             return "";
         }
+
+        // nakon sto se ruta iscrtala, kameru postavi na srediste rute
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             double centLat;
@@ -186,10 +163,10 @@ public class GoogleMaps extends ActionBarActivity {
         }
     }
 
-    /** A class to parse the Google Places in JSON format */
+    // klasa za parsiranje
     private class ParserTask extends AsyncTask<String, Integer, List<List<HashMap<String,String>>> >{
 
-        // Parsing the data in non-ui thread
+        // parsiranje podataka u pozadinskoj dretvi
         @Override
         protected List<List<HashMap<String, String>>> doInBackground(String... jsonData) {
 
@@ -200,47 +177,46 @@ public class GoogleMaps extends ActionBarActivity {
                 jObject = new JSONObject(jsonData[0]);
                 JSONParser parser = new JSONParser();
 
-                // Starts parsing data
+                // pocetak parsiranja
                 routes = parser.parse(jObject);
             }catch(Exception e){
                 e.printStackTrace();
             }
+            // vracanje liste s listama koordinata
             return routes;
         }
 
-        // Executes in UI thread, after the parsing process
+        // kad je parsiranje gotovo, iscrtavanje
         @Override
         protected void onPostExecute(List<List<HashMap<String, String>>> result) {
             ArrayList<LatLng> points = null;
             PolylineOptions lineOptions = null;
-            MarkerOptions markerOptions = new MarkerOptions();
 
-            // Traversing through all the routes
-            for(int i=0;i<result.size();i++){
-                points = new ArrayList<LatLng>();
-                lineOptions = new PolylineOptions();
 
-                // Fetching i-th route
-                List<HashMap<String, String>> path = result.get(i);
+            points = new ArrayList<LatLng>();
+            lineOptions = new PolylineOptions();
 
-                // Fetching all the points in i-th route
-                for(int j=0;j<path.size();j++){
-                    HashMap<String,String> point = path.get(j);
+            // dohvat 0-te, jedine rute
+            List<HashMap<String, String>> path = result.get(0);
 
-                    double lat = Double.parseDouble(point.get("lat"));
-                    double lng = Double.parseDouble(point.get("lng"));
-                    LatLng position = new LatLng(lat, lng);
+            // dohvat svih koordinata tocaka iz rute i spremanje u listu points
+            for(int j=0;j<path.size();j++){
+                HashMap<String,String> point = path.get(j);
 
-                    points.add(position);
-                }
+                double lat = Double.parseDouble(point.get("lat"));
+                double lng = Double.parseDouble(point.get("lng"));
+                LatLng position = new LatLng(lat, lng);
 
-                // Adding all the points in the route to LineOptions
-                lineOptions.addAll(points);
-                lineOptions.width(10);
-                lineOptions.color(Color.BLUE);
+                points.add(position);
             }
 
-            // Drawing polyline in the Google Map for the i-th route
+            // spremanje tocaka u lineOptions, dodavanje njihove sirine i boje
+            lineOptions.addAll(points);
+            lineOptions.width(10);
+            lineOptions.color(Color.BLUE);
+
+
+            // crtanje rute
             mMap.addPolyline(lineOptions);
         }
     }

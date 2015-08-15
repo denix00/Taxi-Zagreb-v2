@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 public class JSONParser {
 
-    /** Receives a JSONObject and returns a list of lists containing latitude and longitude */
+    // prima JSONObject i vraca listu liste koja sadrzi latitude i longidute decimalne vrijednosti
     public List<List<HashMap<String,String>>> parse(JSONObject jObject){
 
         List<List<HashMap<String, String>>> routes = new ArrayList<List<HashMap<String,String>>>() ;
@@ -28,22 +28,22 @@ public class JSONParser {
 
             jRoutes = jObject.getJSONArray("routes");
 
-            /** Traversing all routes */
+            /** Prolazak kroz sve rute */
             for(int i=0;i<jRoutes.length();i++){
                 jLegs = ( (JSONObject)jRoutes.get(i)).getJSONArray("legs");
                 List path = new ArrayList<HashMap<String, String>>();
 
-                /** Traversing all legs */
+                /** prolazak kroz sve noge */
                 for(int j=0;j<jLegs.length();j++){
                     jSteps = ( (JSONObject)jLegs.get(j)).getJSONArray("steps");
 
-                    /** Traversing all steps */
+                    /** prolazak kroz sve korake */
                     for(int k=0;k<jSteps.length();k++){
                         String polyline = "";
                         polyline = (String)((JSONObject)((JSONObject)jSteps.get(k)).get("polyline")).get("points");
                         List<LatLng> list = decodePoly(polyline);
 
-                        /** Traversing all points */
+                        /** prolazak kroz sve točke */
                         for(int l=0;l<list.size();l++){
                             HashMap<String, String> hm = new HashMap<String, String>();
                             hm.put("lat", Double.toString(((LatLng)list.get(l)).latitude) );
@@ -51,6 +51,7 @@ public class JSONParser {
                             path.add(hm);
                         }
                     }
+                    // lista tocaka koja sadrzi latitude i longitude dodana ruti
                     routes.add(path);
                 }
             }
@@ -62,10 +63,9 @@ public class JSONParser {
 
         return routes;
     }
-    /**
-     * Method to decode polyline points
-     * Courtesy : http://jeffreysambells.com/2010/05/27/decoding-polylines-from-google-maps-direction-api-with-java
-     * */
+
+    // metoda za dekodiranje polyline tocaka. Polyline je format gdje je niz koordinata komprimiran u jedan string
+    // http://jeffreysambells.com/2010/05/27/decoding-polylines-from-google-maps-direction-api-with-java
     private List<LatLng> decodePoly(String encoded) {
 
         List<LatLng> poly = new ArrayList<LatLng>();

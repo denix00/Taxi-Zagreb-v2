@@ -61,7 +61,7 @@
     <string name="naslov_zebra">Zebra Taxi</string>
 
     <string name="adresa_polazista">Adresa polazišta</string>
-    <string name="adresa_odredista">Adresa dolazišta</string>
+    <string name="adresa_odredista">Adresa odredišta</string>
     <string name="btn_GPS">GPS</string>
     <string name="btn_izracunaj">Izračunaj</string>
     <string name="btn_reset">Očisti</string>
@@ -118,6 +118,8 @@
     <string name="broj_eko">1414</string>
     <string name="broj_zebra">0607557</string>
 
+
+    <string name="polaziste_string">Moja lokacija</string>
 
     <string name="help_dialog_poruka">
          <![CDATA[

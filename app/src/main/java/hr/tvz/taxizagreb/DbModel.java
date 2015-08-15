@@ -5,6 +5,8 @@ import java.util.Date;
 
 /**
  * Created by Dennis on 23.5.2015..
+ *
+ * Klasa sluzi kao model podataka koji ce se upisivati u bazu i citati iz nje.
  */
 public class DbModel {
 
@@ -36,6 +38,7 @@ public class DbModel {
         this.polaziste = polaziste;
     }
 
+
     public String getOdrediste() {
         return odrediste;
     }
@@ -44,6 +47,7 @@ public class DbModel {
         this.odrediste = odrediste;
     }
 
+
     public String getDistanca() {
         return distanca;
     }
@@ -51,6 +55,7 @@ public class DbModel {
     public void setDistanca(String distanca) {
         this.distanca = distanca;
     }
+
 
     public String getTrajanjePutovanja() {
         return trajanjePutovanja;

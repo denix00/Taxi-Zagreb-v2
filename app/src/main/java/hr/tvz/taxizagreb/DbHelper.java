@@ -13,9 +13,12 @@ import java.util.List;
 
 /**
  * Created by Dennis on 23.5.2015..
+ *
+ * Klasa za koja unosi podatke u bazu i cita iz nje prema modelu definiranom u DbModel.
  */
 public class DbHelper extends SQLiteOpenHelper {
 
+    //nazivi tablica i atributa
     private static final String DATABASE_NAME = "PovijestVoznji";
     private static final String TABLE_NAME = "povijest";
     private static final String KEY_ID = "id";
@@ -26,24 +29,41 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String CIJENA = "cijena";
     private static final String PRIJEVOZNIK = "prijevoznik";
 
+
+    //ukoliko se napravi promjena u modelu baze, DATABASE_VERSION je potrebno povisiti kako bi promjena bila prihvacena
     private static final int DATABASE_VERSION = 4;
 
+    //upit za kreiranje tabliceu u koju ce se spremati povijest voznji
     private static final String CREATE_TABLE = "CREATE TABLE " +
             TABLE_NAME +"("+KEY_ID+" INTEGER PRIMARY KEY AUTOINCREMENT,"+
             POLAZISTE+" VARCHAR(255),"+ODREDISTE+" VARCHAR(255),"+
             DISTANCA+" VARCHAR(10),"+TRAJANJE_PUTOVANJA+" VARCHAR(20),"+
             PRIJEVOZNIK+" VARCHAR(20),"+CIJENA+" DECIMAL(6,2)"+");";
 
+    /**
+     * kontruktor
+     * @param context
+     */
     public DbHelper (Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    /**
+     * kreiranje tablice pri instanciranju klase, ukoliko tablica postoji, nece se ponovo kreirati.
+     * @param db
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
 
         db.execSQL(CREATE_TABLE);
     }
 
+    /**
+     * metoda za nadogradnju baze, prvo se DROPa baza, potom pokrece onCreate metoda koja ce ju ponovo kreirati.
+     * @param db
+     * @param oldVersion
+     * @param newVersion
+     */
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
@@ -51,6 +71,11 @@ public class DbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    /**
+     * Unos u bazu pomocu modela baze
+     * @param model objekt sadrzi podatke koji ce se spremiti u tablicu
+     * @return id reda u koji je unesen podatak, -1 ako unos nije uspio
+     */
     public long unosUBazu(DbModel model){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -59,7 +84,6 @@ public class DbHelper extends SQLiteOpenHelper {
         values.put(ODREDISTE, model.getOdrediste());
         values.put(DISTANCA, model.getDistanca());
         values.put(TRAJANJE_PUTOVANJA, model.getTrajanjePutovanja());
-        //values.put(DATUM, );
         values.put(PRIJEVOZNIK, model.getPrijevoznik());
         values.put(CIJENA, model.getCijena());
 
@@ -67,16 +91,21 @@ public class DbHelper extends SQLiteOpenHelper {
         return unosUBazu_id;
     }
 
+    /**
+     * Ispis svih redaka iz baze
+     * @return lista objekata, svaki sadrzi podatke iz jednog retka
+     */
     public List<DbModel> ispisiSve() {
         List<DbModel> povijest = new ArrayList<DbModel>();
         String selectQuery = "SELECT * FROM " + TABLE_NAME;
 
         Log.e("LOG", selectQuery);
 
+        //dohvacanje baze i izvrsavanje upita koji ce vratiti N redaka i spremiti u kursor
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor c = db.rawQuery(selectQuery, null);
 
-        // looping through all rows and adding to list
+        // pomocu kursora se prolazi redak po redak kroz sve retke, podaci se spremaju u listu
         if (c.moveToFirst()) {
             do {
                 DbModel td = new DbModel();
@@ -86,7 +115,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 td.setTrajanjePutovanja(c.getString(c.getColumnIndex(TRAJANJE_PUTOVANJA)));
                 td.setDistanca(c.getString(c.getColumnIndex(DISTANCA)));
                 td.setCijena(c.getDouble(c.getColumnIndex(CIJENA)));
-                // adding to DbModel list
+                // dodavanje podataka u obliku objekta DbModela na kraj liste
                 povijest.add(td);
             } while (c.moveToNext());
         }
@@ -94,7 +123,12 @@ public class DbHelper extends SQLiteOpenHelper {
         return povijest;
     }
 
-    public List<String> getPoint(int location){
+    /**
+     * Dohvat polazista i odredista na temelju rednog broja u bazi
+     * @param location redak koji se zeli dohvatiti
+     * @return lista s prvim podatkom koji je polaziste, a drugi je odrediste
+     */
+    public List<String> getStartPoints(int location){
         DbModel dbModel = new DbModel();
         List<String> polOdr = new ArrayList<String>();
         String selectQuery = "SELECT " + POLAZISTE + "," + ODREDISTE + " FROM " + TABLE_NAME + " LIMIT 1 OFFSET " + location + ";";

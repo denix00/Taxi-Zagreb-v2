@@ -63,7 +63,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:src="@drawable/ic_action_about"
-                android:onClick="clickBtnInfoCammeo"
+                android:onClick="clickBtnInfoHandler"
                 android:clickable="true" />
 
             <ImageButton
@@ -133,7 +133,7 @@
                 android:layout_alignParentStart="true"
                 android:src="@drawable/ic_action_about"
                 android:clickable="true"
-                android:onClick="clickBtnInfoRadio" />
+                android:onClick="clickBtnInfoHandler" />
 
             <ImageButton
                 android:contentDescription="@string/desc_radio_call"
@@ -207,7 +207,7 @@
                 android:layout_alignParentStart="true"
                 android:src="@drawable/ic_action_about"
                 android:clickable="true"
-                android:onClick="clickBtnInfoEko" />
+                android:onClick="clickBtnInfoHandler" />
 
             <ImageButton
                 android:contentDescription="@string/desc_eko_call"
@@ -276,7 +276,7 @@
                 android:layout_alignParentStart="true"
                 android:src="@drawable/ic_action_about"
                 android:clickable="true"
-                android:onClick="clickBtnInfoZebra" />
+                android:onClick="clickBtnInfoHandler" />
 
             <ImageButton
                 android:contentDescription="@string/desc_zebra_call"

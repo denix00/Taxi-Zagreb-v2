@@ -1,7 +1,6 @@
 package hr.tvz.taxizagreb;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.util.Log;
@@ -10,22 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
-
-import com.google.android.gms.wearable.DataEventBuffer;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.TooManyListenersException;
-
-import hr.tvz.taxizagreb.dummy.DummyContent;
 
 /**
  * A fragment representing a list of Items.
@@ -39,7 +31,7 @@ import hr.tvz.taxizagreb.dummy.DummyContent;
 public class FragmentPovijest extends Fragment implements AbsListView.OnItemClickListener {
 
     private boolean prazno = false;
-
+/*
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -48,7 +40,7 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+*/
     private OnFragmentInteractionListener mListener;
 
     /**
@@ -61,7 +53,7 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
      * Views.
      */
     private ListAdapter mAdapter;
-
+/*
     // TODO: Rename and change types of parameters
     public static FragmentPovijest newInstance(String param1, String param2) {
         FragmentPovijest fragment = new FragmentPovijest();
@@ -71,7 +63,7 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
         fragment.setArguments(args);
         return fragment;
     }
-
+*/
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -79,25 +71,32 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
     public FragmentPovijest() {
     }
 
+    /**
+     * Popunjavanje liste s podacima (li s napomenom da nema podataka u bazi, odnosno povijesti) kod kreiranja fragmenta.
+     * @param savedInstanceState Bundle s podacima od prethodnog izvodenja fragmenta
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //postavljanje formata za decimalne brojeve radi citljivijeg prikaza korisniku
         DecimalFormat decFormat = new DecimalFormat("##0.00");
 
-        DbHelper db = new DbHelper(getActivity());
-        List<DbModel> td = db.ispisiSve();
+        //instanciranje DbHelpera i dohvacanje svih redaka iz baze kao lista
+        DbHelper dbHelper = new DbHelper(getActivity());
+        List<DbModel> tableData = dbHelper.ispisiSve();
 
+        //prolazak kroz sve podatke iz liste koji su u obliku DbModela i spremanje u listu za prikaz korisniku
         ArrayList<HashMap<String, String>> list = new ArrayList<HashMap<String, String>>();
         HashMap<String, String> item;
-        for (DbModel t : td) {
+        for (DbModel t : tableData) {
             item = new HashMap<String, String>();
             item.put("polaziste_i_odrediste", t.getPolaziste() + " -> " + t.getOdrediste());
             item.put("prijevoznik_cijena_distanca", t.getPrijevoznik() + " - " + decFormat.format(t.getCijena()) + " kn - " + t.getDistanca());
             list.add(item);
         }
 
-        //ako nema podataka u bazi ispisi da nema podataka
+        //ako nema podataka u bazi, lista ce biti prazna, tada u listu za ispisivanje postavi obavijest da nema podataka i prikazi
         if(list.isEmpty())
         {
             item = new HashMap<String, String>();
@@ -113,18 +112,19 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
             prazno = true;
 
         }else {
+            //prikazi spremljene podatke iz liste za prikaz koja ima 2 reda
             SimpleAdapter adapter = new SimpleAdapter(getActivity(), list, android.R.layout.simple_list_item_2, new String[]{"polaziste_i_odrediste",
                     "prijevoznik_cijena_distanca"}, new int[]{android.R.id.text1,
                     android.R.id.text2});
+            //vrati adapter koji ce prikazati podatke
             mAdapter = adapter;
-            //  setListAdapter(adapter);
         }
-
+/*
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
+*/
         // TODO: Change Adapter to display your content
         //mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
         //mAdapter = adapter;
@@ -162,6 +162,9 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
         mListener = null;
     }
 
+    /**
+     * Metoda za reakciju na pritisak podatka iz prikazane liste te prebacivanje na fragment Navigacija i Cijena, i proslijedivanje podataka ukoliko ih ima
+     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if (null != mListener) {
@@ -170,33 +173,34 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
             Log.i("povijest", "odabran je " + position + " po redu");
            // mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
 
+            //ako nema podataka u listi (zastavica je postavljena pri citanju podataka iz baze i prikazu na ekran kod kreiranja fragmenta)
+            // korisnika samo prebaci na fragment Cijena i navigacija
             if(prazno){
                 Log.i("povijest", "povijest je prazna");
                 FragmentCijenaINavigacija navigacijaCijena = new FragmentCijenaINavigacija();
                 getFragmentManager().beginTransaction().replace(R.id.container, navigacijaCijena, "navigacijaCijena").commit();
+
+            //inace uz prebacivanje korisnika popuni polaziste i odrediste s podacima iz povijesti
             }else {
 
                 Log.i("povijest", "povijest nije prazna");
                 FragmentCijenaINavigacija navigacijaCijena = new FragmentCijenaINavigacija();
 
-                DbHelper db = new DbHelper(getActivity());
-                List<String> podaciBaza = new ArrayList<String>();
+                DbHelper dbHelper = new DbHelper(getActivity());
+                List<String> dataList = new ArrayList<String>();
 
-                podaciBaza = db.getPoint(position);
+                //dohvacanje polazista i odredista iz retka iz baze koji je identican retku koji je korisnik odabrao, spremanje u Bundle
+                dataList = dbHelper.getStartPoints(position);
 
-                Bundle podaciBundle = new Bundle();
-                podaciBundle.putString("tip", "povijest");
-                podaciBundle.putString("polaziste", podaciBaza.get(0));
-                podaciBundle.putString("odrediste", podaciBaza.get(1));
+                Bundle dataBundle = new Bundle();
+                dataBundle.putString("tip", "povijest");
+                dataBundle.putString("polaziste", dataList.get(0));
+                dataBundle.putString("odrediste", dataList.get(1));
 
-                navigacijaCijena.setArguments(podaciBundle);
+                //fragmentu dodaj i podatke koje ce koristiti pri kreiranju
+                navigacijaCijena.setArguments(dataBundle);
 
-                //  navigacijaCijena.setArguments(bundlePodaci);
                 getFragmentManager().beginTransaction().replace(R.id.container, navigacijaCijena, "navigacijaCijena").commit();
-
-/** neuspio pokusaj za mijenjanje selecta na itemu
-                ((MainActivity) getActivity()).changeItemSelectedNavigationDrawer(2);
- */
             }
         }
     }
@@ -206,23 +210,17 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
      * the list is empty. If you would like to change the text, call this method
      * to supply the text it should use.
      */
-    public void setEmptyText(CharSequence emptyText) {
+/*    public void setEmptyText(CharSequence emptyText) {
         View emptyView = mListView.getEmptyView();
 
         if (emptyView instanceof TextView) {
             ((TextView) emptyView).setText(emptyText);
         }
     }
-
+*/
     /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
+     *  interface kojeg moraju implementirati svi activityji koji koriste ovaj fragment
+     * uloga mu je komunikacija izmedu fragemanta
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

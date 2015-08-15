@@ -27,37 +27,8 @@ import java.text.DecimalFormat;
  * create an instance of this fragment.
  */
 public class FragmentCijenaINavigacija extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-
-    private String odrediste;
-    private String polaziste;
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentCijenaINavigacija.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentCijenaINavigacija newInstance(String param1, String param2) {
-        FragmentCijenaINavigacija fragment = new FragmentCijenaINavigacija();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     public FragmentCijenaINavigacija() {
         // Required empty public constructor
@@ -67,39 +38,28 @@ public class FragmentCijenaINavigacija extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // poziv metode za restoranje imena fragmenta u actionBaru. Rijesilo problem kada se klikom na stavku u povijesti i
-        // prelaskom na fragment Cijena i Navigacija nije promijenilo ime fragmenta u actionBaru.
+        // prelaskom na fragment CijenaINavigacija nije promijenilo ime fragmenta u actionBaru.
         ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.title_section2));
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        // postavljanje dizajna na ekran
         View v = inflater.inflate(R.layout.fragment_cijena_inavigacija, container, false);
-
-/*
-        //postavljanje focus listenera na polja za unos
-        EditText etOdr = (EditText) v.findViewById(R.id.txtAdresaOdredista);
-        EditText etPol = (EditText) v.findViewById(R.id.txtAdresaPolazista);
-        View.OnFocusChangeListener ofcListener = new MyFocusChangeListener();
-        etPol.setOnFocusChangeListener(ofcListener);
-        etOdr.setOnFocusChangeListener(ofcListener);
-*/
 
         //ako sam primio podatke, postavi ih
         Log.i("podaci", "OnCreateView");
         Bundle bundlePodaci = getArguments();
 
+        //onemogucavanje buttona kako se ne bi mogli koristiti prije nego sto su obradeni podaci
         ((Button) v.findViewById(R.id.btn_cijena_map)).setClickable(false);
         ((ImageButton) v.findViewById(R.id.btn_cijena_cammeo_call)).setClickable(false);
         ((ImageButton) v.findViewById(R.id.btn_cijena_radio_call)).setClickable(false);
         ((ImageButton) v.findViewById(R.id.btn_cijena_eko_call)).setClickable(false);
         ((ImageButton) v.findViewById(R.id.btn_cijena_zebra_call)).setClickable(false);
 
+        //ako sam bio u karti i vracam se na FragmentCijenaINavigacija
         //ako je pokrenutaKarta 1, ne onemogucuje tipke za pozivanje i kartu, jer su podaci vec skinuti
         if(bundlePodaci != null) {
             if(bundlePodaci.getString("tip").equals("cijena")) {
@@ -118,6 +78,7 @@ public class FragmentCijenaINavigacija extends Fragment {
             }
         }
 
+        //ako sam bio u karti i vracam se na FragmentCijenaINavigacija
         if(bundlePodaci != null) {
             if(bundlePodaci.getString("tip").equals("cijena")) {
                 Log.i("podaci", "primio sam podatke, getArguments() nije null");
@@ -145,6 +106,7 @@ public class FragmentCijenaINavigacija extends Fragment {
                 ((EditText) v.findViewById(R.id.txtAdresaOdredista)).setEnabled(false);
             }
 
+            //ako je prethodni fragment bio povijest
             else if(bundlePodaci.getString("tip").equals("povijest")){
                 String polTemp = bundlePodaci.getString("polaziste");
                 String odrTemp = bundlePodaci.getString("odrediste");
@@ -153,13 +115,6 @@ public class FragmentCijenaINavigacija extends Fragment {
             }
         }
         return v;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -180,14 +135,8 @@ public class FragmentCijenaINavigacija extends Fragment {
     }
 
     /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
+     * interface kojeg moraju implementirati svi activityji koji koriste ovaj fragment
+     * uloga mu je komunikacija izmedu fragemanta
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

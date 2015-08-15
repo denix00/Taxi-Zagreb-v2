@@ -27,31 +27,20 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 /**
- * Fragment used for managing interactions for and presentation of a navigation drawer.
- * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
- * design guidelines</a> for a complete explanation of the behaviors implemented here.
+ * Fragment koji predstavlja menu nazvan NavigationDrawer
  */
 public class NavigationDrawerFragment extends Fragment {
 
-    /**
-     * Remember the position of the selected item.
-     */
+    // Kljuc koji se koristi za pamcenje koji je item odabran
     private static final String STATE_SELECTED_POSITION = "selected_navigation_drawer_position";
 
-    /**
-     * Per the design guidelines, you should show the drawer on launch until the user manually
-     * expands it. This shared preference tracks this.
-     */
+    // Kljuc s kojim se sprema vrijednost da li je korisnik vidio menu dok je 1. put pokrenuo aplikaciju
     private static final String PREF_USER_LEARNED_DRAWER = "navigation_drawer_learned";
 
-    /**
-     * A pointer to the current callbacks instance (the Activity).
-     */
+    // referenca na aktivnost
     private NavigationDrawerCallbacks mCallbacks;
 
-    /**
-     * Helper component that ties the action bar to the navigation drawer.
-     */
+    // ActionBarDrawerToggle sluzi za spajanje actionBara i NavigationDrawera
     private ActionBarDrawerToggle mDrawerToggle;
 
     private DrawerLayout mDrawerLayout;
@@ -62,8 +51,6 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
 
-    private boolean disableHelpButton = false;
-
     public NavigationDrawerFragment() {
     }
 
@@ -71,17 +58,17 @@ public class NavigationDrawerFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Read in the flag indicating whether or not the user has demonstrated awareness of the
-        // drawer. See PREF_USER_LEARNED_DRAWER for details.
+        // provjera da li je korisnik vec vidio menu ili nije
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mUserLearnedDrawer = sp.getBoolean(PREF_USER_LEARNED_DRAWER, false);
 
+        // dohvat odabira koji je bio kod zadnjeg prikaza menua
         if (savedInstanceState != null) {
             mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
             mFromSavedInstanceState = true;
         }
 
-        // Select either the default item (0) or the last selected item.
+        // odabir pretpostavljenje stavke na poziciji 0 ili stavke koja je bila zadnje odabrana
         selectItem(mCurrentSelectedPosition);
     }
 
@@ -95,6 +82,7 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // ucitavanje dizajna i postavljanje listenera za odaber stavke iz menua
         mDrawerListView = (ListView) inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -103,6 +91,8 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
+
+        // postavljanje izgleda i naziva stavki
         mDrawerListView.setAdapter(new ArrayAdapter<String>(
                 getActionBar().getThemedContext(),
                 android.R.layout.simple_list_item_activated_1,
@@ -116,41 +106,40 @@ public class NavigationDrawerFragment extends Fragment {
         return mDrawerListView;
     }
 
+    // metoda za provjeru da li je menu otvoren
     public boolean isDrawerOpen() {
         return mDrawerLayout != null && mDrawerLayout.isDrawerOpen(mFragmentContainerView);
     }
 
     /**
-     * Users of this fragment must call this method to set up the navigation drawer interactions.
-     *
-     * @param fragmentId   The android:id of this fragment in its activity's layout.
-     * @param drawerLayout The DrawerLayout containing this fragment's UI.
+     * metoda koju je potrebno pozvati kako bi se postavila interakcija s NavigationDrawerom
+     * @param fragmentId   id od fragmenta iz layout datoteke
+     * @param drawerLayout drawerLayout koji sadrzi korisnicko sucelje ovog fragmenta
      */
     public void setUp(int fragmentId, DrawerLayout drawerLayout) {
         mFragmentContainerView = getActivity().findViewById(fragmentId);
         mDrawerLayout = drawerLayout;
 
-        // set a custom shadow that overlays the main content when the drawer opens
+        // postavljanje sjencanja koje prekrije ostatak ekrana dok se menu otvori
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-        // set up the drawer's list view with items and click listener
-        /**
-        Customizacija actionBara
-         */
+
+        // postavljanje izgleda actionBara
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer);
 
 
-        // ActionBarDrawerToggle ties together the the proper interactions
-        // between the navigation drawer and the action bar app icon.
+        // ActionBarDrawerToggle povezuje interakciju koja se odvija izmedu NavigationDrawer ikone i
+        // actionBar ikone.
         mDrawerToggle = new ActionBarDrawerToggle(
-                getActivity(),                    /* host Activity */
-                mDrawerLayout,                    /* DrawerLayout object */
-                R.drawable.ic_drawer,             /* nav drawer image to replace 'Up' caret */
-                R.string.navigation_drawer_open,  /* "open drawer" description for accessibility */
-                R.string.navigation_drawer_close  /* "close drawer" description for accessibility */
+                getActivity(),                    /* glavni activity */
+                mDrawerLayout,                    /* DrawerLayout objekt */
+                R.drawable.ic_drawer,             /* ikona koja ce predstavljati menu i zamijeniti ikonu za povratak na prethodni ekran */
+                R.string.navigation_drawer_open,  /* opis dok je menu otvoren */
+                R.string.navigation_drawer_close  /* opis dok je menu zatvoren */
         ) {
+            // dok je menu zatvoren
             @Override
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
@@ -158,9 +147,10 @@ public class NavigationDrawerFragment extends Fragment {
                     return;
                 }
 
-                getActivity().supportInvalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+                getActivity().supportInvalidateOptionsMenu(); // poziva onPrepareOptionsMenu()
             }
 
+            //dok je menu otvoren
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
@@ -169,25 +159,23 @@ public class NavigationDrawerFragment extends Fragment {
                 }
 
                 if (!mUserLearnedDrawer) {
-                    // The user manually opened the drawer; store this flag to prevent auto-showing
-                    // the navigation drawer automatically in the future.
+                    // dok korisnik otvori menu, spremi zastavicu da se menu vise ne otvara automatski
+                    // po pokretanju aplikacije
                     mUserLearnedDrawer = true;
                     SharedPreferences sp = PreferenceManager
                             .getDefaultSharedPreferences(getActivity());
                     sp.edit().putBoolean(PREF_USER_LEARNED_DRAWER, true).apply();
                 }
 
-                getActivity().supportInvalidateOptionsMenu(); // calls onPrepareOptionsMenu()
+                getActivity().supportInvalidateOptionsMenu(); // poziva onPrepareOptionsMenu()
             }
         };
 
-        // If the user hasn't 'learned' about the drawer, open it to introduce them to the drawer,
-        // per the navigation drawer design guidelines.
+        // ako korisnik jos nije otvorio menu, otvori ga da korisnik zna da postoji
         if (!mUserLearnedDrawer && !mFromSavedInstanceState) {
             mDrawerLayout.openDrawer(mFragmentContainerView);
         }
 
-        // Defer code dependent on restoration of previous instance state.
         mDrawerLayout.post(new Runnable() {
             @Override
             public void run() {
@@ -195,9 +183,14 @@ public class NavigationDrawerFragment extends Fragment {
             }
         });
 
+        // listener za menu gumb
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
+    /**
+     * metoda za selektiranje stavke u NavigationDraweru
+     * @param position pozicija itema, 0 je prvi
+     */
     private void selectItem(int position) {
         mCurrentSelectedPosition = position;
         if (mDrawerListView != null) {
@@ -227,12 +220,14 @@ public class NavigationDrawerFragment extends Fragment {
         mCallbacks = null;
     }
 
+    // spremanje stanja kod pauziranja ili unistavanja
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt(STATE_SELECTED_POSITION, mCurrentSelectedPosition);
     }
 
+    // promjena konfiguracije
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
@@ -240,24 +235,26 @@ public class NavigationDrawerFragment extends Fragment {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
+    // kod otvaranja NavigationDrawera
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // If the drawer is open, show the global app actions in the action bar. See also
-        // showGlobalContextActionBar, which controls the top-left area of the action bar.
+        // ako je menu otvoren, ucitaj global dizajn za actionBar
+        // pozovi showGlobalContextActionBar() metodu koja ce promijeniti naslov
         if (mDrawerLayout != null && isDrawerOpen()) {
             inflater.inflate(R.menu.global, menu);
             showGlobalContextActionBar();
         }
         super.onCreateOptionsMenu(menu, inflater);
-        // restoreActionBar();
     }
 
+    // odabir tipke iz actionBara
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
 
+        // odabran je gumb za pomoc, prikazi alertDialog s pomoci i gumbom za zatvaranje
         if (item.getItemId() == R.id.action_help) {
 
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getActivity());
@@ -280,46 +277,28 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     /**
-     * Per the navigation drawer design guidelines, updates the action bar to show the global app
-     * 'context', rather than just what's in the current screen.
+     * metoda koja se poziva dok je menu otvoren - prikaz naziva aplikacije, a ne trenutnog ekrana
      */
     private void showGlobalContextActionBar() {
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setTitle(R.string.app_name);
-    //    actionBar.setDisplayHomeAsUpEnabled(true);
-    //    actionBar.setHomeAsUpIndicator(R.drawable.ic_drawer);
     }
 
+    // dohvat actionBara
     private ActionBar getActionBar() {
         return ((ActionBarActivity) getActivity()).getSupportActionBar();
     }
 
     /**
-     * Callbacks interface that all activities using this fragment must implement.
+     * interface kojeg moraju implementirati svi activityji koji koriste ovaj fragment
+     * uloga mu je komunikacija izmedu fragemanta
      */
     public static interface NavigationDrawerCallbacks {
         /**
-         * Called when an item in the navigation drawer is selected.
+         * poziva se kad je odabrana stavka iz menua
          */
         void onNavigationDrawerItemSelected(int position);
-    }
-
-    public void restoreActionBar () {
-        ActionBar actionBar = getActionBar();
-        actionBar.setNavigationMode( ActionBar.NAVIGATION_MODE_STANDARD );
-        actionBar.setDisplayShowTitleEnabled( true );
-        actionBar.setTitle( getResources().getString(R.string.title_section2) );
-    }
-
-/** neuspio pokusaj za mijenjanje selecta na itemu
-    public void changeSelectedItem(int position){
-        mCurrentSelectedPosition = position;
-    }
-    */
-
-    public void disableHelpBtn(boolean statement){
-        this.disableHelpButton = statement;
     }
 }

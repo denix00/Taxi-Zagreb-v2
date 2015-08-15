@@ -77,22 +77,18 @@ public class MainActivity extends ActionBarActivity
     static String odredisteGl;
     static String distancaGl;
     static String vrijemeGl;
-    //android.support.v4.app.FragmentManager manager;
 
-
+    // za spremanje podatka da li je korisnik prethodno otvorio kartu ili ne
     static String zastavica = "";
 
     static double GPSLat = 0;
     static double GPSLng = 0;
 
-    /**
-     * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
-     */
+    // instanciranje navigationDrawera
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
-    /**
-     * Used to store the last screen title. For use in {@link #restoreActionBar()}.
-     */
+
+    // spremanje posljednje koristenog naslova ekrana
     private CharSequence mTitle;
 
     @Override
@@ -108,27 +104,17 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
-
-        /**neuspio pokusaj
-        if(savedInstanceState != null) {
-            Log.i("SavedInstance", "nije null");
-            if (savedInstanceState.getBoolean("zastavica")) {
-                getFragmentManager().beginTransaction().replace(R.id.container, new FragmentCijenaINavigacija()).commit();
-            }
-        }
-         */
-       // manager = getSupportFragmentManager();
     }
 
-/**Dobar pokusaj, radi*/
+
     @Override
     protected void onResume()
     {
         super.onResume();
+
+        // Po povratku iz karte postavi vrijednosti koje su bile u TextViewovima u fragmentu CijenaINavigacija
         if(zastavica.equals("karta")){
-            //dohvat spremljenih podataka
-         //   Bundle bundlePodaci = getIntent().getExtras();
-           // String odredisteTemp = getIntent().getExtras().getString("odrediste");
+            // pakiranej podataka u bundle pri povratku iz karte i promjena fragmenta na CijenaINavigacija
             Bundle bundlePodaci = new Bundle();
             bundlePodaci.putString("tip", "cijena");
             bundlePodaci.putString("polaziste", polazisteGl);
@@ -141,8 +127,9 @@ public class MainActivity extends ActionBarActivity
             bundlePodaci.putString("vrijeme", vrijemeGl);
             //kako bi buttoni za pozivanje ostali aktivirani
             bundlePodaci.putBoolean("pokrenutaKarta", true);
-            Log.i("podaci", "podaci primljeni u OnResume" + bundlePodaci.getString("polaziste"));
+            Log.i("podaci", "podaci primljeni u OnResume" );
 
+            // dodavanje bundla podataka fragmentu i mijenjanje na njega
             FragmentCijenaINavigacija navigacijaCijena = new FragmentCijenaINavigacija();
             navigacijaCijena.setArguments(bundlePodaci);
             getFragmentManager().beginTransaction().replace(R.id.container, navigacijaCijena, "navigacijaCijena").commit();
@@ -151,74 +138,8 @@ public class MainActivity extends ActionBarActivity
     }
 
 
-    @Override
-    protected void onStop() {
-        super.onStop();;
-        //spremanje podataka za popunjavanje fragmenta pri povratku u glavnu aplikaciju
-      //  Bundle izlaz = new Bundle();
-     //   izlaz.putString("polaziste", polazisteGl);
-     //   izlaz.putString("odrediste", odredisteGl);
-     //   getIntent().putExtras(izlaz);
-     //   Log.i("podaci", "podaci spremljeni u OnStop");
-    }
-/** Pokusaj spremanja stanja aplikacije */
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        super.onSaveInstanceState(savedInstanceState);
-
-        savedInstanceState.putBoolean("zastavica", true);
-        Log.i("SavedInstance", "pokrenut");
-    }
-        /**
-        if(! jsonString.isEmpty()) {
-            savedInstanceState.putString("json", jsonString);
-            savedInstanceState.putDouble("polLat", polLatLng.latitude);
-            savedInstanceState.putDouble("polLng", polLatLng.longitude);
-            savedInstanceState.putDouble("odrLat", odrLatLng.latitude);
-            savedInstanceState.putDouble("odrLng", odrLatLng.longitude);
-            savedInstanceState.putString("polaziste", polazisteGl);
-            savedInstanceState.putString("odrediste", odredisteGl);
-            savedInstanceState.putString("distanca", distancaGl);
-            savedInstanceState.putString("vrijeme", vrijemeGl);
-            savedInstanceState.putFloat("cijenaCammeo", cijenaCammeo);
-            savedInstanceState.putFloat("cijenaRadio", cijenaRadio);
-            savedInstanceState.putFloat("cijenaEko", cijenaEko);
-            savedInstanceState.putFloat("cijenaZebra", cijenaZebra);
-        }
-    }
-
-    @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-
-        Log.i("SavedInstance", "Pokrenut restore");
-        getFragmentManager().beginTransaction().replace(R.id.container, new FragmentCijenaINavigacija()).commit();
-    }
-        /**
-        jsonString = savedInstanceState.getString("json");
-        polLatLng = new LatLng(savedInstanceState.getDouble("polLat"), savedInstanceState.getDouble("polLng"));
-        odrLatLng = new LatLng(savedInstanceState.getDouble("odrLat"), savedInstanceState.getDouble("odrLng"));
-        polazisteGl = savedInstanceState.getString("polaziste");
-        odredisteGl = savedInstanceState.getString("odrediste");
-        distancaGl = savedInstanceState.getString("distanca");
-        vrijemeGl = savedInstanceState.getString("vrijeme");
-        cijenaCammeo = savedInstanceState.getFloat("cijenaCammeo");
-        cijenaRadio = savedInstanceState.getFloat("cijenaRadio");
-        cijenaEko = savedInstanceState.getFloat("cijenaEko");
-        cijenaZebra = savedInstanceState.getFloat("cijenaZebra");
-
-
-        ((TextView)findViewById(R.id.txtAdresaPolazista)).setText(polazisteGl);
-        ((TextView)findViewById(R.id.txtAdresaOdredista)).setText(odredisteGl);
-        ((TextView)findViewById(R.id.txtCammeoCijena)).setText(String.valueOf(cijenaCammeo) );
-        ((TextView)findViewById(R.id.txtRadioCijena)).setText(String.valueOf(cijenaRadio));
-        ((TextView)findViewById(R.id.txtEkoCijena)).setText(String.valueOf(cijenaEko));
-        ((TextView)findViewById(R.id.txtZebraCijena)).setText(String.valueOf(cijenaZebra));
-        ((TextView)findViewById(R.id.txtVrijemeVoznje)).setText(String.valueOf(vrijemeGl));
-        ((TextView)findViewById(R.id.txtUdaljenost)).setText(String.valueOf(distancaGl));
-
-    }
-*/
+    // handleanje onoga sto je odabrano u izborniku (navigationdrawer)
+    // prikaz odabranog ekrana/fragmenta
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
@@ -230,35 +151,20 @@ public class MainActivity extends ActionBarActivity
         switch (position)
         {
             case 0:
-             //   FragmentImenik imenik = new FragmentImenik();
-              //  android.support.v4.app.FragmentTransaction transaction = manager.beginTransaction();
-              //  transaction.add(R.id.container, imenik, "imenik");
-              //  transaction.commit();
-
+                // Toast.makeText(this, "odabran je: 1 ", Toast.LENGTH_SHORT).show();
                 getFragmentManager().beginTransaction().replace(R.id.container, new FragmentImenik(), "imenik").commit();
-
-            //    getFragmentManager().beginTransaction().replace(R.id.container, new FragmentImenik()).addToBackStack("imenik").commit();
-
-
-               // Toast.makeText(this, "odabran je: 1 ", Toast.LENGTH_SHORT).show();
                 break;
             case 1:
                // Toast.makeText(this, "odabran je: 2 ", Toast.LENGTH_SHORT).show();
                 getFragmentManager().beginTransaction().replace(R.id.container, new FragmentCijenaINavigacija()).commit();
-
-
-            //    getFragmentManager().beginTransaction().replace(R.id.container, new FragmentCijenaINavigacija()).addToBackStack("imenik").commit();
-
                 break;
             case 2:
             //    Toast.makeText(this, "odabran je: 3 ", Toast.LENGTH_SHORT).show();
-
                 getFragmentManager().beginTransaction().replace(R.id.container, new FragmentPovijest()).commit();
-            //    getFragmentManager().beginTransaction().replace(R.id.container, new FragmentPovijest()).addToBackStack("imenik").commit();
-
                 break;
         }
     }
+
 
     public void onSectionAttached(int number) {
         switch (number) {
@@ -274,6 +180,7 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
+    // postavljanje actionbara i njegovih postavki
     public void restoreActionBar() {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
@@ -282,32 +189,15 @@ public class MainActivity extends ActionBarActivity
     }
 
 
+    // ucitavanje dizajna actionbara, dok navigationdrawer nije otvoren
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!mNavigationDrawerFragment.isDrawerOpen()) {
-            // Only show items in the action bar relevant to this screen
-            // if the drawer is not showing. Otherwise, let the drawer
-            // decide what to show in the action bar.
             getMenuInflater().inflate(R.menu.main, menu);
             restoreActionBar();
             return true;
         }
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-/** disableano je u menuiu, pa nije potrebno
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-*/
-        return super.onOptionsItemSelected(item);
     }
 
     //FragmentImenik i FragmentCijenaINavigacija
@@ -323,13 +213,13 @@ public class MainActivity extends ActionBarActivity
     }
 
 
-    /**Disabling menu button*/
+/*    // onemogucavanje dodatnog menua
     @Override
     public boolean onMenuOpened(final int featureId, final Menu menu) {
         super.onMenuOpened(featureId, menu);
         return false;
     }
-
+*/
 
     /**
      * A placeholder fragment containing a simple view.
@@ -372,7 +262,29 @@ public class MainActivity extends ActionBarActivity
     }
 
 
+    // ovisno koji je button pritisnut za info, za njega prikazi infoDialog
+    public void clickBtnInfoHandler(View v){
+        switch (v.getId()){
+            case R.id.btn_imenik_cammeo_info:
 
+                infoDialog(R.string.info_title_cammeo, R.string.info_nap_cammeo);
+                break;
+            case R.id.btn_imenik_radio_info:
+
+                infoDialog(R.string.info_title_radio, R.string.info_nap_radio);
+                break;
+            case R.id.btn_imenik_eko_info:
+
+                infoDialog(R.string.info_title_eko, R.string.info_nap_eko);
+                break;
+            case R.id.btn_imenik_zebra_info:
+
+                infoDialog(R.string.info_title_zebra, R.string.info_nap_zebra);
+                break;
+        }
+    }
+
+    // nazovi, a ako je button s fragmenta CijenaINavigacija, tada i spremi u bazu
     public void clickBtnCallCammeo(View v)    {
         if(v.getId() == R.id.btn_cijena_cammeo_call) {
             spremanjeUBazu(polazisteGl, odredisteGl, distancaGl, vrijemeGl, "Cammeo Taxi", (double) cijenaCammeo);
@@ -381,11 +293,7 @@ public class MainActivity extends ActionBarActivity
 
     }
 
-    public void clickBtnInfoCammeo(View v)    {
-     //   Toast.makeText(this, "info cammeo",Toast.LENGTH_LONG).show();
-        infoDialog(R.string.info_title_cammeo, R.string.info_nap_cammeo);
-    }
-
+    // nazovi, a ako je button s fragmenta CijenaINavigacija, tada i spremi u bazu
     public void clickBtnCallRadio(View v)    {
         if(v.getId() == R.id.btn_cijena_radio_call) {
             spremanjeUBazu(polazisteGl, odredisteGl, distancaGl, vrijemeGl, "Radio Taxi", (double) cijenaRadio);
@@ -393,11 +301,7 @@ public class MainActivity extends ActionBarActivity
         call(getResources().getString(R.string.broj_radio));
     }
 
-    public void clickBtnInfoRadio(View v)    {
-    //    Toast.makeText(this, "info radio",Toast.LENGTH_LONG).show();
-        infoDialog(R.string.info_title_radio, R.string.info_nap_radio);
-    }
-
+    // nazovi, a ako je button s fragmenta CijenaINavigacija, tada i spremi u bazu
     public void clickBtnCallEko(View v)    {
         if(v.getId() == R.id.btn_cijena_eko_call) {
             spremanjeUBazu(polazisteGl, odredisteGl, distancaGl, vrijemeGl, "Eko Taxi", (double) cijenaEko);
@@ -405,11 +309,7 @@ public class MainActivity extends ActionBarActivity
         call(getResources().getString(R.string.broj_eko));
     }
 
-    public void clickBtnInfoEko(View v)    {
-     //   Toast.makeText(this, "info eko",Toast.LENGTH_LONG).show();
-        infoDialog(R.string.info_title_eko, R.string.info_nap_eko);
-    }
-
+    // nazovi, a ako je button s fragmenta CijenaINavigacija, tada i spremi u bazu
     public void clickBtnCallZebra(View v)    {
         if(v.getId() == R.id.btn_cijena_zebra_call) {
             spremanjeUBazu(polazisteGl, odredisteGl, distancaGl, vrijemeGl, "Zebra Taxi", (double) cijenaZebra);
@@ -417,10 +317,9 @@ public class MainActivity extends ActionBarActivity
         call(getResources().getString(R.string.broj_zebra));
     }
 
-    public void clickBtnInfoZebra(View v)    {
-       infoDialog(R.string.info_title_zebra, R.string.info_nap_zebra);
-    }
 
+    // handler za pritisak na button karta, postavi zastavicu da se zna da je aplikacija otvorila kartu, uz activity dodaj i podatke o polazistu, odredistu i json koji je odgovor API-ja
+    // pokreni activity
     public void clickBtnMap(View v)    {
         zastavica = "karta";
         Intent map = new Intent(this, GoogleMaps.class);
@@ -432,6 +331,7 @@ public class MainActivity extends ActionBarActivity
         startActivity(map);
     }
 
+    // pomovu locationManagera utvrdi lokaciju korisnika
     public void clickBtnGPS(View view)    {
 
         LocationManager manager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
@@ -464,45 +364,58 @@ public class MainActivity extends ActionBarActivity
 
             }
         };
-       // manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5, 20, listener);
-        manager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, listener, null);
-      //  manager.requestSingleUpdate(LocationManager.GPS_PROVIDER, listener, null);
 
+
+       // manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5, 20, listener);
+
+        // utvrdivanje lokacije pomocu lokacije korisnika u mrezi
+        manager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, listener, null);
+
+        // utvrdivanje lokacije pomocu GPS-a
+      //  manager.requestSingleUpdate(LocationManager.GPS_PROVIDER, listener, null);
 
         Toast.makeText(this, "Molimo pričekajte da GPS utvrdi lokaciju", Toast.LENGTH_LONG).show();
     }
 
+
     public void clickBtnIzracunaj(View view) throws IOException, JSONException {
 
+        // provjera ako je Internet dostupan, ako nije baci toast
         if (isNetworkAvailable()) {
             EditText txtPolaziste = (EditText) findViewById(R.id.txtAdresaPolazista);
             EditText txtOdrediste = (EditText) findViewById(R.id.txtAdresaOdredista);
 
+            // ako tocke nisu unesene baci toast
             if(txtPolaziste.getText().toString().isEmpty() || txtOdrediste.getText().toString().isEmpty())
             {
                 Toast.makeText(this, R.string.prazno_polje, Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            String polazisteString = "Moja lokacija";
+            String polazisteString = getResources().getString(R.string.polaziste_string);
             //string s podcrtima = string bez podcrta
+
+            // ako polaziste nije utvrdeno pomocu GPS-a, proslijedi ga metodi checkStreetName
+            // odrediste samo proslijedi
             if( GPSLat == 0) {
                 polazisteString = checkStreetName(txtPolaziste);
             }
             String odredisteString = checkStreetName(txtOdrediste);
 
+            // vrijednosti stavi u globalne varijable
             polazisteGl = txtPolaziste.getText().toString();
             odredisteGl = txtOdrediste.getText().toString();
 
             Log.i("polasisteGL", polazisteGl);
             Log.i("polasisteGL", odredisteGl);
-/**
- *          Ovdje ide sav kod za dohvacanje podataka sa Google Maps API V2, pa se sprema u bazu
- */
 
+            // String koji sadrzi API upit za Google Maps API
+
+            // filter pomocu kojega se ulica smjesta u pojedini grad
             String gradFilter = ",_zagreb";
             String url = "";
-          //  String url = "http://maps.googleapis.com/maps/api/directions/json?origin=jarun_24_zagreb&destination=maksimirska_cesta_128&sensor=false";
+
+            // ako je polaziste utvrdno GPS-om, njegove koordinate stavi u string
             if(GPSLat != 0){
                 url = "http://maps.googleapis.com/maps/api/directions/json?origin=" + GPSLat + "," + GPSLng + "&destination=" + odredisteString + gradFilter + "&mode=driving&sensor=false";
             }else {
@@ -510,6 +423,7 @@ public class MainActivity extends ActionBarActivity
             }
             Log.i("JSONUrl ", url);
 
+            // proslijedivanje upita downloadTask klasi
             downloadTask = new DownloadTask();
             downloadTask.execute(url);
 
@@ -518,15 +432,7 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
-  /*      SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "yyyy-MM-dd", Locale.getDefault());
-        Date date = new Date(2015-05-21);
-
-
-
-*/
-
-
+    // ocisti sva polja i podesi stanje na pocetno
     public void clickReset(View v){
 
         resetTextViews(false);
@@ -536,12 +442,9 @@ public class MainActivity extends ActionBarActivity
         GPSLng = 0;
     }
 
+    // alert dialog s naslovom, porukom i gumbom za zatvaranje ("OK")
     public void infoDialog(int naslov, int poruka){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-
-   //     AlertDialog alertDialog = alertDialogBuilder.create();
-  //      alertDialog.setMessage(getResources().getString(poruka));
-   //     alertDialog.setTitle(getResources().getString(naslov));
         alertDialogBuilder.setMessage(getResources().getString(poruka));
         alertDialogBuilder.setTitle(getResources().getString(naslov));
         alertDialogBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -554,26 +457,39 @@ public class MainActivity extends ActionBarActivity
         alertDialog.show();
     }
 
+    /**
+     * metoda za zvanje
+     * @param phone telefonski broj kao String
+     */
     public void call(String phone)    {
-        /** Stvaranje objekta aktivnosti koja pokrece ugradenu mogusnost zvanja ( ACTION_CALL ) */
+        // Stvaranje objekta aktivnosti koja pokrece ugradenu mogusnost zvanja ( ACTION_CALL )
         Intent intent = new Intent("android.intent.action.CALL");
 
-        /** Stvaranje uri objekta u koji se sprema telefonski broj */
+        // Stvaranje uri objekta u koji se sprema telefonski broj
         Uri telBroj = Uri.parse("tel:" + phone );
 
-        /** Postavljanje stvorenog uri objekta u intent */
+        // Postavljanje stvorenog uri objekta u intent
         intent.setData(telBroj);
 
-        /**Pokretanje aktivnosti za zvanje */
+        // Pokretanje aktivnosti za zvanje
         startActivity(intent);
     }
 
+    /**
+     * provjera stanja mreznih adaptera i povezanosti
+     * @return vraca 1 ako su adapteri ukljuceni i povezani
+     */
     private boolean isNetworkAvailable() {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 
+    /**
+     * zamjena " " s "_" u nazivu ulice, sva velika slova u mala
+     * @param ulicaTxt EditText koji sadrzi tekst za provjeru
+     * @return vracen obraden String
+     */
     public String checkStreetName(EditText ulicaTxt)    {
 
         String ulica = ulicaTxt.getText().toString();
@@ -596,6 +512,9 @@ public class MainActivity extends ActionBarActivity
         return ulica;
     }
 
+    /**
+     * Spremanje podataka u bazu koji ce posluziti za prikaz povijesti voznji
+     */
     public void spremanjeUBazu(String polaziste, String odrediste, String distanca, String vrijeme, String prijevoznik, Double cijena) {
         DbHelper db = new DbHelper(this);
         //                                                  distanca, vrijeme, prijevoznik, cijena
@@ -606,11 +525,19 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
+    /**
+     * izracun cijene voznje za sve taxi prijevoznike na temelju duzine rute
+     * postavljanje izracunatog iznosa u textview zaduzen za to
+     *
+     * @param kilometara duzina rute
+     */
     public void izracunajCijenu(float kilometara){
+
+        // format u kojem ce se prikazivati decimalan broj - dva decimalna mjesta
         DecimalFormat decFormat = new DecimalFormat("##0.00");
 
-        Log.i("CijenaCam",getResources().getString(R.string.cammeo_start));
-        Log.i("CijenaCam2",Float.toString(Float.parseFloat(getResources().getString(R.string.cammeo_start))));
+
+        // citanje cijene iz stringa i parsiranje kao float podatak
 
         cijenaCammeo = 0;
         cijenaCammeo += Float.parseFloat(getResources().getString(R.string.cammeo_start));
@@ -640,8 +567,12 @@ public class MainActivity extends ActionBarActivity
     }
 
 
-
-    /** A method to download json data from url */
+    /**
+     * Metoda za dohvacanje JSON podataka s URL-a
+     * @param strUrl URL kao string
+     * @return JSON string
+     * @throws IOException
+     */
     private String downloadUrl(String strUrl) throws IOException {
         String data = "";
         InputStream iStream = null;
@@ -650,42 +581,43 @@ public class MainActivity extends ActionBarActivity
             URL url = new URL(strUrl);
 
             // Creating an http connection to communicate with url
+            // htpp veza za komuniciranje s API-jem
             urlConnection = (HttpURLConnection) url.openConnection();
 
-            // Connecting to url
+            // povezivanje na API
             urlConnection.connect();
 
-            // Reading data from url
+            // citanje podataka s API-ja
             iStream = urlConnection.getInputStream();
-
             BufferedReader br = new BufferedReader(new InputStreamReader(iStream));
-
             StringBuffer sb = new StringBuffer();
-
             String line = "";
             while( ( line = br.readLine()) != null){
                 sb.append(line);
             }
 
+            // spremanje podataka iz buffera u string
             data = sb.toString();
-
             br.close();
 
         }catch(Exception e){
             Log.d("Exception", "Exception while downloading url");
         }finally{
-     //       iStream.close();
-     //       urlConnection.disconnect();
+            // zatvaranje veza
+            iStream.close();
+            urlConnection.disconnect();
         }
         return data;
     }
 
 
-    // Fetches data from url passed
+    // Klasa za preuzimanje podataka u pozadinskoj dretvi
     private class DownloadTask extends AsyncTask<String, Integer, String> {
 
         @Override
         protected void onPreExecute() {
+
+            // postavljanje dialoga za cekanje
             diag = new ProgressDialog(MainActivity.this);
             diag.setMessage(getResources().getString(R.string.dohvat_podataka));
             diag.setIndeterminate(false);
@@ -701,15 +633,14 @@ public class MainActivity extends ActionBarActivity
             super.onPreExecute();
         };
 
-        // Downloading data in non-ui thread
+        //
         @Override
         protected String doInBackground(String... url) {
 
-            // For storing data from web service
+            // skidanje podataka i vracanje istih kao string
             String data = "";
 
             try{
-                // Fetching the data from web service
                 data = downloadUrl(url[0]);
                 publishProgress(1);
             }catch(Exception e){
@@ -718,8 +649,7 @@ public class MainActivity extends ActionBarActivity
             return data;
         }
 
-        // Executes in UI thread, after the execution of
-        // doInBackground()
+        // nakon sto se izvrsi metoda doInBackground, parsiraj podatke
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
@@ -736,13 +666,22 @@ public class MainActivity extends ActionBarActivity
         }
     }
 
+    /**
+     * parsiranje JSON-a, dohvacanje onog sto je potrebno iz njega
+     * @param url JSON podaci (odgovor API-ja)
+     * @throws IOException
+     * @throws JSONException
+     */
     private void JSONParserSimple (String url) throws IOException, JSONException
     {
         final JSONObject json = new JSONObject(url);
 
         Log.i("statusDohvata", json.getString("status"));
 
+        //ako je API odgovorio sa OK, znaci da je uspio pronaci rutu (nazivi ulica su ispravni)
         if(json.getString("status").equals("OK")) {
+
+            // spustanje razinu po razinu u JSON-u i dohvacanje krajnih podataka koji su potrebni
             JSONArray routeArray = json.getJSONArray("routes");
             JSONObject routes = routeArray.getJSONObject(0);
 
@@ -755,7 +694,7 @@ public class MainActivity extends ActionBarActivity
             //ukoliko se koristi GPS, tada postavi naziv ulice na kojoj se nalazim
             if(GPSLat != 0) {
                 String myLocation = newDisTimeOb.getString("start_address");
-                String tempString;
+
                 //izbacivanje viska podataka iz naziva ulice
                 int location = 1;
                 for(int i=0; i<myLocation.length(); i++){
@@ -766,12 +705,14 @@ public class MainActivity extends ActionBarActivity
                 }
                 myLocation = myLocation.substring(0, location);
 
+                // postavljanje polazista koje je utvrdio GPS u polje za unos i u globalnu varijablu
                 ((EditText) findViewById(R.id.txtAdresaPolazista)).setText(myLocation);
                 polazisteGl = myLocation;
             }
 
-            /**za latlng*/
+            /** latlng*/
 
+            // parsiranje koordinata polazista i odredista i spremanje u globalne varijable
             JSONObject polOb = newDisTimeOb.getJSONObject("start_location");
             JSONObject odrOb = newDisTimeOb.getJSONObject("end_location");
 
@@ -783,30 +724,31 @@ public class MainActivity extends ActionBarActivity
             Log.i("LatLngO", Double.toString(odrOb.getDouble("lat")));
             Log.i("LatLngO", Double.toString(odrOb.getDouble("lng")));
 
-            /**za latlng*/
-
             Log.i("Distance :", distOb.getString("text"));
             Log.i("TimeDi :", timeOb.getString("text"));
 
-            //Postavljanje vrijednosti u TextView za udaljenost i vrijeme
+            // postavljanje vrijednosti u TextView za udaljenost i vrijeme
             ((TextView) findViewById(R.id.txtUdaljenost)).setText(distOb.getString("text"));
             ((TextView) findViewById(R.id.txtVrijemeVoznje)).setText(timeOb.getString("text"));
 
-            //postavljanje vrijednosti u globalne varijable za spremanje u bazu
+            // postavljanje vrijednosti u globalne varijable za spremanje u bazu
             distancaGl = distOb.getString("text");
             vrijemeGl = timeOb.getString("text");
 
 
-            /**Omogucavanje call buttona na ekranu Cijena i navigacija, micanje Gray efekta*/
+            // omogucavanje call buttona na ekranu CijenaINavigacija, micanje Gray efekta
             enableCallButtons(true);
 
+            // sakrivanje tipkovnice
             hideSoftKeyboard();
 
+            // omoguci button za kartu
             ((Button) findViewById(R.id.btn_cijena_map)).setClickable(true);
 
+            // izrezi brojku za distancu iz stringa, pretvori ga u decimalan tip i proslijedi
+            // metodi za izracun cijena
             float distanca = Float.parseFloat(distancaGl.substring(0, distancaGl.indexOf(" ")));
             izracunajCijenu(distanca);
-
 
             //zakljucaj polja za unos
             enableEnterTextviews(false);
@@ -819,13 +761,14 @@ public class MainActivity extends ActionBarActivity
     }
 
 
-    /**Metoda za sakrivanje tipkovnice*/
+    /** Metoda za sakrivanje tipkovnice */
     public void hideSoftKeyboard() {
         InputMethodManager inputMethodManager = (InputMethodManager)  this.getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(this.getCurrentFocus().getWindowToken(), 0);
     }
 
-    //ako je argument 1, tada adresa nije pronadena i ta poruka se dodaje, inace sve se postavlja na prazno
+    // ciscenje svih polja
+    //ako je argument true, tada adresa nije pronadena i ta poruka se dodaje, inace se sve postavlja na prazno
     public void resetTextViews(Boolean addressNotFound){
         //ako adresa nije pronadena, ne cisti polja da se unos moze editirati
         if(! addressNotFound){
@@ -844,11 +787,14 @@ public class MainActivity extends ActionBarActivity
             ((TextView)findViewById(R.id.txtUdaljenost)).setText(R.string.nepostojece_adrese);
     }
 
+    // zakljucavanje/otkljucavanje polja za unos
     public void enableEnterTextviews(Boolean enable){
         ((EditText)findViewById(R.id.txtAdresaPolazista)).setEnabled(enable);
         ((EditText)findViewById(R.id.txtAdresaOdredista)).setEnabled(enable);
     }
 
+    // zakljuvavanje/otkljucavanje tipki za zvanje na CijenaINavigacija
+    // ako je argument true, makni sivi efekt s njih
     public void enableCallButtons(Boolean enable){
         ((ImageButton) findViewById(R.id.btn_cijena_cammeo_call)).setClickable(enable);
         ((ImageButton) findViewById(R.id.btn_cijena_eko_call)).setClickable(enable);
@@ -874,11 +820,5 @@ public class MainActivity extends ActionBarActivity
     public void setActionBarTitle(String title) {
         getSupportActionBar().setTitle(title);
     }
-
-/** neuspio pokusaj za mijenjanje selecta na itemu
-    public void changeItemSelectedNavigationDrawer(int position){
-        mNavigationDrawerFragment.changeSelectedItem(position);
-    }
- */
 }
 
