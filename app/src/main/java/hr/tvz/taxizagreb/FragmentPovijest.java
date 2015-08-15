@@ -31,16 +31,7 @@ import java.util.List;
 public class FragmentPovijest extends Fragment implements AbsListView.OnItemClickListener {
 
     private boolean prazno = false;
-/*
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-*/
     private OnFragmentInteractionListener mListener;
 
     /**
@@ -53,17 +44,7 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
      * Views.
      */
     private ListAdapter mAdapter;
-/*
-    // TODO: Rename and change types of parameters
-    public static FragmentPovijest newInstance(String param1, String param2) {
-        FragmentPovijest fragment = new FragmentPovijest();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-*/
+
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
@@ -119,12 +100,7 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
             //vrati adapter koji ce prikazati podatke
             mAdapter = adapter;
         }
-/*
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-*/
+
         // TODO: Change Adapter to display your content
         //mAdapter = new ArrayAdapter<DummyContent.DummyItem>(getActivity(), android.R.layout.simple_list_item_1, android.R.id.text1, DummyContent.ITEMS);
         //mAdapter = adapter;
@@ -163,7 +139,8 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
     }
 
     /**
-     * Metoda za reakciju na pritisak podatka iz prikazane liste te prebacivanje na fragment Navigacija i Cijena, i proslijedivanje podataka ukoliko ih ima
+     * Metoda za reakciju na pritisak podatka iz prikazane liste te prebacivanje na fragment
+     * Navigacija i Cijena, i proslijedivanje podataka ukoliko ih ima
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -173,7 +150,8 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
             Log.i("povijest", "odabran je " + position + " po redu");
            // mListener.onFragmentInteraction(DummyContent.ITEMS.get(position).id);
 
-            //ako nema podataka u listi (zastavica je postavljena pri citanju podataka iz baze i prikazu na ekran kod kreiranja fragmenta)
+            //ako nema podataka u listi (zastavica je postavljena pri citanju podataka iz baze i
+            // prikazu na ekran kod kreiranja fragmenta)
             // korisnika samo prebaci na fragment Cijena i navigacija
             if(prazno){
                 Log.i("povijest", "povijest je prazna");
@@ -189,7 +167,8 @@ public class FragmentPovijest extends Fragment implements AbsListView.OnItemClic
                 DbHelper dbHelper = new DbHelper(getActivity());
                 List<String> dataList = new ArrayList<String>();
 
-                //dohvacanje polazista i odredista iz retka iz baze koji je identican retku koji je korisnik odabrao, spremanje u Bundle
+                //dohvacanje polazista i odredista iz retka iz baze koji je identican retku koji je
+                // korisnik odabrao, spremanje u Bundle
                 dataList = dbHelper.getStartPoints(position);
 
                 Bundle dataBundle = new Bundle();

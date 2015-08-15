@@ -57,7 +57,8 @@ import java.util.Locale;
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks,
                     FragmentImenik.OnFragmentInteractionListener,
-                    FragmentCijenaINavigacija.OnFragmentInteractionListener, FragmentPovijest.OnFragmentInteractionListener {
+                    FragmentCijenaINavigacija.OnFragmentInteractionListener,
+                    FragmentPovijest.OnFragmentInteractionListener {
 
     static String jsonString;
 
@@ -318,7 +319,8 @@ public class MainActivity extends ActionBarActivity
     }
 
 
-    // handler za pritisak na button karta, postavi zastavicu da se zna da je aplikacija otvorila kartu, uz activity dodaj i podatke o polazistu, odredistu i json koji je odgovor API-ja
+    // handler za pritisak na button karta, postavi zastavicu da se zna da je aplikacija otvorila
+    // kartu, uz activity dodaj i podatke o polazistu, odredistu i json koji je odgovor API-ja
     // pokreni activity
     public void clickBtnMap(View v)    {
         zastavica = "karta";
@@ -417,9 +419,11 @@ public class MainActivity extends ActionBarActivity
 
             // ako je polaziste utvrdno GPS-om, njegove koordinate stavi u string
             if(GPSLat != 0){
-                url = "http://maps.googleapis.com/maps/api/directions/json?origin=" + GPSLat + "," + GPSLng + "&destination=" + odredisteString + gradFilter + "&mode=driving&sensor=false";
+                url = "http://maps.googleapis.com/maps/api/directions/json?origin=" + GPSLat + ","
+                        + GPSLng + "&destination=" + odredisteString + gradFilter + "&mode=driving&sensor=false";
             }else {
-                url = "http://maps.googleapis.com/maps/api/directions/json?origin=" + polazisteString + gradFilter + "&destination=" + odredisteString + gradFilter + "&mode=driving&sensor=false";
+                url = "http://maps.googleapis.com/maps/api/directions/json?origin=" + polazisteString
+                        + gradFilter + "&destination=" + odredisteString + gradFilter + "&mode=driving&sensor=false";
             }
             Log.i("JSONUrl ", url);
 

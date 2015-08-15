@@ -30,7 +30,8 @@ public class DbHelper extends SQLiteOpenHelper {
     private static final String PRIJEVOZNIK = "prijevoznik";
 
 
-    //ukoliko se napravi promjena u modelu baze, DATABASE_VERSION je potrebno povisiti kako bi promjena bila prihvacena
+    //ukoliko se napravi promjena u modelu baze, DATABASE_VERSION je potrebno povisiti kako
+    // bi promjena bila prihvacena
     private static final int DATABASE_VERSION = 4;
 
     //upit za kreiranje tabliceu u koju ce se spremati povijest voznji
