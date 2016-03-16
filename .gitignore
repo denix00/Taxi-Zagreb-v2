@@ -25,6 +25,9 @@ proguard/
 # Log Files
 *.log
 
+#Google Maps API key file
+google_maps_api.xml
+
 # =========================
 # Operating System Files
 # =========================
@@ -71,6 +74,3 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
-
-#Google Maps API key file
-google_maps_api.xml
