@@ -136,7 +136,6 @@ public class FragmentCijenaINavigacija extends Fragment {
 
     /**
      * interface kojeg moraju implementirati svi activityji koji koriste ovaj fragment
-     * uloga mu je komunikacija izmedu fragemanta
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

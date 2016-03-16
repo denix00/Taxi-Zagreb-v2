@@ -66,7 +66,6 @@ public class GoogleMaps extends ActionBarActivity {
             // omogucavanje buttona za centriranje na lokaciju korisnika
             mMap.setMyLocationEnabled(true);
 
-            // u markerPoints listu kao prvom prolazu dodaj polaziste, u drugome odrediste
             for(int i = 0; i < 2; i++ ){
                 //u prvom prolazu dodaj polaziste, u drogom odrediste
                 LatLng latLng = polLatLng;
@@ -123,16 +122,6 @@ public class GoogleMaps extends ActionBarActivity {
         }
     }
 
-    /**
-     * This is where we can add markers or lines, add listeners or move the camera. In this case, we
-     * just add a marker near Africa.
-     * <p/>
-     * This should only be called once and when we are sure that {@link #mMap} is not null.
-     */
-/*    private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
-    }
-*/
     // klasa za izvodenje radnji u drugoj dretvi
     private class DoInBackground extends AsyncTask<Void, Void, String> {
 

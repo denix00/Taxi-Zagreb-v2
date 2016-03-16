@@ -7,8 +7,6 @@ import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class FragmentImenik extends Fragment {
@@ -50,7 +48,6 @@ public class FragmentImenik extends Fragment {
 
     /**
      * interface kojeg moraju implementirati svi activityji koji koriste ovaj fragment
-     * * uloga mu je komunikacija izmedu fragemanta
      */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name

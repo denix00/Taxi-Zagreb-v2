@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Created by Dennis on 23.5.2015..
  *
- * Klasa za koja unosi podatke u bazu i cita iz nje prema modelu definiranom u DbModel.
+ * Klasa koja unosi podatke u bazu i cita iz nje prema modelu definiranom u DbModel.
  */
 public class DbHelper extends SQLiteOpenHelper {
 
@@ -130,14 +130,21 @@ public class DbHelper extends SQLiteOpenHelper {
      * @return lista s prvim podatkom koji je polaziste, a drugi je odrediste
      */
     public List<String> getStartPoints(int location){
+        //
         DbModel dbModel = new DbModel();
+        //lista stringova, na prvo mjesto ce ic polaziste, na drugo odrediste
         List<String> polOdr = new ArrayList<String>();
+        // upit za bazu
         String selectQuery = "SELECT " + POLAZISTE + "," + ODREDISTE + " FROM " + TABLE_NAME + " LIMIT 1 OFFSET " + location + ";";
         Log.i("selectQuery", selectQuery);
 
+        // dohvat dostupne baze
         SQLiteDatabase db = this.getReadableDatabase();
+        // izvrsavanje upita i spremanje svih redaka u kursor
         Cursor c = db.rawQuery(selectQuery, null);
+        // odabir prvog retka
         c.moveToFirst();
+        // spremanje naziva u listu
         polOdr.add(c.getString(c.getColumnIndex(POLAZISTE)));
         polOdr.add(c.getString(c.getColumnIndex(ODREDISTE)));
 

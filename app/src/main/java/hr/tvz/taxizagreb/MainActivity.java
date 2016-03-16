@@ -21,10 +21,8 @@ import android.support.v4.app.FragmentManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
@@ -37,8 +35,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -101,7 +97,7 @@ public class MainActivity extends ActionBarActivity
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
-        // Set up the drawer.
+        // Set up drawera
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
@@ -130,11 +126,12 @@ public class MainActivity extends ActionBarActivity
             bundlePodaci.putBoolean("pokrenutaKarta", true);
             Log.i("podaci", "podaci primljeni u OnResume" );
 
-            // dodavanje bundla podataka fragmentu i mijenjanje na njega
+            // dodavanje bundla podataka fragmentu i promjena na njega
             FragmentCijenaINavigacija navigacijaCijena = new FragmentCijenaINavigacija();
             navigacijaCijena.setArguments(bundlePodaci);
             getFragmentManager().beginTransaction().replace(R.id.container, navigacijaCijena, "navigacijaCijena").commit();
         }
+        // pocisti zastavicu
         zastavica = "";
     }
 
@@ -143,7 +140,6 @@ public class MainActivity extends ActionBarActivity
     // prikaz odabranog ekrana/fragmenta
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
@@ -201,26 +197,17 @@ public class MainActivity extends ActionBarActivity
         return super.onCreateOptionsMenu(menu);
     }
 
-    //FragmentImenik i FragmentCijenaINavigacija
+    //za FragmentImenik i FragmentCijenaINavigacija
     @Override
     public void onFragmentInteraction(Uri uri) {
 
     }
 
-    //FragmentPovijest
+    //za FragmentPovijest
     @Override
     public void onFragmentInteraction(String id) {
 
     }
-
-
-/*    // onemogucavanje dodatnog menua
-    @Override
-    public boolean onMenuOpened(final int featureId, final Menu menu) {
-        super.onMenuOpened(featureId, menu);
-        return false;
-    }
-*/
 
     /**
      * A placeholder fragment containing a simple view.
@@ -333,13 +320,14 @@ public class MainActivity extends ActionBarActivity
         startActivity(map);
     }
 
-    // pomovu locationManagera utvrdi lokaciju korisnika
+    // s LocationManagerom utvrdi lokaciju korisnika nakon klika na gumb
     public void clickBtnGPS(View view)    {
 
         LocationManager manager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
         LocationListener listener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
+                // postavljanje obavijesti o utvrdenoj lokaciji
                 ((EditText) findViewById(R.id.txtAdresaPolazista)).setText("Lokacija utvrđena");
                 ((EditText) findViewById(R.id.txtAdresaPolazista)).setEnabled(false);
             //    Toast.makeText(this, "GPS lokacija utvrđena", Toast.LENGTH_LONG).show();
@@ -370,7 +358,7 @@ public class MainActivity extends ActionBarActivity
 
        // manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5, 20, listener);
 
-        // utvrdivanje lokacije pomocu lokacije korisnika u mrezi
+        // utvrdivanje lokacije prema lokaciji korisnika u mrezi
         manager.requestSingleUpdate(LocationManager.NETWORK_PROVIDER, listener, null);
 
         // utvrdivanje lokacije pomocu GPS-a
@@ -411,10 +399,9 @@ public class MainActivity extends ActionBarActivity
             Log.i("polasisteGL", polazisteGl);
             Log.i("polasisteGL", odredisteGl);
 
-            // String koji sadrzi API upit za Google Maps API
-
             // filter pomocu kojega se ulica smjesta u pojedini grad
             String gradFilter = ",_zagreb";
+            // String koji ce sadrzavat API upit za Google Maps API
             String url = "";
 
             // ako je polaziste utvrdno GPS-om, njegove koordinate stavi u string
@@ -466,10 +453,10 @@ public class MainActivity extends ActionBarActivity
      * @param phone telefonski broj kao String
      */
     public void call(String phone)    {
-        // Stvaranje objekta aktivnosti koja pokrece ugradenu mogusnost zvanja ( ACTION_CALL )
+        // Stvaranje objekta aktivnosti koja pokrece ugradenu mogucnost zvanja ( ACTION_CALL )
         Intent intent = new Intent("android.intent.action.CALL");
 
-        // Stvaranje uri objekta u koji se sprema telefonski broj
+        // Stvaranje uri objekta u koji se sprema telefonski broj s prefiksom "tel"
         Uri telBroj = Uri.parse("tel:" + phone );
 
         // Postavljanje stvorenog uri objekta u intent
@@ -584,7 +571,6 @@ public class MainActivity extends ActionBarActivity
         try{
             URL url = new URL(strUrl);
 
-            // Creating an http connection to communicate with url
             // htpp veza za komuniciranje s API-jem
             urlConnection = (HttpURLConnection) url.openConnection();
 
@@ -682,7 +668,7 @@ public class MainActivity extends ActionBarActivity
 
         Log.i("statusDohvata", json.getString("status"));
 
-        //ako je API odgovorio sa OK, znaci da je uspio pronaci rutu (nazivi ulica su ispravni)
+        //ako je API odgovorio s OK, znaci da je uspio pronaci rutu (nazivi ulica su ispravni)
         if(json.getString("status").equals("OK")) {
 
             // spustanje razinu po razinu u JSON-u i dohvacanje krajnih podataka koji su potrebni
